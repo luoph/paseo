@@ -4,22 +4,45 @@
 (() => {
   const g = typeof globalThis !== "undefined" ? globalThis : window;
 
-  // Safari < 14 only has the deprecated MediaQueryList.addListener.
-  if (
-    typeof MediaQueryList !== "undefined" &&
-    !MediaQueryList.prototype.addEventListener &&
-    MediaQueryList.prototype.addListener
-  ) {
-    MediaQueryList.prototype.addEventListener = function addEventListener(type, listener) {
+  // Safari < 14 only has the deprecated MediaQueryList.addListener. Probe a real
+  // matchMedia result instead of the MediaQueryList global: a check against the
+  // global did not take effect on an iOS 12.5 iPad, and Unistyles crashed on its
+  // first breakpoint listener.
+  if (typeof g.matchMedia === "function") {
+    const addEventListener = function addEventListener(type, listener) {
       if (type === "change") {
         this.addListener(listener);
       }
     };
-    MediaQueryList.prototype.removeEventListener = function removeEventListener(type, listener) {
+    const removeEventListener = function removeEventListener(type, listener) {
       if (type === "change") {
         this.removeListener(listener);
       }
     };
+    const needsShim = (mql) =>
+      mql && typeof mql.addEventListener !== "function" && typeof mql.addListener === "function";
+
+    const sample = g.matchMedia("all");
+    if (needsShim(sample)) {
+      const proto = Object.getPrototypeOf(sample);
+      try {
+        proto.addEventListener = addEventListener;
+        proto.removeEventListener = removeEventListener;
+      } catch {
+        // Fall through to the per-instance wrapper below.
+      }
+      if (needsShim(g.matchMedia("all"))) {
+        const matchMedia = g.matchMedia;
+        g.matchMedia = function patchedMatchMedia(query) {
+          const mql = matchMedia.call(g, query);
+          if (needsShim(mql)) {
+            mql.addEventListener = addEventListener;
+            mql.removeEventListener = removeEventListener;
+          }
+          return mql;
+        };
+      }
+    }
   }
 
   // crypto.randomUUID ships in Safari 15.4.
