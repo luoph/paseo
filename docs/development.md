@@ -487,6 +487,8 @@ Measured bundle size for a standard Expo web export:
 - gzip: 2.55 MiB
 - brotli: 1.93 MiB
 
+The web export targets current browsers. Safari 12 (iPads and iPhones stuck on iOS 12) rejects the bundle at parse time and shows a blank page. For those devices, run `npm run build:legacy-web-ui` and point a daemon at the output with `PASEO_WEB_UI_DIST_DIR=packages/app/dist-legacy`. `scripts/build-legacy-web-ui.mjs` explains what it rewrites; runtime errors show in an on-screen overlay because these devices have no usable Web Inspector.
+
 The desktop-managed daemon disables the bundled web UI by default (`PASEO_WEB_UI_ENABLED=false`) because the desktop app already ships the renderer as `app-dist`. Shipping the same assets again inside `@getpaseo/server` would duplicate the ~10.8 MiB install. Desktop packaging also excludes `node_modules/@getpaseo/server/dist/server/web-ui/**` from the packaged app.
 
 ## Built workspace packages
