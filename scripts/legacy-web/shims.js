@@ -1,5 +1,6 @@
 // Hand-written runtime shims for the legacy (Safari 12) web build, for gaps
-// core-js does not cover. Loaded after the core-js bundle, before the app.
+// core-js does not cover. Loaded after the core-js bundle and css-compat.js,
+// before the app.
 // The build verifies this file parses as ES2019; keep it within that.
 (() => {
   const g = typeof globalThis !== "undefined" ? globalThis : window;
@@ -44,6 +45,105 @@
       }
     }
   }
+
+  // Runtime CSS: Unistyles writes its <style> through innerText, the app sets
+  // textContent, react-native-web calls insertRule. Route all three through
+  // css-compat.js (concatenated before this file). Each rewrite is gated on
+  // the feature being missing, because current browsers load this build too.
+  const supportsFlexGap = () => {
+    const root = document.body || document.documentElement;
+    const probe = document.createElement("div");
+    probe.style.cssText =
+      "display:flex;flex-direction:column;row-gap:1px;position:absolute;visibility:hidden";
+    probe.appendChild(document.createElement("div"));
+    probe.appendChild(document.createElement("div"));
+    root.appendChild(probe);
+    const supported = probe.scrollHeight === 1;
+    root.removeChild(probe);
+    return supported;
+  };
+  const shimRuntimeCss = () => {
+    const compat = g.paseoLegacyCss;
+    if (
+      !compat ||
+      typeof HTMLStyleElement === "undefined" ||
+      typeof CSSStyleSheet === "undefined"
+    ) {
+      return;
+    }
+    const options = {
+      colorScheme: !["light", "dark"].some(
+        (scheme) => g.matchMedia(`(prefers-color-scheme: ${scheme})`).matches,
+      ),
+      flexGap: !supportsFlexGap(),
+    };
+    const insertRule = CSSStyleSheet.prototype.insertRule;
+    const textContent = Object.getOwnPropertyDescriptor(Node.prototype, "textContent");
+    let gapStyle = null;
+    const gapRules = new Set();
+    // The gap stand-ins must sit after react-native-web's sheet, whose base
+    // `margin: 0` on every view would otherwise cancel them, and before
+    // Unistyles' sheet, so margins a child sets itself still win. Kept as text,
+    // not insertRule, because moving a <style> rebuilds its sheet from text.
+    const placeGapStyle = () => {
+      const anchor = document.getElementById("react-native-stylesheet");
+      if (anchor && anchor.parentNode) {
+        if (gapStyle.previousSibling !== anchor) {
+          anchor.parentNode.insertBefore(gapStyle, anchor.nextSibling);
+        }
+      } else if (!gapStyle.parentNode) {
+        document.head.insertBefore(gapStyle, document.head.firstChild);
+      }
+    };
+    const addGapRules = (rules) => {
+      const fresh = rules.filter((rule) => !gapRules.has(rule));
+      if (fresh.length === 0) {
+        // react-native-web may create its sheet after the first gap rules.
+        if (gapStyle) {
+          placeGapStyle();
+        }
+        return;
+      }
+      for (const rule of fresh) {
+        gapRules.add(rule);
+      }
+      if (!gapStyle) {
+        gapStyle = document.createElement("style");
+        gapStyle.id = "paseo-legacy-flex-gap";
+      }
+      textContent.set.call(gapStyle, [...gapRules].join("\n"));
+      placeGapStyle();
+    };
+    const transform = (css) => {
+      const result = compat.rewrite(css, options);
+      addGapRules(result.gapRules);
+      return result.css;
+    };
+
+    CSSStyleSheet.prototype.insertRule = function patchedInsertRule(rule, index) {
+      return insertRule.call(this, transform(rule), index);
+    };
+    const setters = [
+      [Node.prototype, "textContent"],
+      [HTMLElement.prototype, "innerText"],
+    ];
+    for (const [owner, prop] of setters) {
+      const descriptor = Object.getOwnPropertyDescriptor(owner, prop);
+      if (descriptor && descriptor.set) {
+        Object.defineProperty(HTMLStyleElement.prototype, prop, {
+          configurable: true,
+          enumerable: descriptor.enumerable,
+          get() {
+            return descriptor.get.call(this);
+          },
+          set(value) {
+            descriptor.set.call(this, transform(value));
+          },
+        });
+      }
+    }
+  };
+  shimRuntimeCss();
 
   // crypto.randomUUID ships in Safari 15.4.
   if (g.crypto && g.crypto.getRandomValues && !g.crypto.randomUUID) {

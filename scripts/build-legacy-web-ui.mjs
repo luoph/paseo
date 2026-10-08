@@ -7,8 +7,10 @@
 //   2. rewrites what Babel cannot lower (regex lookbehind, BigInt literals)
 //      into runtime calls, so the bundle still parses,
 //   3. prepends core-js plus hand-written shims (scripts/legacy-web/shims.js),
-//   4. injects an on-screen error overlay into index.html,
-//   5. verifies every JS file parses as ES2019.
+//      including the runtime CSS rewrites in scripts/legacy-web/css-compat.js,
+//   4. runs the same CSS rewrites over the emitted static .css files,
+//   5. injects an on-screen error overlay into index.html,
+//   6. verifies every JS file parses as ES2019.
 //
 // Usage: node scripts/build-legacy-web-ui.mjs [--input <dir>] [--output <dir>]
 // Defaults: packages/app/dist -> packages/app/dist-legacy
@@ -20,6 +22,7 @@ import path from "node:path";
 import { pipeline } from "node:stream/promises";
 import { fileURLToPath } from "node:url";
 import { parseArgs } from "node:util";
+import vm from "node:vm";
 import { constants as zlibConstants, createBrotliCompress, createGzip } from "node:zlib";
 import { transformAsync } from "@babel/core";
 import * as acorn from "acorn";
@@ -154,19 +157,28 @@ async function buildPolyfillBundle() {
     logLevel: "silent",
   });
   const coreJs = result.outputFiles[0].text;
+  const cssCompat = await readFile(path.join(LEGACY_DIR, "css-compat.js"), "utf8");
   const shims = await readFile(path.join(LEGACY_DIR, "shims.js"), "utf8");
-  return `${coreJs}\n${shims}`;
+  return `${coreJs}\n${cssCompat}\n${shims}`;
+}
+
+// Static stylesheets get the same rewrites as runtime CSS. Color-scheme and
+// flex-gap fallbacks depend on the browser, so only the unconditional ones
+// (logical properties, :is()) apply here.
+async function loadCssCompat() {
+  const code = await readFile(path.join(LEGACY_DIR, "css-compat.js"), "utf8");
+  return vm.runInNewContext(`${code}\npaseoLegacyCss`);
 }
 
 function shortHash(text) {
   return createHash("sha256").update(text).digest("hex").slice(0, 16);
 }
 
-// Renames `name-<hash>.js` to `name-<hash>-legacy<buildId>.js` so browsers
-// that cached a previous legacy build (hashed assets are served immutable)
-// pick up the new one.
+// Renames `name-<hash>.js` to `name-<hash>-legacy<buildId>.js` (same for
+// .css) so browsers that cached a previous legacy build (hashed assets are
+// served immutable) pick up the new one.
 function legacyFileName(baseName, buildId) {
-  return baseName.replace(/\.js$/, `-legacy${buildId}.js`);
+  return baseName.replace(/\.(js|css)$/, `-legacy${buildId}.$1`);
 }
 
 // The daemon serves `.br` when the browser accepts brotli and falls back to
@@ -220,14 +232,23 @@ async function main() {
     );
   }
 
+  const cssCompat = await loadCssCompat();
+  const cssFiles = allFiles.filter((file) => file.endsWith(".css"));
+  const rewrittenCss = new Map();
+  for (const file of cssFiles) {
+    rewrittenCss.set(file, cssCompat.rewrite(await readFile(file, "utf8")).css);
+  }
+
   const polyfills = await buildPolyfillBundle();
   verifyParses(polyfills, "legacy polyfills");
   const overlay = await readFile(path.join(LEGACY_DIR, "error-overlay.js"), "utf8");
   verifyParses(overlay, "error overlay");
 
-  const buildId = shortHash([polyfills, overlay, ...transpiled.values()].join("\n"));
+  const buildId = shortHash(
+    [polyfills, overlay, ...transpiled.values(), ...rewrittenCss.values()].join("\n"),
+  );
   const renames = new Map();
-  for (const file of jsFiles) {
+  for (const file of [...jsFiles, ...cssFiles]) {
     const baseName = path.basename(file);
     renames.set(baseName, legacyFileName(baseName, buildId));
   }
@@ -245,6 +266,11 @@ async function main() {
       path.join(path.dirname(file), renames.get(path.basename(file))),
       applyRenames(code),
     );
+  }
+
+  for (const [file, css] of rewrittenCss) {
+    await rm(file);
+    await writeFile(path.join(path.dirname(file), renames.get(path.basename(file))), css);
   }
 
   const jsDir = path.join(OUTPUT_DIR, "_expo", "static", "js", "web");
