@@ -225,7 +225,16 @@ var paseoLegacyCss = (() => {
     return `${prelude}{${inner}}`;
   };
 
+  // Unistyles rewrites its whole stylesheet (60 KB+ on real screens) every
+  // time it adds a style, so nearly every top-level rule repeats from the
+  // previous call. Measured on an iPad mini 2, rewriting without this cache
+  // took 1.6 s across eight settings-page switches.
+  const blockCache = new Map();
+  const MAX_CACHED_BLOCKS = 20000;
+
   const rewriteRules = (text, options, wrappers, gaps) => {
+    const cacheable = wrappers.length === 0;
+    const flags = `${options.colorScheme ? 1 : 0}${options.flexGap ? 1 : 0}|`;
     let out = "";
     let pos = 0;
     while (pos < text.length) {
@@ -243,7 +252,26 @@ var paseoLegacyCss = (() => {
       }
       const end = findBlockEnd(text, brace);
       const prelude = text.slice(pos, brace).trim();
-      out += rewriteBlock(prelude, text.slice(brace + 1, end), options, wrappers, gaps);
+      const inner = text.slice(brace + 1, end);
+      if (cacheable) {
+        const key = `${flags}${prelude}{${inner}}`;
+        let hit = blockCache.get(key);
+        if (!hit) {
+          const blockGaps = [];
+          hit = {
+            css: rewriteBlock(prelude, inner, options, wrappers, blockGaps),
+            gaps: blockGaps,
+          };
+          if (blockCache.size >= MAX_CACHED_BLOCKS) {
+            blockCache.clear();
+          }
+          blockCache.set(key, hit);
+        }
+        out += hit.css;
+        gaps.push(...hit.gaps);
+      } else {
+        out += rewriteBlock(prelude, inner, options, wrappers, gaps);
+      }
       pos = end + 1;
     }
     return out;
@@ -253,10 +281,19 @@ var paseoLegacyCss = (() => {
   // options.flexGap: collect child-margin rules that emulate flex `gap`.
   // Returns the rewritten CSS and the gap rules, which callers place in an
   // early stylesheet so children's own margins still win.
+  let last = { input: null, flags: null, result: null };
   const rewrite = (css, options) => {
+    const opts = options || {};
+    const input = String(css);
+    const flags = `${opts.colorScheme ? 1 : 0}${opts.flexGap ? 1 : 0}`;
+    if (last.input === input && last.flags === flags) {
+      return last.result;
+    }
     const gaps = [];
-    const text = String(css).replace(/\/\*[\s\S]*?\*\//g, "");
-    return { css: rewriteRules(text, options || {}, [], gaps), gapRules: gaps };
+    const text = input.indexOf("/*") === -1 ? input : input.replace(/\/\*[\s\S]*?\*\//g, "");
+    const result = { css: rewriteRules(text, opts, [], gaps), gapRules: gaps };
+    last = { input, flags, result };
+    return result;
   };
 
   return { rewrite };

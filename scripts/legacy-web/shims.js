@@ -123,6 +123,22 @@
     CSSStyleSheet.prototype.insertRule = function patchedInsertRule(rule, index) {
       return insertRule.call(this, transform(rule), index);
     };
+    // Unistyles rewrites its whole sheet each time it adds a style, often a
+    // dozen times in one React commit, and every write makes the browser
+    // reparse the sheet and restyle the page. Writes made in the same task are
+    // coalesced into one at the next microtask; layout reads flush first, so
+    // code that measures right after rendering still sees current styles.
+    // On an iPad mini 2 this cut settings-page switches by another ~15%.
+    const pending = new Map();
+    let flushScheduled = false;
+    const flush = () => {
+      flushScheduled = false;
+      const writes = [...pending];
+      pending.clear();
+      for (const [element, write] of writes) {
+        write.set.call(element, transform(write.value));
+      }
+    };
     const setters = [
       [Node.prototype, "textContent"],
       [HTMLElement.prototype, "innerText"],
@@ -134,13 +150,58 @@
           configurable: true,
           enumerable: descriptor.enumerable,
           get() {
-            return descriptor.get.call(this);
+            const write = pending.get(this);
+            return write ? write.value : descriptor.get.call(this);
           },
           set(value) {
-            descriptor.set.call(this, transform(value));
+            pending.set(this, { set: descriptor.set, value: String(value) });
+            if (!flushScheduled) {
+              flushScheduled = true;
+              Promise.resolve().then(flush);
+            }
           },
         });
       }
+    }
+    const flushBeforeRead = (owner, name) => {
+      const descriptor = Object.getOwnPropertyDescriptor(owner, name);
+      if (!descriptor) {
+        return;
+      }
+      if (typeof descriptor.value === "function") {
+        const read = descriptor.value;
+        owner[name] = function flushedRead(...args) {
+          if (pending.size > 0) {
+            flush();
+          }
+          return read.apply(this, args);
+        };
+      } else if (descriptor.get) {
+        Object.defineProperty(owner, name, {
+          configurable: true,
+          enumerable: descriptor.enumerable,
+          get() {
+            if (pending.size > 0) {
+              flush();
+            }
+            return descriptor.get.call(this);
+          },
+        });
+      }
+    };
+    const windowOwner = Object.getOwnPropertyDescriptor(g, "getComputedStyle")
+      ? g
+      : Object.getPrototypeOf(g);
+    flushBeforeRead(windowOwner, "getComputedStyle");
+    flushBeforeRead(HTMLStyleElement.prototype, "sheet");
+    for (const name of ["getBoundingClientRect", "getClientRects"]) {
+      flushBeforeRead(Element.prototype, name);
+    }
+    for (const name of ["clientWidth", "clientHeight", "scrollWidth", "scrollHeight"]) {
+      flushBeforeRead(Element.prototype, name);
+    }
+    for (const name of ["offsetWidth", "offsetHeight", "offsetTop", "offsetLeft"]) {
+      flushBeforeRead(HTMLElement.prototype, name);
     }
   };
   shimRuntimeCss();
@@ -224,9 +285,40 @@
   }
 
   // ResizeObserver ships in Safari 13.1. This fallback re-measures observed
-  // elements on window resize and on a slow interval; it is coarse but keeps
-  // layout code that depends on it working.
+  // elements at most once per frame, when the DOM or the window changes, plus
+  // a 1 s sweep for size changes no mutation reports (transitions, font
+  // loads). One shared check serves every observer; per-observer 250 ms
+  // intervals forced a layout per observer and showed up in iPad profiles.
   if (typeof g.ResizeObserver === "undefined") {
+    const observers = new Set();
+    let frame = null;
+    const checkAll = () => {
+      frame = null;
+      for (const observer of observers) {
+        observer.poll();
+      }
+    };
+    const scheduleCheck = () => {
+      if (frame === null && observers.size > 0) {
+        frame = requestAnimationFrame(checkAll);
+      }
+    };
+    let watching = false;
+    const watch = () => {
+      if (watching) {
+        return;
+      }
+      watching = true;
+      g.addEventListener("resize", scheduleCheck);
+      g.addEventListener("orientationchange", scheduleCheck);
+      new MutationObserver(scheduleCheck).observe(document.documentElement, {
+        attributes: true,
+        characterData: true,
+        childList: true,
+        subtree: true,
+      });
+      setInterval(scheduleCheck, 1000);
+    };
     const toEntry = (target, rect) => {
       const box = { inlineSize: rect.width, blockSize: rect.height };
       return {
@@ -250,8 +342,6 @@
       constructor(callback) {
         this.callback = callback;
         this.sizes = new Map();
-        this.interval = null;
-        this.check = () => this.poll();
       }
 
       poll() {
@@ -273,25 +363,21 @@
           return;
         }
         this.sizes.set(target, null);
-        if (this.interval === null) {
-          g.addEventListener("resize", this.check);
-          this.interval = setInterval(this.check, 250);
-        }
-        requestAnimationFrame(this.check);
+        observers.add(this);
+        watch();
+        scheduleCheck();
       }
 
       unobserve(target) {
         this.sizes.delete(target);
         if (this.sizes.size === 0) {
-          this.disconnect();
+          observers.delete(this);
         }
       }
 
       disconnect() {
         this.sizes.clear();
-        g.removeEventListener("resize", this.check);
-        clearInterval(this.interval);
-        this.interval = null;
+        observers.delete(this);
       }
     };
   }
