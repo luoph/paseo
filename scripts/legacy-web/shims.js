@@ -4,6 +4,8 @@
 // The build verifies this file parses as ES2019; keep it within that.
 (() => {
   const g = typeof globalThis !== "undefined" ? globalThis : window;
+  // Set by the ResizeObserver fallback: style writes can resize elements.
+  let afterStyleFlush = () => {};
 
   // Safari < 14 only has the deprecated MediaQueryList.addListener. Probe a real
   // matchMedia result instead of the MediaQueryList global: a check against the
@@ -138,6 +140,7 @@
       for (const [element, write] of writes) {
         write.set.call(element, transform(write.value));
       }
+      afterStyleFlush();
     };
     const setters = [
       [Node.prototype, "textContent"],
@@ -285,10 +288,10 @@
   }
 
   // ResizeObserver ships in Safari 13.1. This fallback re-measures observed
-  // elements at most once per frame, when the DOM or the window changes, plus
-  // a 1 s sweep for size changes no mutation reports (transitions, font
-  // loads). One shared check serves every observer; per-observer 250 ms
-  // intervals forced a layout per observer and showed up in iPad profiles.
+  // elements in one shared check: every 250 ms, after style writes and on
+  // window resize, at most once per frame. A MutationObserver trigger looked
+  // more precise but measured slower on an iPad mini 2: React page switches
+  // produce thousands of mutation records.
   if (typeof g.ResizeObserver === "undefined") {
     const observers = new Set();
     let frame = null;
@@ -311,13 +314,8 @@
       watching = true;
       g.addEventListener("resize", scheduleCheck);
       g.addEventListener("orientationchange", scheduleCheck);
-      new MutationObserver(scheduleCheck).observe(document.documentElement, {
-        attributes: true,
-        characterData: true,
-        childList: true,
-        subtree: true,
-      });
-      setInterval(scheduleCheck, 1000);
+      afterStyleFlush = scheduleCheck;
+      setInterval(scheduleCheck, 250);
     };
     const toEntry = (target, rect) => {
       const box = { inlineSize: rect.width, blockSize: rect.height };

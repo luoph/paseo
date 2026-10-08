@@ -24,6 +24,7 @@ import { fileURLToPath } from "node:url";
 import { parseArgs } from "node:util";
 import vm from "node:vm";
 import { constants as zlibConstants, createBrotliCompress, createGzip } from "node:zlib";
+import { createRequire } from "node:module";
 import { transformAsync } from "@babel/core";
 import * as acorn from "acorn";
 import * as esbuild from "esbuild";
@@ -142,10 +143,34 @@ function verifyParses(code, label) {
   }
 }
 
+// Only the core-js modules Safari 12 lacks: `core-js/stable` ships ~309
+// modules and initializing all of them showed up in startup profiles.
+// core-js-compat comes in through Expo's Babel preset; a direct dependency
+// would drag a browserslist upgrade through the lockfile.
+function polyfillEntry() {
+  const require = createRequire(import.meta.url);
+  let compat;
+  try {
+    compat = require("core-js-compat");
+  } catch {
+    console.warn("core-js-compat not found; bundling all of core-js/stable");
+    return 'import "core-js/stable";';
+  }
+  const { list } = compat({
+    modules: ["core-js/stable"],
+    targets: BABEL_TARGETS,
+    version: require("core-js-compat/package.json").version,
+  });
+  for (const name of list) {
+    require.resolve(`core-js/modules/${name}`);
+  }
+  return list.map((name) => `import "core-js/modules/${name}";`).join("\n");
+}
+
 async function buildPolyfillBundle() {
   const result = await esbuild.build({
     stdin: {
-      contents: 'import "core-js/stable";',
+      contents: polyfillEntry(),
       resolveDir: REPO_ROOT,
       loader: "js",
     },
