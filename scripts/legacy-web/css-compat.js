@@ -154,6 +154,12 @@ var paseoLegacyCss = (() => {
 
   // Child-margin rules that stand in for flex `gap`. Direction comes from the
   // same rule; React Native defaults to column when the rule does not say.
+  // The stand-in goes on each later item's leading side. Putting it on the
+  // earlier item's trailing side fails for `display: contents` icon wrappers,
+  // which have no box to hold a margin. Real gap adds to a child's own margin;
+  // a margin cannot, so `:not(#paseo-legacy-gap)` makes the stand-in win:
+  // spacing never drops below the gap, though a child's own margin on that
+  // side is lost (an icon button's -4px pull-in shows as 8px, not 4px).
   // Wrapping containers give every child trailing margins instead, so items
   // that wrap onto a new line are spaced too; the cost is one extra gap after
   // the last item of each line.
@@ -178,9 +184,8 @@ var paseoLegacyCss = (() => {
     if (reverse) {
       side = horizontal ? "right" : "bottom";
     }
-    return wrap(
-      `${targets.map((selector) => `${selector} > * + *`).join(",")}{margin-${side}:${value}}`,
-    );
+    const children = targets.map((selector) => `${selector} > * + *:not(#paseo-legacy-gap)`);
+    return wrap(`${children.join(",")}{margin-${side}:${value}}`);
   };
 
   const findBlockEnd = (text, open) => {

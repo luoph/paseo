@@ -83,10 +83,11 @@
     const textContent = Object.getOwnPropertyDescriptor(Node.prototype, "textContent");
     let gapStyle = null;
     const gapRules = new Set();
-    // The gap stand-ins must sit after react-native-web's sheet, whose base
-    // `margin: 0` on every view would otherwise cancel them, and before
-    // Unistyles' sheet, so margins a child sets itself still win. Kept as text,
-    // not insertRule, because moving a <style> rebuilds its sheet from text.
+    // The wrapping-container stand-ins carry plain class specificity, so this
+    // sheet sits after react-native-web's (whose base `margin: 0` on every view
+    // would cancel them) and before Unistyles' (so a child's own margins win).
+    // Kept as text, not insertRule, because moving a <style> rebuilds its sheet
+    // from text.
     const placeGapStyle = () => {
       const anchor = document.getElementById("react-native-stylesheet");
       if (anchor && anchor.parentNode) {
