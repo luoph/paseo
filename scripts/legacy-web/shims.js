@@ -196,6 +196,104 @@
     };
   }
 
+  // screen.orientation ships in Safari 16.4. Unistyles reads
+  // screen.orientation.type at startup; derive it from the legacy
+  // window.orientation angle and forward "change" to "orientationchange".
+  const shimScreenOrientation = () => {
+    if (typeof screen === "undefined" || screen.orientation) {
+      return;
+    }
+    const angle = () => (typeof g.orientation === "number" ? g.orientation : 0);
+    const orientation = {
+      get angle() {
+        return (angle() + 360) % 360;
+      },
+      get type() {
+        if (typeof g.orientation !== "number") {
+          return g.innerHeight >= g.innerWidth ? "portrait-primary" : "landscape-primary";
+        }
+        switch (angle()) {
+          case 90:
+            return "landscape-primary";
+          case -90:
+          case 270:
+            return "landscape-secondary";
+          case 180:
+            return "portrait-secondary";
+          default:
+            return "portrait-primary";
+        }
+      },
+      onchange: null,
+      addEventListener(type, listener) {
+        if (type === "change") {
+          g.addEventListener("orientationchange", listener);
+        }
+      },
+      removeEventListener(type, listener) {
+        if (type === "change") {
+          g.removeEventListener("orientationchange", listener);
+        }
+      },
+    };
+    Object.defineProperty(screen, "orientation", { configurable: true, get: () => orientation });
+  };
+  shimScreenOrientation();
+
+  // WeakRef ships in Safari 14.1 and cannot be emulated. This fallback holds a
+  // strong reference, so deref() never returns undefined and the target is
+  // kept alive; callers only lose the memory optimisation.
+  const shimWeakRef = () => {
+    if (typeof g.WeakRef !== "undefined") {
+      return;
+    }
+    g.WeakRef = class WeakRef {
+      constructor(target) {
+        Object.defineProperty(this, "__target", { value: target });
+      }
+
+      deref() {
+        return this.__target;
+      }
+    };
+  };
+  shimWeakRef();
+
+  // replaceChildren ships in Safari 14. xterm's DOM renderer clears and
+  // repaints rows with it.
+  const shimReplaceChildren = (Ctor) => {
+    if (Ctor && !Ctor.prototype.replaceChildren) {
+      Ctor.prototype.replaceChildren = function replaceChildren(...nodes) {
+        while (this.lastChild) {
+          this.removeChild(this.lastChild);
+        }
+        this.append(...nodes);
+      };
+    }
+  };
+  [g.Element, g.Document, g.DocumentFragment].forEach(shimReplaceChildren);
+
+  // Safari has no requestIdleCallback at all; some components call it
+  // unguarded from effects.
+  const shimRequestIdleCallback = () => {
+    if (typeof g.requestIdleCallback !== "undefined") {
+      return;
+    }
+    g.requestIdleCallback = (callback) => {
+      const start = Date.now();
+      return setTimeout(
+        () =>
+          callback({
+            didTimeout: false,
+            timeRemaining: () => Math.max(0, 50 - (Date.now() - start)),
+          }),
+        1,
+      );
+    };
+    g.cancelIdleCallback = (handle) => clearTimeout(handle);
+  };
+  shimRequestIdleCallback();
+
   // BigInt ships in Safari 14. The build rewrites `BigInt(x)` calls and BigInt
   // literals into this helper. Without native BigInt the value degrades to a
   // Number: module-level constants (zod's int64 ranges) load, and 64-bit
