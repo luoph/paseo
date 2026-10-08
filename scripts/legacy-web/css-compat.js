@@ -73,7 +73,7 @@ var paseoLegacyCss = (() => {
   // Rewrites one declaration block. Also reports the flex gap and direction so
   // the caller can emulate flex `gap` (Safari 14.1) with child margins.
   const rewriteDeclarations = (body) => {
-    const layout = { rowGap: null, columnGap: null, direction: null };
+    const layout = { rowGap: null, columnGap: null, direction: null, wrap: null };
     const out = splitTopLevel(body, /;/).map((declaration) => {
       const colon = declaration.indexOf(":");
       if (colon === -1) {
@@ -95,6 +95,16 @@ var paseoLegacyCss = (() => {
         layout.columnGap = value;
       } else if (prop === "flex-direction") {
         layout.direction = value;
+      } else if (prop === "flex-wrap") {
+        layout.wrap = value;
+      } else if (prop === "flex-flow") {
+        for (const token of splitTopLevel(value, /\s/)) {
+          if (/^(row|column)/.test(token)) {
+            layout.direction = token;
+          } else if (/wrap/.test(token)) {
+            layout.wrap = token;
+          }
+        }
       }
       return expandDeclaration(prop, value, important) || declaration;
     });
@@ -130,9 +140,33 @@ var paseoLegacyCss = (() => {
 
   const isZero = (value) => value === null || /^0(px|rem|em|%)?$/.test(value);
 
+  const wrapRule = (layout) => {
+    const sides = [];
+    if (!isZero(layout.columnGap)) {
+      const side = (layout.direction || "").endsWith("reverse") ? "left" : "right";
+      sides.push(`margin-${side}:${layout.columnGap}`);
+    }
+    if (!isZero(layout.rowGap)) {
+      sides.push(`margin-${layout.wrap === "wrap-reverse" ? "top" : "bottom"}:${layout.rowGap}`);
+    }
+    return sides.join(";");
+  };
+
   // Child-margin rules that stand in for flex `gap`. Direction comes from the
   // same rule; React Native defaults to column when the rule does not say.
+  // Wrapping containers give every child trailing margins instead, so items
+  // that wrap onto a new line are spaced too; the cost is one extra gap after
+  // the last item of each line.
   const gapRules = (selectors, layout, wrappers) => {
+    const targets = selectors.filter((selector) => selector.indexOf("::") === -1);
+    if (targets.length === 0) {
+      return [];
+    }
+    const wrap = (rule) => [wrappers.reduceRight((inner, prelude) => `${prelude}{${inner}}`, rule)];
+    if (layout.wrap && layout.wrap !== "nowrap") {
+      const body = wrapRule(layout);
+      return body ? wrap(`${targets.map((selector) => `${selector} > *`).join(",")}{${body}}`) : [];
+    }
     const direction = layout.direction || "column";
     const horizontal = direction.indexOf("row") === 0;
     const value = horizontal ? layout.columnGap : layout.rowGap;
@@ -144,12 +178,9 @@ var paseoLegacyCss = (() => {
     if (reverse) {
       side = horizontal ? "right" : "bottom";
     }
-    const targets = selectors.filter((selector) => selector.indexOf("::") === -1);
-    if (targets.length === 0) {
-      return [];
-    }
-    const rule = `${targets.map((selector) => `${selector} > * + *`).join(",")}{margin-${side}:${value}}`;
-    return [wrappers.reduceRight((inner, prelude) => `${prelude}{${inner}}`, rule)];
+    return wrap(
+      `${targets.map((selector) => `${selector} > * + *`).join(",")}{margin-${side}:${value}}`,
+    );
   };
 
   const findBlockEnd = (text, open) => {
