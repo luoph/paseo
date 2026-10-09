@@ -199,11 +199,43 @@ function shortHash(text) {
   return createHash("sha256").update(text).digest("hex").slice(0, 16);
 }
 
-// Renames `name-<hash>.js` to `name-<hash>-legacy<buildId>.js` (same for
-// .css) so browsers that cached a previous legacy build (hashed assets are
-// served immutable) pick up the new one.
-function legacyFileName(baseName, buildId) {
-  return baseName.replace(/\.(js|css)$/, `-legacy${buildId}.$1`);
+// Renames `name-<hash>.js` to `name-<hash>-legacy<contentHash>.js` (same for
+// .css). Hashed assets are served immutable, so the name must change exactly
+// when the legacy output changes.
+function legacyFileName(baseName, contentHash) {
+  return baseName.replace(/\.(js|css)$/, `-legacy${contentHash}.$1`);
+}
+
+// Each asset is named by a hash of its own final text, so a release renames
+// (and makes clients re-download) only the files that changed. With one
+// build-wide id, a shims-only fix re-downloaded the 4 MB (brotli) main bundle,
+// which took 14-22 s on the iPad's network.
+// Final text embeds other assets' new names (the main bundle loads chunks), so
+// names are recomputed until they stop changing.
+function contentHashNames(contents) {
+  const renames = new Map();
+  const applyRenames = (text) => {
+    let next = text;
+    for (const [from, to] of renames) {
+      next = next.split(from).join(to);
+    }
+    return next;
+  };
+  for (let pass = 0; pass < 10; pass += 1) {
+    let changed = false;
+    for (const [file, text] of contents) {
+      const baseName = path.basename(file);
+      const name = legacyFileName(baseName, shortHash(applyRenames(text)));
+      if (renames.get(baseName) !== name) {
+        renames.set(baseName, name);
+        changed = true;
+      }
+    }
+    if (!changed) {
+      return { renames, applyRenames };
+    }
+  }
+  throw new Error("Legacy asset names did not converge; assets reference each other in a cycle");
 }
 
 // The daemon serves `.br` when the browser accepts brotli and falls back to
@@ -269,21 +301,11 @@ async function main() {
   const overlay = await readFile(path.join(LEGACY_DIR, "error-overlay.js"), "utf8");
   verifyParses(overlay, "error overlay");
 
+  const contents = new Map([...transpiled, ...rewrittenCss]);
+  const { renames, applyRenames } = contentHashNames(contents);
   const buildId = shortHash(
-    [polyfills, overlay, ...transpiled.values(), ...rewrittenCss.values()].join("\n"),
+    [polyfills, overlay, ...[...contents.values()].map(applyRenames)].join("\n"),
   );
-  const renames = new Map();
-  for (const file of [...jsFiles, ...cssFiles]) {
-    const baseName = path.basename(file);
-    renames.set(baseName, legacyFileName(baseName, buildId));
-  }
-  function applyRenames(text) {
-    let next = text;
-    for (const [from, to] of renames) {
-      next = next.split(from).join(to);
-    }
-    return next;
-  }
 
   for (const [file, code] of transpiled) {
     await rm(file);
@@ -295,11 +317,14 @@ async function main() {
 
   for (const [file, css] of rewrittenCss) {
     await rm(file);
-    await writeFile(path.join(path.dirname(file), renames.get(path.basename(file))), css);
+    await writeFile(
+      path.join(path.dirname(file), renames.get(path.basename(file))),
+      applyRenames(css),
+    );
   }
 
   const jsDir = path.join(OUTPUT_DIR, "_expo", "static", "js", "web");
-  const polyfillName = `legacy-polyfills-${buildId}.js`;
+  const polyfillName = `legacy-polyfills-${shortHash(polyfills)}.js`;
   await writeFile(path.join(jsDir, polyfillName), polyfills);
 
   const htmlFiles = allFiles.filter((file) => file.endsWith(".html"));
