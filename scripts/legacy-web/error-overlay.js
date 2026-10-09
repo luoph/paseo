@@ -83,6 +83,11 @@
 
   var originalConsoleError = console.error;
   console.error = function () {
+    // Once the box is full, skip stringifying: React logs large objects, and a
+    // render loop that keeps logging would otherwise churn memory for nothing.
+    if (count >= MAX_MESSAGES) {
+      return originalConsoleError.apply(console, arguments);
+    }
     var parts = [];
     for (var i = 0; i < arguments.length; i += 1) {
       parts.push(stringify(arguments[i]));

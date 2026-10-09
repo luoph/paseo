@@ -261,6 +261,150 @@
   };
   shimInlineLogicalProperties();
 
+  // element.animate (Web Animations, Safari 13.1). The status ring spins with
+  // it, so on Safari 12 the sidebar threw as soon as a host with running agents
+  // connected; dnd-kit's drop animation awaits `finished`. This fallback plays
+  // the keyframes as a CSS animation and covers what those callers use:
+  // duration, easing, delay, iterations, fill, startTime (timeline alignment),
+  // cancel, finish, finished and onfinish.
+  const shimElementAnimate = () => {
+    if (typeof Element === "undefined" || Element.prototype.animate) {
+      return;
+    }
+    let sequence = 0;
+    let keyframesStyle = null;
+    const IGNORED = new Set(["offset", "easing", "composite"]);
+    const cssName = (key) => key.replace(/[A-Z]/g, (letter) => `-${letter.toLowerCase()}`);
+    const frameOffsets = (keyframes) => {
+      if (Array.isArray(keyframes)) {
+        return keyframes.map((frame, index) => ({
+          offset:
+            frame.offset !== null && frame.offset !== undefined
+              ? frame.offset
+              : index / Math.max(1, keyframes.length - 1),
+          props: frame,
+        }));
+      }
+      const keys = Object.keys(keyframes).filter((key) => !IGNORED.has(key));
+      const count = Math.max(1, ...keys.map((key) => [].concat(keyframes[key]).length));
+      return Array.from({ length: count }, (_unused, index) => {
+        const props = {};
+        for (const key of keys) {
+          const values = [].concat(keyframes[key]);
+          props[key] = values[Math.min(index, values.length - 1)];
+        }
+        return { offset: count === 1 ? 1 : index / (count - 1), props };
+      });
+    };
+    const keyframesRule = (name, keyframes) => {
+      const frames = frameOffsets(keyframes).map(({ offset, props }) => {
+        const body = Object.keys(props)
+          .filter((key) => !IGNORED.has(key))
+          .map((key) => `${cssName(key)}:${props[key]}`)
+          .join(";");
+        return `${(offset * 100).toFixed(3)}%{${body}}`;
+      });
+      return `@keyframes ${name}{${frames.join("")}}`;
+    };
+
+    Element.prototype.animate = function legacyAnimate(keyframes, options) {
+      const timing = typeof options === "number" ? { duration: options } : options || {};
+      const element = this;
+      const style = element.style;
+      const name = `paseo-legacy-animation-${(sequence += 1)}`;
+      if (!keyframesStyle) {
+        keyframesStyle = document.createElement("style");
+        keyframesStyle.id = "paseo-legacy-animations";
+        document.head.appendChild(keyframesStyle);
+      }
+      const sheet = keyframesStyle.sheet;
+      sheet.insertRule(keyframesRule(name, keyframes || {}), sheet.cssRules.length);
+
+      const duration = Number(timing.duration) || 0;
+      const iterations =
+        timing.iterations === Number.POSITIVE_INFINITY ? "infinite" : timing.iterations || 1;
+      const previousAnimation = style.animation;
+      style.animation = [
+        name,
+        `${duration}ms`,
+        timing.easing || "linear",
+        `${Number(timing.delay) || 0}ms`,
+        iterations,
+        timing.direction || "normal",
+        timing.fill || "none",
+      ].join(" ");
+
+      let resolveFinished;
+      const finished = new Promise((resolve) => {
+        resolveFinished = resolve;
+      });
+      let startTime = null;
+      const cleanup = () => {
+        element.removeEventListener("animationend", onEnd);
+        if (style.animationName === name) {
+          style.animation = previousAnimation || "";
+        }
+        for (let index = sheet.cssRules.length - 1; index >= 0; index -= 1) {
+          if (sheet.cssRules[index].name === name) {
+            sheet.deleteRule(index);
+          }
+        }
+      };
+      const animation = {
+        playState: "running",
+        finished,
+        onfinish: null,
+        oncancel: null,
+        get startTime() {
+          return startTime;
+        },
+        // A start time on the document timeline: shift the CSS animation so
+        // its progress matches one that started then (keeps rings in sync).
+        set startTime(value) {
+          startTime = value;
+          if (value !== null && value !== undefined) {
+            style.animationDelay = `${Number(value) - performance.now()}ms`;
+          }
+        },
+        cancel() {
+          cleanup();
+          animation.playState = "idle";
+          if (typeof animation.oncancel === "function") {
+            animation.oncancel({});
+          }
+        },
+        finish() {
+          // eslint-disable-next-line no-use-before-define -- assigned below
+          onEnd({ animationName: name });
+        },
+        pause() {
+          style.animationPlayState = "paused";
+          animation.playState = "paused";
+        },
+        play() {
+          style.animationPlayState = "running";
+          animation.playState = "running";
+        },
+      };
+      function onEnd(event) {
+        if (event.animationName !== name || animation.playState === "finished") {
+          return;
+        }
+        animation.playState = "finished";
+        if (timing.fill !== "forwards" && timing.fill !== "both") {
+          cleanup();
+        }
+        if (typeof animation.onfinish === "function") {
+          animation.onfinish({});
+        }
+        resolveFinished(animation);
+      }
+      element.addEventListener("animationend", onEnd);
+      return animation;
+    };
+  };
+  shimElementAnimate();
+
   // crypto.randomUUID ships in Safari 15.4.
   if (g.crypto && g.crypto.getRandomValues && !g.crypto.randomUUID) {
     g.crypto.randomUUID = () => {
