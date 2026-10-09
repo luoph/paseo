@@ -38,6 +38,7 @@ import { WorkspaceRenameModal } from "@/components/workspace-rename-modal";
 import { useWorkspaceClipboardActions } from "@/hooks/use-workspace-clipboard-actions";
 import { ExternalLink, Settings, MoreVertical, Plus, Trash2 } from "lucide-react-native";
 import { NestableScrollContainer } from "react-native-draggable-flatlist";
+import { getLegacyWebScrollStyle } from "@/utils/legacy-web-interaction";
 import { DraggableList, type DraggableRenderItemInfo } from "./draggable-list";
 import type { DraggableListDragHandleProps } from "./draggable-list.types";
 import { getHostRuntimeStore, useHosts } from "@/runtime/host-runtime";
@@ -2477,7 +2478,7 @@ function ProjectModeList({
         </NestableScrollContainer>
       ) : (
         <ScrollView
-          style={styles.list}
+          style={[styles.list, getLegacyWebScrollStyle()]}
           contentContainerStyle={styles.listContent}
           showsVerticalScrollIndicator={false}
           testID="sidebar-project-workspace-list-scroll"

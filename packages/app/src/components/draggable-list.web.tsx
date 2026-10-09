@@ -17,6 +17,10 @@ import {
   useSortable,
 } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
+import {
+  getLegacyWebScrollStyle,
+  shouldAttachWebDragSensors,
+} from "@/utils/legacy-web-interaction";
 import type { DraggableListProps, DraggableRenderItemInfo } from "./draggable-list.types";
 import { getDragActivationConstraints, useDragReorderState } from "./drag-reorder";
 
@@ -184,7 +188,7 @@ function SortableItemInner<T>({
 
 const SortableItem = memo(SortableItemInner) as typeof SortableItemInner;
 
-export function DraggableList<T>({
+function SensorDraggableList<T>({
   data,
   keyExtractor,
   renderItem,
@@ -242,7 +246,7 @@ export function DraggableList<T>({
       {scrollEnabled ? (
         <ScrollView
           testID={testID}
-          style={style}
+          style={[style, getLegacyWebScrollStyle()]}
           contentContainerStyle={contentContainerStyle}
           showsVerticalScrollIndicator={showsVerticalScrollIndicator}
         >
@@ -309,4 +313,72 @@ export function DraggableList<T>({
       )}
     </View>
   );
+}
+
+function noopDrag(): void {}
+
+function StaticDraggableList<T>({
+  data,
+  keyExtractor,
+  renderItem,
+  style,
+  containerStyle,
+  contentContainerStyle,
+  testID,
+  ListFooterComponent,
+  ListHeaderComponent,
+  ListEmptyComponent,
+  showsVerticalScrollIndicator = true,
+  scrollEnabled = true,
+}: DraggableListProps<T>) {
+  const wrapperStyle = useMemo(
+    () => [
+      { position: "relative" as const },
+      scrollEnabled ? { flex: 1, minHeight: 0 } : null,
+      containerStyle,
+    ],
+    [scrollEnabled, containerStyle],
+  );
+  const rows = data.map((item, index) => (
+    <View key={keyExtractor(item, index)}>
+      {renderItem({
+        item,
+        index,
+        drag: noopDrag,
+        isActive: false,
+      })}
+    </View>
+  ));
+  const body = (
+    <>
+      {ListHeaderComponent}
+      {data.length === 0 && ListEmptyComponent}
+      {rows}
+      {ListFooterComponent}
+    </>
+  );
+
+  return (
+    <View style={wrapperStyle}>
+      {scrollEnabled ? (
+        <ScrollView
+          testID={testID}
+          style={[style, getLegacyWebScrollStyle()]}
+          contentContainerStyle={contentContainerStyle}
+          showsVerticalScrollIndicator={showsVerticalScrollIndicator}
+        >
+          {body}
+        </ScrollView>
+      ) : (
+        body
+      )}
+    </View>
+  );
+}
+
+export function DraggableList<T>(props: DraggableListProps<T>) {
+  if (!shouldAttachWebDragSensors()) {
+    return <StaticDraggableList {...props} />;
+  }
+  return <SensorDraggableList {...props} />;
 }

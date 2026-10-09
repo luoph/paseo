@@ -26,6 +26,7 @@ import type { SidebarWorkspaceGroup } from "@/components/sidebar/sidebar-labels"
 import { SidebarFilterEmptyState } from "@/components/sidebar/empty-states";
 import type { HostBadgeModel } from "@/hosts/appearance";
 import { isWeb as platformIsWeb, isNative as platformIsNative } from "@/constants/platform";
+import { getLegacyWebScrollStyle } from "@/utils/legacy-web-interaction";
 import { useIsCompactFormFactor } from "@/constants/layout";
 import { StyleSheet } from "react-native-unistyles";
 import type { Theme } from "@/styles/theme";
@@ -260,7 +261,7 @@ export function SidebarStatusWorkspaceList({
         </NestableScrollContainer>
       ) : (
         <ScrollView
-          style={styles.list}
+          style={[styles.list, getLegacyWebScrollStyle()]}
           contentContainerStyle={styles.listContent}
           showsVerticalScrollIndicator={false}
           testID="sidebar-status-list-scroll"

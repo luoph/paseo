@@ -41,6 +41,15 @@ function renderReplacementRow(info: DraggableRenderItemInfo<Item>) {
   return <Row dragHandleProps={info.dragHandleProps} />;
 }
 
+let legacyDragHandleProps: DraggableListDragHandleProps | undefined;
+let sawLegacyRow = false;
+
+function renderLegacyRow(info: DraggableRenderItemInfo<Item>) {
+  sawLegacyRow = true;
+  legacyDragHandleProps = info.dragHandleProps;
+  return <Row dragHandleProps={info.dragHandleProps} />;
+}
+
 beforeEach(() => {
   vi.stubGlobal("React", React);
   vi.stubGlobal("IS_REACT_ACT_ENVIRONMENT", true);
@@ -55,6 +64,7 @@ afterEach(() => {
   container?.remove();
   root = null;
   container = null;
+  delete (globalThis as Record<string, unknown>).__paseoLegacyLayoutViewport;
   vi.unstubAllGlobals();
 });
 
@@ -86,5 +96,27 @@ describe("DraggableList web row stability", () => {
     });
 
     expect(rowRenderCount).toBe(1);
+  });
+
+  it("renders rows without drag listeners on the legacy viewport", () => {
+    (globalThis as Record<string, unknown>).__paseoLegacyLayoutViewport = true;
+    legacyDragHandleProps = undefined;
+    sawLegacyRow = false;
+
+    act(() => {
+      root?.render(
+        <DraggableList
+          data={items}
+          keyExtractor={keyExtractor}
+          renderItem={renderLegacyRow}
+          onDragEnd={onDragEnd}
+          useDragHandle
+          scrollEnabled={false}
+        />,
+      );
+    });
+
+    expect(sawLegacyRow).toBe(true);
+    expect(legacyDragHandleProps).toBeUndefined();
   });
 });
