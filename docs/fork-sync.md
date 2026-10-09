@@ -62,5 +62,5 @@ git reset --hard <同步前的 HEAD>
 - 只在自己独占的功能分支上 rebase。有人基于这个分支开发时，改用 `git merge origin/main`，免得强推覆盖别人的基线。
 - 分支上不要有 merge 提交，脚本遇到会拒绝运行。
 - 自己的改动尽量放进新文件，少改官方已有文件。改动越集中，rebase 冲突越少。
-- 同步后在 iOS 12 真机上打开一次 legacy Web UI。官方可能引入 Safari 12 不支持的语法或 API，`build:legacy-web-ui` 的 ES2019 校验能拦下语法问题，运行时缺失的 API 只有真机打开才会暴露（错误会显示在页面上的错误面板里）。
+- 同步后在 iOS 12 真机上打开一次 legacy Web UI，并连上主机看一遍侧边栏和会话。官方可能引入 Safari 12 不支持的语法或 API，`build:legacy-web-ui` 的 ES2019 校验能拦下语法问题，运行时缺失的 API 只有真机打开才会暴露，有些（如运行中 agent 的状态环）连上主机才出现。真机调试方法见 [legacy-web-ui.md](legacy-web-ui.md)。
 - 运行 `--verify` 后如果 `package-lock.json` 被改动，说明 `npm install` 重写了锁文件。确认是否要提交，别让它混进下一次同步。
