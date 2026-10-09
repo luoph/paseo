@@ -1,5 +1,6 @@
 import { Platform } from "react-native";
-import { darkHighlightColors, lightHighlightColors } from "@getpaseo/highlight";
+// Subpath, not the package barrel: the barrel loads every Lezer grammar.
+import { darkHighlightColors, lightHighlightColors } from "@getpaseo/highlight/colors";
 
 export const baseColors = {
   // Base colors

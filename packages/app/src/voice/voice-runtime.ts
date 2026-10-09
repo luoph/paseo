@@ -3,10 +3,6 @@ import type { AgentStreamEventPayload, SessionOutboundMessage } from "@getpaseo/
 import { resolveVoiceUnavailableMessage } from "@/utils/server-info-capabilities";
 import type { DaemonServerInfo } from "@/stores/session-store";
 import type { AudioEngine } from "@/audio";
-import {
-  THINKING_TONE_NATIVE_PCM_BASE64,
-  THINKING_TONE_NATIVE_PCM_DURATION_MS,
-} from "@/utils/thinking-tone.native-pcm";
 
 const PCM_MIME_TYPE = "audio/pcm;rate=16000;bits=16";
 const KEEP_AWAKE_TAG = "paseo:voice";
@@ -211,12 +207,30 @@ export function createVoiceRuntime(deps: VoiceRuntimeDeps): VoiceRuntime {
     controller: null,
     timeout: null,
   };
-  const cuePcm16 = Uint8Array.from(Buffer.from(THINKING_TONE_NATIVE_PCM_BASE64, "base64"));
+  // The PCM asset is a large module. Load it when voice mode starts, not while
+  // constructing the runtime, so settings/welcome never execute it.
+  let cuePcm16: Uint8Array | null = null;
+  let cueDurationMs = 0;
+  async function loadThinkingTone(): Promise<void> {
+    if (cuePcm16) {
+      return;
+    }
+    const tone = await import("@/utils/thinking-tone.native-pcm");
+    cueDurationMs = tone.THINKING_TONE_NATIVE_PCM_DURATION_MS;
+    cuePcm16 = Uint8Array.from(Buffer.from(tone.THINKING_TONE_NATIVE_PCM_BASE64, "base64"));
+  }
   const cueSource = {
-    size: cuePcm16.byteLength,
+    get size() {
+      return cuePcm16?.byteLength ?? 0;
+    },
     type: "audio/pcm;rate=16000;bits=16",
     async arrayBuffer() {
-      return cuePcm16.buffer.slice(cuePcm16.byteOffset, cuePcm16.byteOffset + cuePcm16.byteLength);
+      if (!cuePcm16) {
+        throw new Error("Thinking tone is not loaded");
+      }
+      const copy = new ArrayBuffer(cuePcm16.byteLength);
+      new Uint8Array(copy).set(cuePcm16);
+      return copy;
     },
   };
   function emit(): void {
@@ -479,10 +493,7 @@ export function createVoiceRuntime(deps: VoiceRuntimeDeps): VoiceRuntime {
           if (controller.signal.aborted) {
             return;
           }
-          cue.timeout = setTimeout(
-            playNext,
-            THINKING_TONE_NATIVE_PCM_DURATION_MS + THINKING_TONE_REPEAT_GAP_MS,
-          );
+          cue.timeout = setTimeout(playNext, cueDurationMs + THINKING_TONE_REPEAT_GAP_MS);
         });
     };
 
@@ -736,6 +747,7 @@ export function createVoiceRuntime(deps: VoiceRuntimeDeps): VoiceRuntime {
       }));
 
       try {
+        await loadThinkingTone();
         if (
           state.snapshot.isVoiceMode &&
           previousServerId &&

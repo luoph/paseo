@@ -3,7 +3,6 @@ import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";
 import { PortalProvider } from "@gorhom/portal";
 import { LucideProvider } from "lucide-react-native";
 import * as Linking from "expo-linking";
-import * as Notifications from "expo-notifications";
 import { Stack, useNavigationContainerRef, usePathname, useRouter } from "expo-router";
 import {
   createContext,
@@ -40,9 +39,9 @@ import { DesktopWindowControls } from "@/components/desktop/window-controls";
 import { SidebarModelProvider } from "@/components/sidebar/sidebar-model";
 import { WorkspacePinShortcutHandler } from "@/components/workspace-pin-shortcut-handler";
 import { WorkspaceRenameHost } from "@/components/workspace-rename-host";
-import { CompactExplorerSidebarHost } from "@/components/compact-explorer-sidebar-host";
+import { CompactExplorerSidebarHostLoader } from "@/components/compact-explorer-sidebar-host-loader";
 import { ProviderSettingsHost } from "@/components/provider-settings-host";
-import { WorkspaceSetupDialog } from "@/components/workspace-setup-dialog";
+import { WorkspaceSetupDialogLoader } from "@/components/workspace-setup-dialog-loader";
 import { WorkspaceShortcutTargetsSubscriber } from "@/components/workspace-shortcut-targets-subscriber";
 import { FloatingPanelPortalHost } from "@/components/ui/floating-panel-portal";
 import { HostChooserModal, useHostChooser } from "@/hosts/host-chooser";
@@ -138,6 +137,8 @@ import {
   type WebNotificationClickDetail,
 } from "@/utils/os-notifications";
 
+type NotificationResponse = import("expo-notifications").NotificationResponse;
+
 polyfillNavigator();
 polyfillCrypto();
 
@@ -224,41 +225,53 @@ function PushNotificationRouter() {
       };
     }
 
-    Notifications.setNotificationHandler({
-      handleNotification: async () => ({
-        // When the app is open, don't show OS banners.
-        shouldShowAlert: false,
-        shouldShowBanner: false,
-        shouldShowList: false,
-        shouldPlaySound: false,
-        shouldSetBadge: false,
-      }),
-    });
+    let cancelled = false;
+    let removeSubscription: (() => void) | null = null;
 
-    const openFromResponse = (response: Notifications.NotificationResponse) => {
-      const identifier = response.notification.request.identifier;
-      if (lastHandledIdRef.current === identifier) {
+    void (async () => {
+      const Notifications = await import("expo-notifications");
+      if (cancelled) {
         return;
       }
-      lastHandledIdRef.current = identifier;
 
-      const data = response.notification.request.content.data as
-        | Record<string, unknown>
-        | undefined;
-      openNotification(data);
-    };
+      Notifications.setNotificationHandler({
+        handleNotification: async () => ({
+          // When the app is open, don't show OS banners.
+          shouldShowAlert: false,
+          shouldShowBanner: false,
+          shouldShowList: false,
+          shouldPlaySound: false,
+          shouldSetBadge: false,
+        }),
+      });
 
-    const subscription = Notifications.addNotificationResponseReceivedListener(openFromResponse);
+      const openFromResponse = (response: NotificationResponse) => {
+        const identifier = response.notification.request.identifier;
+        if (lastHandledIdRef.current === identifier) {
+          return;
+        }
+        lastHandledIdRef.current = identifier;
 
-    void Notifications.getLastNotificationResponseAsync().then((response) => {
-      if (response) {
+        const data = response.notification.request.content.data as
+          | Record<string, unknown>
+          | undefined;
+        openNotification(data);
+      };
+
+      const subscription = Notifications.addNotificationResponseReceivedListener(openFromResponse);
+      removeSubscription = () => {
+        subscription.remove();
+      };
+
+      const response = await Notifications.getLastNotificationResponseAsync();
+      if (!cancelled && response) {
         openFromResponse(response);
       }
-      return;
-    });
+    })();
 
     return () => {
-      subscription.remove();
+      cancelled = true;
+      removeSubscription?.();
     };
   }, [openNotification]);
 
@@ -556,14 +569,14 @@ function AppContainer({ children, chromeEnabled: chromeEnabledOverride }: AppCon
         </WindowChromeRegion>
       ) : null}
       {usesCompactExplorerHost ? (
-        <CompactExplorerSidebarHost
+        <CompactExplorerSidebarHostLoader
           enabled={chromeEnabled}
           presentation={explorerSidebarPresentation === "dock" ? "dock" : "overlay"}
         >
           <WindowChromeRegion corners={chromeEnabled ? "both" : appChromeLayout.contentCorners}>
             <View style={flexStyle}>{children}</View>
           </WindowChromeRegion>
-        </CompactExplorerSidebarHost>
+        </CompactExplorerSidebarHostLoader>
       ) : (
         <WindowChromeRegion corners={appChromeLayout.contentCorners}>
           <View style={flexStyle}>{children}</View>
@@ -610,7 +623,7 @@ function AppContainer({ children, chromeEnabled: chromeEnabledOverride }: AppCon
         <HostChooserModal />
         <HostConfirmationSheet />
         <ProviderSettingsHost />
-        <WorkspaceSetupDialog />
+        <WorkspaceSetupDialogLoader />
         <KeyboardShortcutsDialog />
         <AppDiagnosticHost />
         <ChangelogHost />

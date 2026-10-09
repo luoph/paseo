@@ -1,5 +1,6 @@
 import { UnistylesRuntime } from "react-native-unistyles";
-import { resolveSyntaxColors, type SyntaxThemeId } from "@getpaseo/highlight";
+// Subpath, not the package barrel: the barrel loads every Lezer grammar.
+import { resolveSyntaxColors, type SyntaxThemeId } from "@getpaseo/highlight/themes";
 import {
   DEFAULT_UI_FONT_STACK,
   DEFAULT_MONO_FONT_STACK,

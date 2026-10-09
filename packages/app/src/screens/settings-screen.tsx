@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { Suspense, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import type { ComponentType, ReactNode } from "react";
 import {
   Alert,
@@ -48,12 +48,33 @@ import { SidebarHeaderRow } from "@/components/sidebar/sidebar-header-row";
 import { HostPicker as SharedHostPicker } from "@/components/hosts/host-picker";
 import { HostStatusDot } from "@/components/host-status-dot";
 import { SettingsSection } from "@/components/settings/headings/settings-section";
-import { AppearanceSection } from "@/screens/settings/appearance/appearance-section";
-import { OpenLocationSection } from "@/screens/settings/open-location/open-location-section";
-import { TerminalSection } from "@/screens/settings/terminal/terminal-section";
-import { ChatSection } from "@/screens/settings/chat/chat-section";
-import { SidebarNavSection } from "@/screens/settings/sidebar/sidebar-nav-section";
 import { SendingSection } from "@/screens/settings/general/sending-section";
+import {
+  AppearanceSection,
+  BrowserDataSection,
+  ChatSection,
+  DesktopNotificationsSection,
+  DesktopPermissionsSection,
+  EditorSection,
+  HostAgentsPage,
+  HostConnectionsPage,
+  HostPairDevicePage,
+  HostPluginsPage,
+  HostProvidersPage,
+  HostSettingsPage,
+  HostTerminalsPage,
+  HostUsagePage,
+  HostWorkspacesPage,
+  IntegrationsSection,
+  KeyboardShortcutsSection,
+  MetadataGenerationPage,
+  OpenLocationSection,
+  PluginSettingsContent,
+  ProjectSettingsScreen,
+  ProjectsScreen,
+  SidebarNavSection,
+  TerminalSection,
+} from "@/screens/settings/lazy-content";
 import {
   useAppSettings,
   useSettings,
@@ -76,17 +97,11 @@ import { AddHostMethodModal } from "@/components/add-host-method-modal";
 import { AddHostModal } from "@/components/add-host-modal";
 import { AddRemoteSshHostModal } from "@/components/add-remote-ssh-host-modal";
 import { PairLinkModal } from "@/components/pair-link-modal";
-import { KeyboardShortcutsSection } from "@/screens/settings/keyboard-shortcuts-section";
-import { EditorSection } from "@/screens/settings/editor-section";
 import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
 import { CommunityLinks } from "@/components/community-links";
 import { SegmentedControl } from "@/components/ui/segmented-control";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem } from "@/components/ui/dropdown-menu";
-import { DesktopPermissionsSection } from "@/desktop/components/desktop-permissions-section";
-import { DesktopNotificationsSection } from "@/desktop/components/desktop-notifications-section";
-import { BrowserDataSection } from "@/desktop/browser/settings/browser-data-section";
-import { IntegrationsSection } from "@/desktop/components/integrations-section";
 import { isElectronRuntime } from "@/desktop/host";
 import { useDesktopAppUpdater } from "@/desktop/updates/use-desktop-app-updater";
 import { formatVersionWithPrefix } from "@/desktop/updates/desktop-updates";
@@ -94,7 +109,6 @@ import { resolveAppVersion } from "@/utils/app-version";
 import { openChangelog } from "@/changelog";
 import { useAppDiagnosticStore } from "@/diagnostics/store";
 import { settingsStyles } from "@/styles/settings";
-import { THINKING_TONE_NATIVE_PCM_BASE64 } from "@/utils/thinking-tone.native-pcm";
 import { useVoiceAudioEngineOptional } from "@/contexts/voice-context";
 import {
   LANGUAGE_OPTIONS,
@@ -103,22 +117,7 @@ import {
   type AppLanguage,
   type SupportedLocale,
 } from "@/i18n/locales";
-import {
-  HostConnectionsPage,
-  HostPairDevicePage,
-  HostAgentsPage,
-  HostSettingsPage,
-  HostProvidersPage,
-  HostUsagePage,
-  HostWorkspacesPage,
-  HostTerminalsPage,
-} from "@/screens/settings/host-page";
-import { PluginSettingsContent } from "@/plugins/settings";
 import { useInstalledPlugins } from "@/plugins/registry";
-import { HostPluginsPage } from "@/screens/settings/plugins-page";
-import { MetadataGenerationPage } from "@/screens/settings/metadata-generation-page";
-import ProjectsScreen from "@/screens/projects-screen";
-import ProjectSettingsScreen from "@/screens/project-settings-screen";
 import { SETTINGS_DESKTOP_SIDEBAR_WIDTH, useIsCompactFormFactor } from "@/constants/layout";
 import { useLocalDaemonServerId } from "@/hooks/use-is-local-daemon";
 import {
@@ -1151,6 +1150,7 @@ export default function SettingsScreen({ view, openAddHostIntent = null }: Setti
     setPlaybackTestResult(null);
 
     try {
+      const { THINKING_TONE_NATIVE_PCM_BASE64 } = await import("@/utils/thinking-tone.native-pcm");
       const bytes = Buffer.from(THINKING_TONE_NATIVE_PCM_BASE64, "base64");
       await voiceAudioEngine.initialize();
       voiceAudioEngine.stop();
@@ -1359,7 +1359,11 @@ export default function SettingsScreen({ view, openAddHostIntent = null }: Setti
             <>
               <GeneralSection settings={settings} handleLanguageChange={handleLanguageChange} />
               <SendingSection />
-              {isDesktopApp ? <OpenLocationSection /> : null}
+              {isDesktopApp ? (
+                <Suspense fallback={null}>
+                  <OpenLocationSection />
+                </Suspense>
+              ) : null}
             </>
           );
         case "diagnostics":
@@ -1453,7 +1457,7 @@ export default function SettingsScreen({ view, openAddHostIntent = null }: Setti
     return (
       <View style={styles.container}>
         <PageLayout title={detailTitle} onBack={handleBackFromDetail}>
-          {content}
+          <Suspense fallback={settingsSectionFallback}>{content}</Suspense>
         </PageLayout>
         {addHostModals}
       </View>
@@ -1481,7 +1485,7 @@ export default function SettingsScreen({ view, openAddHostIntent = null }: Setti
         <WindowChromeRegion corners="top-right">
           <View style={desktopStyles.contentPane} testID="settings-detail-pane">
             <PageLayout title={detailTitle} titleTestID="settings-detail-header-title">
-              {content}
+              <Suspense fallback={settingsSectionFallback}>{content}</Suspense>
             </PageLayout>
           </View>
         </WindowChromeRegion>
@@ -1632,3 +1636,14 @@ const sidebarStyles = StyleSheet.create((theme) => ({
     justifyContent: "center",
   },
 }));
+
+function SettingsSectionFallback() {
+  const { t } = useTranslation();
+  return (
+    <View style={styles.loadingContainer}>
+      <Text style={styles.loadingText}>{t("settings.loading")}</Text>
+    </View>
+  );
+}
+
+const settingsSectionFallback = <SettingsSectionFallback />;

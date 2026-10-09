@@ -1,4 +1,5 @@
-import { isSyntaxThemeId, type SyntaxThemeId } from "@getpaseo/highlight";
+// Subpath, not the package barrel: the barrel loads every Lezer grammar.
+import { isSyntaxThemeId, type SyntaxThemeId } from "@getpaseo/highlight/themes";
 import type { ActiveTurnBehavior } from "@getpaseo/protocol/messages";
 import type { QueryClient } from "@tanstack/react-query";
 import type { DesktopSettings } from "@/desktop/settings/desktop-settings";

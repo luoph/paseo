@@ -1,16 +1,19 @@
-import type { ComponentType } from "react";
+import { lazy, Suspense } from "react";
+import { View } from "react-native";
 import { HighlightedCodeBlock } from "@/components/highlighted-code-block";
 import { getMarkdownFenceLanguage } from "./language";
-import { MermaidFence } from "./mermaid";
 import type { MarkdownFenceRendererProps } from "./types";
+
+const MermaidFence = lazy(() =>
+  import("./mermaid").then((module) => ({ default: module.MermaidFence })),
+);
+
+const mermaidLoadingStyle = { height: 240 };
+const mermaidFallback = <View style={mermaidLoadingStyle} />;
 
 export interface MarkdownFenceBlockProps extends MarkdownFenceRendererProps {
   info: string | null | undefined;
 }
-
-const diagramFences: Partial<Record<string, ComponentType<MarkdownFenceRendererProps>>> = {
-  mermaid: MermaidFence,
-};
 
 export function MarkdownFenceBlock({
   code,
@@ -20,15 +23,16 @@ export function MarkdownFenceBlock({
   textStyle,
 }: MarkdownFenceBlockProps) {
   const language = getMarkdownFenceLanguage(info);
-  const DiagramFence = language ? diagramFences[language] : undefined;
-  if (DiagramFence) {
+  if (language === "mermaid") {
     return (
-      <DiagramFence
-        code={code}
-        phase={phase}
-        inheritedStyles={inheritedStyles}
-        textStyle={textStyle}
-      />
+      <Suspense fallback={mermaidFallback}>
+        <MermaidFence
+          code={code}
+          phase={phase}
+          inheritedStyles={inheritedStyles}
+          textStyle={textStyle}
+        />
+      </Suspense>
     );
   }
   return (
