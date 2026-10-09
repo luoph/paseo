@@ -2,9 +2,21 @@ import { describe, expect, it } from "vitest";
 import {
   extensionFromPath,
   highlightToKeyedLines,
+  LEGACY_MAX_HIGHLIGHT_CHARS,
   MAX_HIGHLIGHT_CHARS,
   tokenizeToLines,
 } from "./highlight-cache";
+
+const legacyFlag = "__paseoLegacyLayoutViewport";
+
+function withLegacyViewport(run: () => void): void {
+  (globalThis as Record<string, unknown>)[legacyFlag] = true;
+  try {
+    run();
+  } finally {
+    delete (globalThis as Record<string, unknown>)[legacyFlag];
+  }
+}
 
 describe("extensionFromPath", () => {
   it("extracts a lowercased extension regardless of absolute/relative path", () => {
@@ -49,6 +61,28 @@ describe("tokenizeToLines", () => {
     const first = tokenizeToLines("const cached = true;", "ts");
     const second = tokenizeToLines("const cached = true;", "ts");
     expect(first).toBe(second);
+  });
+
+  it("returns null above the smaller Safari 12 cap", () => {
+    withLegacyViewport(() => {
+      const over = "x".repeat(LEGACY_MAX_HIGHLIGHT_CHARS + 1);
+      expect(tokenizeToLines(over, "ts")).toBeNull();
+      expect(tokenizeToLines("const n = 1;", "ts")).not.toBeNull();
+    });
+  });
+
+  it("keeps only a handful of Safari 12 tokenizations", () => {
+    withLegacyViewport(() => {
+      const snippets: string[] = [];
+      for (let index = 0; index < 9; index += 1) {
+        snippets.push(`const v${index} = ${index};`);
+      }
+      const first = tokenizeToLines(snippets[0]!, "ts");
+      for (const snippet of snippets.slice(1)) {
+        tokenizeToLines(snippet, "ts");
+      }
+      expect(tokenizeToLines(snippets[0]!, "ts")).not.toBe(first);
+    });
   });
 });
 

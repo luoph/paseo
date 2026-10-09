@@ -5,6 +5,7 @@ export const DEFAULT_MOUNTED_RECENT_STREAM_ITEMS = 20;
 const LEGACY_MOUNTED_RECENT_STREAM_ITEMS = 4;
 const LEGACY_MAX_MOUNTED_STREAM_ITEMS = 8;
 const LEGACY_SPLIT_RECENT_SOURCE_ITEMS = 6;
+const LEGACY_MARKDOWN_CHAR_BUDGET = 12_000;
 
 type MountedRecentStreamItemsE2ETestGlobals = typeof globalThis & {
   __PASEO_E2E_WEB_MOUNTED_RECENT_STREAM_ITEMS?: unknown;
@@ -35,6 +36,14 @@ export function getMountedRecentStreamItems(): number {
 /** How many source messages to Markdown-split when a session opens. */
 export function getLegacySplitRecentCount(): number | undefined {
   return isLegacyLayoutViewport() ? LEGACY_SPLIT_RECENT_SOURCE_ITEMS : undefined;
+}
+
+/**
+ * Characters of an assistant message to parse on Safari 12. The row cap still
+ * mounts one giant fence in full, and that is enough to jetsam WebContent.
+ */
+export function getLegacyMarkdownCharBudget(): number | undefined {
+  return isLegacyLayoutViewport() ? LEGACY_MARKDOWN_CHAR_BUDGET : undefined;
 }
 
 /**

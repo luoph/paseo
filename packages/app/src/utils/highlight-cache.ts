@@ -1,4 +1,5 @@
 import { highlightCode, type HighlightToken } from "@getpaseo/highlight";
+import { isLegacyLayoutViewport } from "@/utils/legacy-layout-viewport";
 
 // Shared, theme-independent tokenization + cache for syntax highlighting.
 // Used by markdown code blocks, file preview, and tool-call detail blocks
@@ -19,6 +20,11 @@ export interface KeyedLine {
 // stall when a large Read/Write block is expanded. Callers fall back to plain
 // monospace text. Generous enough to cover the vast majority of real blocks.
 export const MAX_HIGHLIGHT_CHARS = 100_000;
+// Safari 12 turns each token into a DOM node. A few long fences are enough to
+// jetsam WebContent, so the legacy build highlights only a short snippet and
+// keeps almost none of them. Over the cap, callers render one plain text node.
+export const LEGACY_MAX_HIGHLIGHT_CHARS = 4_000;
+const LEGACY_HIGHLIGHT_CACHE_SIZE = 8;
 
 class LRUCache<K, V> {
   private readonly map = new Map<K, V>();
@@ -43,15 +49,21 @@ class LRUCache<K, V> {
 }
 
 const tokenizationCache = new LRUCache<string, HighlightToken[][]>(200);
+const legacyTokenizationCache = new LRUCache<string, HighlightToken[][]>(
+  LEGACY_HIGHLIGHT_CACHE_SIZE,
+);
 
 // Tokenize `code` to per-line tokens, cached. Returns null when the language is
 // unsupported, the input is over the size cap, or parsing throws — callers then
 // render plain text.
 export function tokenizeToLines(code: string, ext: string | null): HighlightToken[][] | null {
   if (!ext) return null;
-  if (code.length > MAX_HIGHLIGHT_CHARS) return null;
+  const legacy = isLegacyLayoutViewport();
+  const limit = legacy ? LEGACY_MAX_HIGHLIGHT_CHARS : MAX_HIGHLIGHT_CHARS;
+  if (code.length > limit) return null;
+  const cache = legacy ? legacyTokenizationCache : tokenizationCache;
   const cacheKey = `${ext}:${code}`;
-  const cached = tokenizationCache.get(cacheKey);
+  const cached = cache.get(cacheKey);
   if (cached) return cached;
   let lines: HighlightToken[][];
   try {
@@ -59,7 +71,7 @@ export function tokenizeToLines(code: string, ext: string | null): HighlightToke
   } catch {
     return null;
   }
-  tokenizationCache.set(cacheKey, lines);
+  cache.set(cacheKey, lines);
   return lines;
 }
 

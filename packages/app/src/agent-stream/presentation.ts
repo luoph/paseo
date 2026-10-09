@@ -21,12 +21,38 @@ interface PresentationInput {
    * every row.
    */
   splitRecentCount?: number;
+  /**
+   * When set, only the tail of an assistant message is parsed. The head stays
+   * out of the token tree so one long review cannot allocate the whole heap.
+   */
+  markdownCharBudget?: number;
 }
 
 function retainItems(previous: StreamItem[], next: StreamItem[]): StreamItem[] {
   return previous.length === next.length && previous.every((item, index) => item === next[index])
     ? previous
     : next;
+}
+
+/**
+ * Keep the tail of a long assistant message, starting on a line boundary when
+ * the slice contains one. The dropped head is never parsed or mounted.
+ */
+function clipAssistantHistoryText(text: string, budget: number): string {
+  if (text.length <= budget) return text;
+  const slice = text.slice(-budget);
+  const newline = slice.indexOf("\n");
+  if (newline >= 0 && newline < slice.length - 1) {
+    return slice.slice(newline + 1);
+  }
+  return slice;
+}
+
+function clipHistoryItem(item: StreamItem, budget: number | undefined): StreamItem {
+  if (budget === undefined || item.kind !== "assistant_message" || item.text.length <= budget) {
+    return item;
+  }
+  return { ...item, text: clipAssistantHistoryText(item.text, budget) };
 }
 
 /**
@@ -78,6 +104,7 @@ export function createStreamPresentation() {
   let historySource: StreamItem[] | undefined;
   let historyTransform: TimelineItemTransform | undefined;
   let historySplitCount: number | undefined;
+  let historyMarkdownBudget: number | undefined;
   let historyRows: StreamItem[] = [];
   let displayTail: StreamItem[] = [];
   let displayHistory: StreamItem[] | undefined;
@@ -147,7 +174,8 @@ export function createStreamPresentation() {
     if (
       historySource !== input.tail ||
       historyTransform !== input.transform ||
-      historySplitCount !== input.splitRecentCount
+      historySplitCount !== input.splitRecentCount ||
+      historyMarkdownBudget !== input.markdownCharBudget
     ) {
       // One rendering path: history splits the same way the live head does, and
       // `blocksBySource` keeps both the live block identities and the split cost
@@ -163,13 +191,14 @@ export function createStreamPresentation() {
         if (index < splitFrom) {
           rows.push(item);
         } else {
-          rows.push(...nativeBlocks(item));
+          rows.push(...nativeBlocks(clipHistoryItem(item, input.markdownCharBudget)));
         }
       }
       historyRows = rows;
       historySource = input.tail;
       historyTransform = input.transform;
       historySplitCount = input.splitRecentCount;
+      historyMarkdownBudget = input.markdownCharBudget;
     }
     const head: StreamItem[] = [];
     const promoted: StreamItem[] = [];

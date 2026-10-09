@@ -5,6 +5,7 @@ import {
   clearAssistantImageMetadataCache,
   setAssistantImageMetadata,
 } from "@/utils/assistant-image-metadata";
+import { getLegacyMarkdownCharBudget } from "./history-window";
 import {
   DEFAULT_WEB_MOUNTED_RECENT_STREAM_ITEMS,
   DEFAULT_WEB_PARTIAL_VIRTUALIZATION_THRESHOLD,
@@ -134,6 +135,7 @@ describe("legacy layout viewport budgets", () => {
     );
     expect(getWebMountedRecentStreamItems()).toBe(DEFAULT_WEB_MOUNTED_RECENT_STREAM_ITEMS);
     expect(getWebVirtualizerOverscan()).toBe(8);
+    expect(getLegacyMarkdownCharBudget()).toBeUndefined();
   });
 
   it("mounts a short tail on Safari 12", () => {
@@ -141,6 +143,7 @@ describe("legacy layout viewport budgets", () => {
     expect(getWebPartialVirtualizationThreshold()).toBe(6);
     expect(getWebMountedRecentStreamItems()).toBe(4);
     expect(getWebVirtualizerOverscan()).toBe(2);
+    expect(getLegacyMarkdownCharBudget()).toBe(12_000);
   });
 });
 

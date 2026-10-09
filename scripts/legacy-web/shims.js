@@ -757,8 +757,9 @@
   // iOS 12 Safari's layout viewport (html at height: 100%) stays taller than
   // the visible area while the toolbar is showing. On an iPad mini that is
   // 698px of layout against a 666px innerHeight, so the composer sits under
-  // the toolbar. Pin the shell to the visible height. Desktop browsers already
-  // match, and the equality check keeps this from rewriting them.
+  // the toolbar. Pin the shell to the visible height. clientHeight stays at
+  // the layout viewport after the write, so comparing it to innerHeight never
+  // settles and every resize rewrites the shell. The style is the guard.
   const fitShellToVisibleViewport = () => {
     const apply = () => {
       const height = g.innerHeight;
@@ -767,7 +768,7 @@
       }
       const px = `${height}px`;
       const root = document.documentElement;
-      if (root.clientHeight === height && root.style.height === px) {
+      if (root.style.height === px) {
         return;
       }
       root.style.height = px;

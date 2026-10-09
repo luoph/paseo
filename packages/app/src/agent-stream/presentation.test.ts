@@ -354,6 +354,42 @@ describe("stream presentation through installed plugins", () => {
     ]);
   });
 
+  it("parses only the tail of a long assistant message when markdownCharBudget is set", () => {
+    const text = `${"A".repeat(200)}\nVISIBLE-TAIL`;
+    const source = hydrateStreamState([{ event: assistant(text), timestamp: new Date(1000) }]);
+    const result = createStreamPresentation()({
+      ...presentationOptions,
+      tail: source,
+      head: [],
+      transform: undefined,
+      splitRecentCount: 1,
+      markdownCharBudget: 30,
+    });
+    const rendered = result.tail
+      .map((row) => (row.kind === "assistant_message" ? row.text : ""))
+      .join("\n");
+    expect(rendered).toContain("VISIBLE-TAIL");
+    expect(rendered).not.toContain("AAAA");
+  });
+
+  it("leaves source rows above splitRecentCount whole when a budget is set", () => {
+    const olderText = `${"B".repeat(200)}\nOLD-TAIL`;
+    const source = hydrateStreamState([
+      { event: assistant(olderText, "old"), timestamp: new Date(1000) },
+      { event: assistant("short new", "new"), timestamp: new Date(2000) },
+    ]);
+    const result = createStreamPresentation()({
+      ...presentationOptions,
+      tail: source,
+      head: [],
+      transform: undefined,
+      splitRecentCount: 1,
+      markdownCharBudget: 30,
+    });
+    expect(result.tail[0]).toBe(source[0]);
+    expect(result.tail[0]).toMatchObject({ text: olderText });
+  });
+
   it("continues to stream inline reasoning with a stable plugin row", () => {
     const harness = streamHarness(installedTransform(installProbe("reasoning")));
     const first = harness.send({

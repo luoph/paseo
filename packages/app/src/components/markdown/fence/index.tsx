@@ -1,6 +1,7 @@
 import { lazy, Suspense } from "react";
-import { View } from "react-native";
+import { Text, View } from "react-native";
 import { HighlightedCodeBlock } from "@/components/highlighted-code-block";
+import { legacyMermaidSourcePreview } from "./legacy-mermaid";
 import { getMarkdownFenceLanguage } from "./language";
 import type { MarkdownFenceRendererProps } from "./types";
 
@@ -23,6 +24,10 @@ export function MarkdownFenceBlock({
   textStyle,
 }: MarkdownFenceBlockProps) {
   const language = getMarkdownFenceLanguage(info);
+  const legacyPreview = legacyMermaidSourcePreview(language, code);
+  if (legacyPreview !== null) {
+    return <Text style={textStyle}>{legacyPreview}</Text>;
+  }
   if (language === "mermaid") {
     return (
       <Suspense fallback={mermaidFallback}>

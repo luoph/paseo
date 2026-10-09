@@ -55,11 +55,44 @@
     }
   }
 
+  var ASSET_RELOAD_KEY = "paseo-legacy-asset-reload";
+
+  function failedAssetUrl(target) {
+    if (!target || target === window || !target.tagName) {
+      return "";
+    }
+    var url = target.src || "";
+    if (!url && String(target.tagName).toUpperCase() === "LINK") {
+      url = target.href || "";
+    }
+    return typeof url === "string" ? url : "";
+  }
+
+  // A restored document can reference hashed files this deploy already deleted.
+  // Reload once so the current index.html is fetched. The same missing URL does
+  // not reload again, or a real 404 would spin forever.
+  function reloadForMissingAsset(url) {
+    if (url.indexOf("/_expo/static/") === -1) {
+      return;
+    }
+    try {
+      if (window.sessionStorage.getItem(ASSET_RELOAD_KEY) === url) {
+        return;
+      }
+      window.sessionStorage.setItem(ASSET_RELOAD_KEY, url);
+    } catch {
+      return;
+    }
+    window.location.reload(true);
+  }
+
   window.addEventListener(
     "error",
     function (event) {
-      if (event.target && event.target !== window && event.target.src) {
-        report("[load error] " + event.target.src);
+      var assetUrl = failedAssetUrl(event.target);
+      if (assetUrl) {
+        report("[load error] " + assetUrl);
+        reloadForMissingAsset(assetUrl);
         return;
       }
       report(
