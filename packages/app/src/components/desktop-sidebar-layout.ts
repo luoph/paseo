@@ -2,6 +2,12 @@ import { SETTINGS_DESKTOP_SPLIT_MIN_WIDTH } from "@/constants/layout";
 import { MAX_SIDEBAR_WIDTH, MIN_SIDEBAR_WIDTH } from "@/stores/panel-store";
 
 const MIN_DESKTOP_CENTER_WIDTH = 400;
+// Below this viewport the docked sidebar gives the conversation column its
+// default width (theme DEFAULT_CONTENT_MAX_WIDTH). A 1024px iPad otherwise
+// keeps a 320px sidebar and leaves the transcript at 704px, which wraps
+// tables and tab titles out of alignment.
+const NARROW_DESKTOP_VIEWPORT = 1200;
+const NARROW_DESKTOP_CONTENT_WIDTH = 820;
 
 export function resolveDesktopSidebarVisibility(input: {
   chromeEnabled: boolean;
@@ -43,9 +49,13 @@ function resolveDesktopPanelWidth(input: {
   maximumWidth: number;
 }): number {
   "worklet";
+  const contentFloor =
+    input.viewportWidth >= NARROW_DESKTOP_VIEWPORT
+      ? MIN_DESKTOP_CENTER_WIDTH
+      : Math.min(NARROW_DESKTOP_CONTENT_WIDTH, input.viewportWidth - input.minimumWidth);
   const maximumVisibleWidth = Math.max(
     input.minimumWidth,
-    Math.min(input.maximumWidth, input.viewportWidth - MIN_DESKTOP_CENTER_WIDTH),
+    Math.min(input.maximumWidth, input.viewportWidth - contentFloor),
   );
   return Math.max(input.minimumWidth, Math.min(maximumVisibleWidth, input.requestedWidth));
 }

@@ -67,15 +67,24 @@ describe("desktop sidebar layout", () => {
   });
 
   it("clamps a persisted wide sidebar to preserve the center pane", () => {
+    // Under 1200px the center keeps the default conversation width (820), and
+    // the sidebar stops at its 200px minimum when that no longer fits.
     const atHalfScreen = resolveDesktopSidebarWidth({ requestedWidth: 600, viewportWidth: 751 });
-    expect(atHalfScreen).toBe(351);
-    expect(751 - atHalfScreen).toBe(400);
+    expect(atHalfScreen).toBe(200);
+    expect(751 - atHalfScreen).toBe(551);
 
     const atBreakpoint = resolveDesktopSidebarWidth({ requestedWidth: 600, viewportWidth: 720 });
-    expect(atBreakpoint).toBe(320);
-    expect(720 - atBreakpoint).toBe(400);
+    expect(atBreakpoint).toBe(200);
+    expect(720 - atBreakpoint).toBe(520);
 
     expect(resolveDesktopSidebarWidth({ requestedWidth: 600, viewportWidth: 1440 })).toBe(600);
+  });
+
+  it("gives an iPad-width window the conversation column instead of a 320px sidebar", () => {
+    expect(resolveDesktopSidebarWidth({ requestedWidth: 320, viewportWidth: 1024 })).toBe(204);
+    expect(1024 - 204).toBe(820);
+    expect(resolveDesktopSidebarWidth({ requestedWidth: 320, viewportWidth: 768 })).toBe(200);
+    expect(resolveDesktopSidebarWidth({ requestedWidth: 320, viewportWidth: 1440 })).toBe(320);
   });
 
   it("yields app navigation when settings needs the shell width", () => {

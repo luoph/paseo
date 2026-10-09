@@ -222,6 +222,10 @@ export function createMarkdownStyles(theme: Theme) {
       borderColor: theme.colors.border,
       borderRadius: theme.borderRadius.md,
       marginVertical: theme.spacing[3],
+      width: "100%" as const,
+      maxWidth: "100%" as const,
+      minWidth: 0,
+      alignSelf: "stretch" as const,
     },
 
     thead: {
@@ -241,12 +245,17 @@ export function createMarkdownStyles(theme: Theme) {
       color: theme.colors.foreground,
       fontSize: theme.fontSize.content,
       textAlign: "left" as const,
+      flex: 1,
+      minWidth: 0,
     },
 
     tr: {
       borderBottomWidth: 1,
       borderColor: theme.colors.border,
       flexDirection: "row" as const,
+      width: "100%" as const,
+      minWidth: 0,
+      alignSelf: "stretch" as const,
     },
 
     td: {
@@ -257,6 +266,7 @@ export function createMarkdownStyles(theme: Theme) {
       color: theme.colors.foreground,
       fontSize: theme.fontSize.content,
       flex: 1,
+      minWidth: 0,
     },
 
     // =========================================================================

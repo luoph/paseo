@@ -88,6 +88,19 @@ describe("createMarkdownStyles", () => {
     });
   });
 
+  it("shares table column width so headers stay aligned with cells", () => {
+    const styles = createMarkdownStyles(darkTheme);
+
+    expect(styles.table).toMatchObject({
+      width: "100%",
+      maxWidth: "100%",
+      minWidth: 0,
+    });
+    expect(styles.tr).toMatchObject({ width: "100%", minWidth: 0 });
+    expect(styles.th).toMatchObject({ flex: 1, minWidth: 0 });
+    expect(styles.td).toMatchObject({ flex: 1, minWidth: 0 });
+  });
+
   it("uses the mono font-size token directly for inline and block code", () => {
     const styles = createMarkdownStyles(darkTheme);
     const compactStyles = createCompactMarkdownStyles(darkTheme);
