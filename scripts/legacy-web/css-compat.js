@@ -163,6 +163,11 @@ var paseoLegacyCss = (() => {
   // Wrapping containers give every child trailing margins instead, so items
   // that wrap onto a new line are spaced too; the cost is one extra gap after
   // the last item of each line.
+  // react-native-web wraps some children (text inputs, icons) in an element
+  // with inline `display: contents`, which has no box to hold a margin; the
+  // stand-in margin then goes on that wrapper's first child instead.
+  const CONTENTS = '[style*="display: contents"]';
+
   const gapRules = (selectors, layout, wrappers) => {
     const targets = selectors.filter((selector) => selector.indexOf("::") === -1);
     if (targets.length === 0) {
@@ -171,7 +176,10 @@ var paseoLegacyCss = (() => {
     const wrap = (rule) => [wrappers.reduceRight((inner, prelude) => `${prelude}{${inner}}`, rule)];
     if (layout.wrap && layout.wrap !== "nowrap") {
       const body = wrapRule(layout);
-      return body ? wrap(`${targets.map((selector) => `${selector} > *`).join(",")}{${body}}`) : [];
+      const children = targets.map(
+        (selector) => `${selector} > *,${selector} > ${CONTENTS} > :first-child`,
+      );
+      return body ? wrap(`${children.join(",")}{${body}}`) : [];
     }
     const direction = layout.direction || "column";
     const horizontal = direction.indexOf("row") === 0;
@@ -184,7 +192,11 @@ var paseoLegacyCss = (() => {
     if (reverse) {
       side = horizontal ? "right" : "bottom";
     }
-    const children = targets.map((selector) => `${selector} > * + *:not(#paseo-legacy-gap)`);
+    const children = targets.map(
+      (selector) =>
+        `${selector} > * + *:not(#paseo-legacy-gap),` +
+        `${selector} > * + ${CONTENTS} > :first-child:not(#paseo-legacy-gap)`,
+    );
     return wrap(`${children.join(",")}{margin-${side}:${value}}`);
   };
 
@@ -301,5 +313,19 @@ var paseoLegacyCss = (() => {
     return result;
   };
 
-  return { rewrite };
+  // Inline styles (`el.style.inset = "0"`) never pass through a stylesheet,
+  // so shims.js applies the same expansion to CSSStyleDeclaration writes.
+  // Returns [[physicalProperty, value], ...], or null when nothing to expand.
+  const expandLogical = (prop, value) => {
+    const text = expandDeclaration(prop, String(value).trim(), false);
+    return text
+      ? text.split(";").map((declaration) => {
+          const colon = declaration.indexOf(":");
+          return [declaration.slice(0, colon), declaration.slice(colon + 1)];
+        })
+      : null;
+  };
+  const logicalProperties = ["inset", ...Object.keys(LOGICAL), ...Object.keys(LOGICAL_LONGHAND)];
+
+  return { rewrite, expandLogical, logicalProperties };
 })();

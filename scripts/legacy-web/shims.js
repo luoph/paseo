@@ -210,6 +210,57 @@
   };
   shimRuntimeCss();
 
+  // Inline logical properties (Safari 14.1). overlay-root.ts pins every modal
+  // and popover layer with `el.style.inset = "0"`; Safari 12 ignored it, left
+  // the fixed layer at the end of <body> with no size, and modals rendered
+  // off-screen. Writes through the style properties or setProperty are
+  // expanded into physical longhands for each property the engine lacks.
+  const shimInlineLogicalProperties = () => {
+    const compat = g.paseoLegacyCss;
+    if (!compat || typeof CSSStyleDeclaration === "undefined") {
+      return;
+    }
+    const probe = document.createElement("div").style;
+    const camelCase = (name) => name.replace(/-([a-z])/g, (_match, letter) => letter.toUpperCase());
+    const missing = compat.logicalProperties.filter((name) => !(camelCase(name) in probe));
+    if (missing.length === 0) {
+      return;
+    }
+    const proto = CSSStyleDeclaration.prototype;
+    const setProperty = proto.setProperty;
+    const removeProperty = proto.removeProperty;
+    const write = (style, name, value, priority) => {
+      if (value === null || value === undefined || String(value).trim() === "") {
+        for (const [longhand] of compat.expandLogical(name, "0")) {
+          removeProperty.call(style, longhand);
+        }
+        return;
+      }
+      for (const [longhand, longhandValue] of compat.expandLogical(name, value)) {
+        setProperty.call(style, longhand, longhandValue, priority || "");
+      }
+    };
+    for (const name of missing) {
+      Object.defineProperty(proto, camelCase(name), {
+        configurable: true,
+        get() {
+          return "";
+        },
+        set(value) {
+          write(this, name, value);
+        },
+      });
+    }
+    proto.setProperty = function patchedSetProperty(name, value, priority) {
+      if (missing.includes(name)) {
+        write(this, name, value, priority);
+        return undefined;
+      }
+      return setProperty.call(this, name, value, priority);
+    };
+  };
+  shimInlineLogicalProperties();
+
   // crypto.randomUUID ships in Safari 15.4.
   if (g.crypto && g.crypto.getRandomValues && !g.crypto.randomUUID) {
     g.crypto.randomUUID = () => {
