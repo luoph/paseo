@@ -12,6 +12,14 @@ function rowOf(range: Range): HTMLElement | null {
   return range.startContainer.parentElement?.closest<HTMLElement>("[data-history-row-id]") ?? null;
 }
 
+// CSS Custom Highlight is Safari 17.2+. Safari 12 still has the CSS object, so
+// reading CSS.highlights.delete throws and the chat find cleanup takes down the page.
+function cssHighlights(): HighlightRegistry | null {
+  if (typeof CSS === "undefined" || typeof Highlight === "undefined" || !CSS.highlights)
+    return null;
+  return CSS.highlights;
+}
+
 export function createFindViewport({
   getBindings,
   getRoot,
@@ -19,7 +27,7 @@ export function createFindViewport({
 }: ViewportInput): Pick<ChatFindOperations, "reveal" | "clear"> {
   return {
     clear() {
-      CSS.highlights.delete(highlightName);
+      cssHighlights()?.delete(highlightName);
     },
     // A message renders as one row per Markdown block, so an occurrence can sit in
     // any of them and the chosen one decides where the viewport lands.
@@ -83,7 +91,7 @@ export function createFindViewport({
             targetTop() {
               const selected = row ? findRenderedMatches(row, query)[indexInRow] : undefined;
               if (!selected) return null;
-              CSS.highlights.set(highlightName, new Highlight(selected));
+              cssHighlights()?.set(highlightName, new Highlight(selected));
               const widget = getRoot()?.querySelector<HTMLElement>(
                 '[data-chat-find-widget="true"]',
               );
@@ -91,7 +99,7 @@ export function createFindViewport({
               return selected.getBoundingClientRect().top - clearance;
             },
           });
-          CSS.highlights.set(highlightName, new Highlight(range));
+          cssHighlights()?.set(highlightName, new Highlight(range));
           resolve({ occurrence: index, count: ranges.length });
         };
         signal.addEventListener("abort", cancelled, { once: true });
