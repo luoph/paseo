@@ -24,6 +24,7 @@ import type { StreamItem } from "@/types/stream";
 import type { Theme } from "@/styles/theme";
 import { WEB_SCROLLBAR_SIZE_PX } from "@/styles/web-scrollbar";
 import { DomOverlayScrollbar } from "@/components/ui/overlay-scrollbar/dom-overlay-scrollbar";
+import { isLegacyLayoutViewport } from "@/utils/legacy-layout-viewport";
 import { estimateStreamItemHeight, getWebVirtualizerOverscan } from "./web-virtualization";
 import { createReadingAnchor } from "./reading-anchor";
 import type { StreamRenderInput, StreamStrategy, StreamViewportHandle } from "./strategy";
@@ -1192,8 +1193,9 @@ function WebStreamViewport(props: StreamRenderInput & { isMobileBreakpoint: bool
       boxSizing: "border-box",
     };
   }, [isMobileBreakpoint]);
+  const legacyTouchScroll = isLegacyLayoutViewport();
   const scrollContainerStyle = useMemo((): CSSProperties => {
-    const overlayScrollbarEnabled = scrollEnabled && !isMobileBreakpoint;
+    const overlayScrollbarEnabled = scrollEnabled && !isMobileBreakpoint && !legacyTouchScroll;
     return {
       width: "100%",
       height: "100%",
@@ -1204,8 +1206,10 @@ function WebStreamViewport(props: StreamRenderInput & { isMobileBreakpoint: bool
       // Detached reading has one owner: reconcileReadingPosition.
       overflowAnchor: followOutput ? "auto" : "none",
       scrollbarWidth: overlayScrollbarEnabled ? "none" : undefined,
+      // iOS 12 otherwise scrolls overflow on the main thread.
+      ...(legacyTouchScroll ? { WebkitOverflowScrolling: "touch" as const } : null),
     };
-  }, [followOutput, isMobileBreakpoint, scrollEnabled]);
+  }, [followOutput, isMobileBreakpoint, legacyTouchScroll, scrollEnabled]);
   const viewportStyle = useMemo(
     (): CSSProperties => ({
       position: "relative",
@@ -1336,7 +1340,7 @@ function WebStreamViewport(props: StreamRenderInput & { isMobileBreakpoint: bool
           {shouldRenderEmpty ? listEmptyComponent : null}
         </div>
       </div>
-      {scrollEnabled && !isMobileBreakpoint ? (
+      {scrollEnabled && !isMobileBreakpoint && !legacyTouchScroll ? (
         <DomOverlayScrollbar
           scrollContainerRef={scrollContainerRef}
           onUserScrollUp={stopFollowingOutputFromUserIntent}

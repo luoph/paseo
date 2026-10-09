@@ -44,7 +44,7 @@ Safari 12 能被 Mac 远程调试，不需要拍照看屏幕上的错误面板�
 
 ## 页面崩溃与"旧版本页面"
 
-Safari 显示"……重复出现问题"，说明页面进程被系统杀了。用 `idevicecrashreport -u <UDID> -k -f JetsamEvent <目录>` 拉日志：`com.apple.WebKit.WebContent` 的 `reason` 为 `highwater` 是内存超限，iPad mini 2 的上限约 840 MB。拉取时带 `-k`，不删设备上的日志。进程被杀后 Safari 会自己打开同一个地址，所以一条超长会话会看起来像"加载报错然后不停刷新"。Safari 12 只挂载对话尾部，并且每条助手消息只解析末尾 12 000 字、代码高亮不超过 4 000 字、不加载 Mermaid iframe。
+Safari 显示"……重复出现问题"，说明页面进程被系统杀了。用 `idevicecrashreport -u <UDID> -k -f JetsamEvent <目录>` 拉日志：`com.apple.WebKit.WebContent` 的 `reason` 为 `highwater` 是内存超限，iPad mini 2 的上限约 840 MB。拉取时带 `-k`，不删设备上的日志。进程被杀后 Safari 会自己打开同一个地址，所以一条超长会话会看起来像"加载报错然后不停刷新"。Safari 12 只挂载对话尾部，并且每条助手消息只解析末尾 12 000 字、代码高亮不超过 4 000 字、不加载 Mermaid iframe。对话不进虚拟列表，滚动容器使用触摸惯性滚动，避免每一帧在主线程重排。
 
 崩溃或某些导航后，Safari 会从后退缓存恢复标签页历史里更早的页面，可能是几个版本之前的构建，它引用的文件已被部署脚本清理，于是报 `[load error]`。覆盖层对同一个 `/_expo/static/` 地址只强制刷新一次，拉当前的 `index.html`；同一个地址再失败就停在错误面板上，不再转圈。排查前先确认 `performance.navigation.type`（2 表示后退/前进恢复）和页面加载的 `legacy-polyfills-*.js` 是不是线上版本。
 

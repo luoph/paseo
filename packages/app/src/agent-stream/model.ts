@@ -6,6 +6,7 @@ import {
   getMaxMountedStreamItems,
   getMountedRecentStreamItems,
 } from "./history-window";
+import { isLegacyLayoutViewport } from "@/utils/legacy-layout-viewport";
 import { getWebPartialVirtualizationThreshold } from "./web-virtualization";
 import { orderHeadForStreamRenderStrategy, orderTailForStreamRenderStrategy } from "./strategy";
 import { resolveStreamRenderStrategy } from "./strategy-resolver";
@@ -89,9 +90,13 @@ function splitOrderedTail(params: {
   isMobileBreakpoint: boolean;
 }): Pick<AgentStreamRenderModel, "history" | "segments"> {
   const { orderedTail, platform, isMobileBreakpoint } = params;
+  // Safari 12 scrolls on the main thread. Absolute rows re-render on every
+  // visible-range change and measure with getBoundingClientRect, which is the
+  // hitch. The history window still bounds what reaches this tail.
   const shouldSplitHistory =
     platform === "web" &&
     !isMobileBreakpoint &&
+    !isLegacyLayoutViewport() &&
     orderedTail.length > getWebPartialVirtualizationThreshold();
   const cacheKey = `${platform}:${isMobileBreakpoint}:${getMountedRecentStreamItems()}:${getMaxMountedStreamItems() ?? "none"}:${shouldSplitHistory}`;
   let cachedByKey = splitHistoryCache.get(orderedTail);

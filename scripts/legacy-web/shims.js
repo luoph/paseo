@@ -789,4 +789,36 @@
     g.addEventListener("orientationchange", apply);
   };
   fitShellToVisibleViewport();
+
+  // iOS 12 scrolls overflow:auto on the main thread unless this property is
+  // set. The chat scroller sets it inline; sidebar and other React Native
+  // ScrollViews only put overflow into the style attribute. A universal
+  // selector would promote every layer and push WebContent toward jetsam.
+  const enableTouchScrolling = () => {
+    const apply = () => {
+      if (!document.head || document.getElementById("paseo-legacy-touch-scroll")) {
+        return;
+      }
+      const style = document.createElement("style");
+      style.id = "paseo-legacy-touch-scroll";
+      style.textContent =
+        [
+          '[style*="overflow-y:auto"]',
+          '[style*="overflow-y: auto"]',
+          '[style*="overflow-y:scroll"]',
+          '[style*="overflow-y: scroll"]',
+          '[style*="overflow:auto"]',
+          '[style*="overflow: auto"]',
+          '[style*="overflow:scroll"]',
+          '[style*="overflow: scroll"]',
+        ].join(",") + "{-webkit-overflow-scrolling:touch}";
+      document.head.appendChild(style);
+    };
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", apply);
+    } else {
+      apply();
+    }
+  };
+  enableTouchScrolling();
 })();

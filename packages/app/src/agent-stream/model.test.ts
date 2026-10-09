@@ -125,6 +125,32 @@ describe("buildAgentStreamRenderModel", () => {
     expect(model.history).not.toContain(head[0]);
   });
 
+  it("keeps a long desktop web tail in normal flow on Safari 12", () => {
+    const flag = "__paseoLegacyLayoutViewport";
+    const tail: StreamItem[] = [];
+    for (let index = 0; index < 60; index += 1) {
+      const seed = index * 2;
+      tail.push(userMessage(`u${index}`, seed + 1));
+      tail.push(assistantMessage(`a${index}`, seed + 2));
+    }
+    (globalThis as Record<string, unknown>)[flag] = true;
+    try {
+      const model = buildAgentStreamRenderModel({
+        isTurnActive: false,
+        activeTurnStartedAt: null,
+        tail,
+        head: [],
+        platform: "web",
+        isMobileBreakpoint: false,
+      });
+
+      expect(model.segments.historyVirtualized).toHaveLength(0);
+      expect(model.segments.historyMounted).toBe(tail);
+    } finally {
+      delete (globalThis as Record<string, unknown>)[flag];
+    }
+  });
+
   it("keeps the full committed tail mounted on mobile web", () => {
     const tail = [userMessage("u1", 1), assistantMessage("a1", 2)];
     const head = [assistantMessage("live-a", 3)];
