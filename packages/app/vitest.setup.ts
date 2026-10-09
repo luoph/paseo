@@ -1,6 +1,7 @@
 // @ts-nocheck
 import { vi } from "vitest";
 import React from "react";
+import { loadPluginIcons } from "./src/plugins/icons";
 
 const globalWithTestShims = globalThis as typeof globalThis & Record<string, unknown>;
 
@@ -75,6 +76,8 @@ vi.mock("@xterm/addon-ligatures", () => ({
     dispose(): void {}
   },
 }));
+
+await loadPluginIcons();
 
 // react-native-svg and expo-linking test doubles live in test-stubs/ and reach
 // every vitest project through the resolve.alias in vitest.config.ts, same as

@@ -1,12 +1,15 @@
 import { Text, View } from "react-native";
-import { useMemo } from "react";
+import { lazy, Suspense, useMemo } from "react";
 import invariant from "tiny-invariant";
 import { useTranslation } from "react-i18next";
-import { FilePane } from "@/file-pane/pane";
 import { usePaneContext } from "@/panels/pane-context";
 import { definePanel } from "@/panels/panel-registry";
 import { useWorkspaceDirectory } from "@/stores/session-store-hooks";
 import { createMaterialFileIcon } from "@/components/material-file-icon";
+
+const FilePane = lazy(() =>
+  import("@/file-pane/pane").then((module) => ({ default: module.FilePane })),
+);
 
 const CENTERED_PADDED_STYLE = {
   flex: 1,
@@ -41,12 +44,14 @@ function FilePanel() {
     );
   }
   return (
-    <FilePane
-      serverId={serverId}
-      workspaceRoot={workspaceDirectory}
-      location={target}
-      navigationRevision={fileNavigationRevision ?? 0}
-    />
+    <Suspense fallback={null}>
+      <FilePane
+        serverId={serverId}
+        workspaceRoot={workspaceDirectory}
+        location={target}
+        navigationRevision={fileNavigationRevision ?? 0}
+      />
+    </Suspense>
   );
 }
 

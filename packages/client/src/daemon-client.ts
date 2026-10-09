@@ -28,7 +28,11 @@ import {
   type ActiveTurnBehavior,
   type ServerInfoStatusPayload,
 } from "@getpaseo/protocol/messages";
-import { validateWSOutboundMessage } from "@getpaseo/protocol/validation/ws-outbound";
+import {
+  enqueueWsOutboundPayload,
+  isWsOutboundValidatorReady,
+  validateWsOutboundMessage,
+} from "./ws-outbound-gate.js";
 import type {
   AgentStreamEventPayload,
   AgentSnapshotPayload,
@@ -6322,6 +6326,12 @@ export class DaemonClient {
   }
 
   private handleJsonPayload(payload: string, rawBytesLength: number | undefined): void {
+    if (!isWsOutboundValidatorReady()) {
+      enqueueWsOutboundPayload(() => {
+        this.handleJsonPayload(payload, rawBytesLength);
+      });
+      return;
+    }
     const bytes = rawBytesLength ?? payload.length;
     const startMs = perfNow();
     let parsedJson: unknown;
@@ -6336,7 +6346,7 @@ export class DaemonClient {
       this.endTraceSection(parseTraceOpen);
     }
 
-    const parsed = validateWSOutboundMessage(parsedJson);
+    const parsed = validateWsOutboundMessage(parsedJson);
     if (!parsed.success) {
       const responseIdentity = extractCorrelatedResponseIdentity(parsedJson);
       const envelopeType =

@@ -7,6 +7,7 @@ import { assertPluginCompatibility } from "@getpaseo/protocol/plugin-requirement
 import { resolveAppVersion } from "@/utils/app-version";
 import { createPluginClientRuntime } from "./client-runtime";
 import { runPluginClientBundle } from "./evaluate";
+import { arePluginIconsLoaded, loadPluginIcons } from "./icons";
 import type { InstalledPlugin } from "./types";
 
 type CatalogPlugin = Awaited<ReturnType<DaemonClient["getPluginCatalog"]>>[number];
@@ -17,6 +18,7 @@ export class PluginRegistry {
   private snapshot: InstalledPlugin[] = [];
   private readonly disposed = new WeakSet<InstalledPlugin>();
   private readonly evaluationErrors = new Map<string, string>();
+  private readonly catalogGeneration = new Map<string, number>();
 
   constructor(
     private readonly dependencies: {
@@ -45,6 +47,16 @@ export class PluginRegistry {
       audio: Pick<AudioEngine, "play">;
     },
   ): boolean {
+    if (!arePluginIconsLoaded()) {
+      const generation = this.claimCatalogGeneration(serverId);
+      void loadPluginIcons().then(() => {
+        if (this.catalogGeneration.get(serverId) !== generation) return undefined;
+        this.installCatalog(serverId, catalog, options);
+        return undefined;
+      });
+      return false;
+    }
+    this.claimCatalogGeneration(serverId);
     const previous = this.byHost.get(serverId) ?? [];
     const previousTimelineBundles = previous
       .filter((plugin) => plugin.timelineTransformers.length > 0)
@@ -146,6 +158,7 @@ export class PluginRegistry {
   }
 
   removeHost(serverId: string): void {
+    this.claimCatalogGeneration(serverId);
     const installed = this.byHost.get(serverId);
     if (!installed) return;
     for (const plugin of installed) this.dispose(plugin);
@@ -168,6 +181,12 @@ export class PluginRegistry {
     } catch (error) {
       console.warn(`[Plugins] Cleanup failed for ${plugin.serverId}/${plugin.id}`, error);
     }
+  }
+
+  private claimCatalogGeneration(serverId: string): number {
+    const generation = (this.catalogGeneration.get(serverId) ?? 0) + 1;
+    this.catalogGeneration.set(serverId, generation);
+    return generation;
   }
 
   private publish(): void {
