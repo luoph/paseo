@@ -1,6 +1,7 @@
 import { createElement, type ReactElement } from "react";
 import type { PluginIconProps } from "@getpaseo/plugin/client";
 import type { LucideIcon } from "lucide-react-native";
+import { legacyPluginIconDelayMs } from "@/utils/legacy-web-interaction";
 
 type LucideModule = typeof import("lucide-react-native");
 
@@ -11,12 +12,24 @@ export function arePluginIconsLoaded(): boolean {
   return lucideModule !== null;
 }
 
+function importPluginIcons(): Promise<void> {
+  return import("lucide-react-native").then((mod) => {
+    lucideModule = mod;
+    return undefined;
+  });
+}
+
 export function loadPluginIcons(): Promise<void> {
   if (!loadPromise) {
-    loadPromise = import("lucide-react-native").then((mod) => {
-      lucideModule = mod;
-      return undefined;
-    });
+    const delayMs = legacyPluginIconDelayMs();
+    const defer = delayMs > 0 && (typeof process === "undefined" || process.env.VITEST !== "true");
+    loadPromise = defer
+      ? new Promise((resolve, reject) => {
+          setTimeout(() => {
+            importPluginIcons().then(resolve, reject);
+          }, delayMs);
+        })
+      : importPluginIcons();
   }
   return loadPromise;
 }
@@ -45,9 +58,13 @@ export function Icon({ name, size, color }: PluginIconProps): ReactElement | nul
   return icon ? createElement(icon, { size, color }) : null;
 }
 
-// Safari 12 parses on the main thread. The full icon set is requested after this
-// script yields so the workspace shell can paint first. Plugin registration waits.
-if (typeof process === "undefined" || process.env.VITEST !== "true") {
+// Safari 12 parses on the main thread. Desktop preloads the icon set after this
+// script yields. The legacy build skips that preload; a later catalog request
+// waits until the sidebar has had a turn before parsing the module.
+if (
+  (typeof process === "undefined" || process.env.VITEST !== "true") &&
+  legacyPluginIconDelayMs() === 0
+) {
   setTimeout(() => {
     void loadPluginIcons();
   }, 0);

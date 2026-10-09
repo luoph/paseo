@@ -1,9 +1,21 @@
-// The generated validator is about 4 MB. Loading it from the entry script keeps
-// Safari 12 parsing before the workspace shell can paint. Inbound frames stay
-// in order until this chunk is ready. Do not replace it with Zod on the hot path.
+// The generated validator is about 4 MB. Safari 12 parses on the main thread,
+// and evaluating that chunk after the workspace is already up gets WebContent
+// killed. The legacy build uses a shallow envelope check and never downloads
+// it. Other browsers still load it after the entry script yields. Inbound
+// frames stay in order until that chunk is ready. Do not replace it with Zod.
+
+import { validateLegacyWsOutboundMessage } from "./legacy-ws-outbound.js";
 
 type ValidateWSOutboundMessage =
   typeof import("@getpaseo/protocol/validation/ws-outbound").validateWSOutboundMessage;
+
+type LegacyLayoutViewportGlobals = typeof globalThis & {
+  __paseoLegacyLayoutViewport?: boolean;
+};
+
+function isLegacyWebViewport(): boolean {
+  return (globalThis as LegacyLayoutViewportGlobals).__paseoLegacyLayoutViewport === true;
+}
 
 let validateWSOutboundMessage: ValidateWSOutboundMessage | null = null;
 let loading: Promise<void> | null = null;
@@ -16,7 +28,7 @@ function flushQueuedPayloads(): void {
 }
 
 function startLoadingValidator(): Promise<void> {
-  if (validateWSOutboundMessage) return Promise.resolve();
+  if (isLegacyWebViewport() || validateWSOutboundMessage) return Promise.resolve();
   if (!loading) {
     loading = import("@getpaseo/protocol/validation/ws-outbound")
       .then((mod) => {
@@ -37,6 +49,7 @@ function startLoadingValidator(): Promise<void> {
 // Start after the entry script yields. Safari 12 parses on the main thread, so
 // evaluating this chunk during startup keeps the shell off screen.
 function beginInitialLoad(): Promise<void> {
+  if (isLegacyWebViewport()) return Promise.resolve();
   const defer = typeof process === "undefined" || process.env.VITEST !== "true";
   if (!defer) return startLoadingValidator();
   return new Promise((resolve, reject) => {
@@ -49,11 +62,11 @@ function beginInitialLoad(): Promise<void> {
 export const wsOutboundValidationReady: Promise<void> = beginInitialLoad();
 
 export function isWsOutboundValidatorReady(): boolean {
-  return validateWSOutboundMessage !== null;
+  return isLegacyWebViewport() || validateWSOutboundMessage !== null;
 }
 
 export function enqueueWsOutboundPayload(deliver: () => void): void {
-  if (validateWSOutboundMessage) {
+  if (isLegacyWebViewport() || validateWSOutboundMessage) {
     deliver();
     return;
   }
@@ -62,6 +75,9 @@ export function enqueueWsOutboundPayload(deliver: () => void): void {
 }
 
 export function validateWsOutboundMessage(input: unknown): ReturnType<ValidateWSOutboundMessage> {
+  if (isLegacyWebViewport()) {
+    return validateLegacyWsOutboundMessage(input) as ReturnType<ValidateWSOutboundMessage>;
+  }
   const validate = validateWSOutboundMessage;
   if (!validate) {
     throw new Error("Outbound validator is not loaded");
