@@ -24,7 +24,7 @@ import type { StreamItem } from "@/types/stream";
 import type { Theme } from "@/styles/theme";
 import { WEB_SCROLLBAR_SIZE_PX } from "@/styles/web-scrollbar";
 import { DomOverlayScrollbar } from "@/components/ui/overlay-scrollbar/dom-overlay-scrollbar";
-import { estimateStreamItemHeight } from "./web-virtualization";
+import { estimateStreamItemHeight, getWebVirtualizerOverscan } from "./web-virtualization";
 import { createReadingAnchor } from "./reading-anchor";
 import type { StreamRenderInput, StreamStrategy, StreamViewportHandle } from "./strategy";
 import { useRevisedHistoryRows } from "./history-row-revision";
@@ -460,7 +460,7 @@ function WebStreamViewport(props: StreamRenderInput & { isMobileBreakpoint: bool
     observeElementOffset: observeVirtualOffset,
     rangeExtractor,
     scrollMargin: VIRTUALIZER_SCROLL_MARGIN_PX,
-    overscan: 8,
+    overscan: getWebVirtualizerOverscan(),
   });
   rowVirtualizerRef.current = rowVirtualizer;
   // Scroll correction belongs to the viewport's committed layout. The virtualizer

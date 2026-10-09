@@ -47,6 +47,10 @@ describe("reconcileRetainedWorkspaceSelections", () => {
     );
   });
 
+  it("retains one workspace when the layout viewport cannot scroll a second session", () => {
+    expect(resolveWorkspaceDeckRetentionLimit({ isNative: false, singleWorkspace: true })).toBe(1);
+  });
+
   it("retains inactive workspaces for ten minutes across app-wide routes", () => {
     const retainedEntries = [retained("A", 1_000), retained("B", 2_000)];
 

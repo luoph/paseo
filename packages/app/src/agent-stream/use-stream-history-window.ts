@@ -1,6 +1,10 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import type { StreamItem } from "@/types/stream";
-import { findMountedWindowStart, getMountedRecentStreamItems } from "./history-window";
+import {
+  findMountedWindowStart,
+  getMaxMountedStreamItems,
+  getMountedRecentStreamItems,
+} from "./history-window";
 import { getStreamItemMessageId } from "./presentation";
 
 // Callers reveal a message, not a row: an assistant message is several block rows and
@@ -16,15 +20,18 @@ function findEarlierHistoryWindowStart(input: {
 }): number {
   const targetIndex = input.itemId ? findMessageRowIndex(input.items, input.itemId) : -1;
   const targetStart = targetIndex >= 0 && targetIndex < input.start ? targetIndex : input.start;
+  const maxMountedCount = getMaxMountedStreamItems();
   if (!input.itemId) {
     return findMountedWindowStart({
       items: input.items.slice(0, targetStart),
       minMountedCount: getMountedRecentStreamItems(),
+      maxMountedCount,
     });
   }
   return findMountedWindowStart({
     items: input.items.slice(0, targetStart + 1),
     minMountedCount: 1,
+    maxMountedCount,
   });
 }
 
@@ -61,7 +68,12 @@ export function useStreamHistoryWindow(input: {
 }) {
   const { agentId, items, loadRemoteOlder } = input;
   const initialStart = useMemo(
-    () => findMountedWindowStart({ items, minMountedCount: getMountedRecentStreamItems() }),
+    () =>
+      findMountedWindowStart({
+        items,
+        minMountedCount: getMountedRecentStreamItems(),
+        maxMountedCount: getMaxMountedStreamItems(),
+      }),
     [items],
   );
   const initialBoundaryItemId = initialStart === 0 ? null : (items[initialStart]?.id ?? null);

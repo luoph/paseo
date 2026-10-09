@@ -1,4 +1,4 @@
-import { describe, expect, it } from "vitest";
+import { afterEach, describe, expect, it } from "vitest";
 import { DEFAULT_CONTENT_MAX_WIDTH } from "@/styles/theme";
 import type { StreamItem } from "@/types/stream";
 import {
@@ -12,6 +12,7 @@ import {
   findMountedWindowStart,
   getWebMountedRecentStreamItems,
   getWebPartialVirtualizationThreshold,
+  getWebVirtualizerOverscan,
   splitWebVirtualizedHistory,
   type IndexedStreamItem,
 } from "./web-virtualization";
@@ -96,6 +97,50 @@ describe("findMountedWindowStart", () => {
         minMountedCount: 50,
       }),
     ).toBe(39);
+  });
+
+  it("stops the user-message rewind at the mounted-row cap", () => {
+    const items: StreamItem[] = [userMessage("u", 1)];
+    for (let index = 0; index < 40; index += 1) {
+      items.push(assistantMessage(`a${index}`, index + 2));
+    }
+
+    expect(
+      findMountedWindowStart({
+        items,
+        minMountedCount: 4,
+        maxMountedCount: 8,
+      }),
+    ).toBe(items.length - 8);
+    expect(
+      findMountedWindowStart({
+        items,
+        minMountedCount: 4,
+      }),
+    ).toBe(0);
+  });
+});
+
+describe("legacy layout viewport budgets", () => {
+  const flag = "__paseoLegacyLayoutViewport";
+
+  afterEach(() => {
+    delete (globalThis as Record<string, unknown>)[flag];
+  });
+
+  it("keeps the desktop transcript window when the shim flag is unset", () => {
+    expect(getWebPartialVirtualizationThreshold()).toBe(
+      DEFAULT_WEB_PARTIAL_VIRTUALIZATION_THRESHOLD,
+    );
+    expect(getWebMountedRecentStreamItems()).toBe(DEFAULT_WEB_MOUNTED_RECENT_STREAM_ITEMS);
+    expect(getWebVirtualizerOverscan()).toBe(8);
+  });
+
+  it("mounts a short tail on Safari 12", () => {
+    (globalThis as Record<string, unknown>)[flag] = true;
+    expect(getWebPartialVirtualizationThreshold()).toBe(6);
+    expect(getWebMountedRecentStreamItems()).toBe(4);
+    expect(getWebVirtualizerOverscan()).toBe(2);
   });
 });
 

@@ -4,6 +4,10 @@
 // The build verifies this file parses as ES2019; keep it within that.
 (() => {
   const g = typeof globalThis !== "undefined" ? globalThis : window;
+  // Safari 12 has no visualViewport. The app uses this to mount one workspace
+  // and only the tail of a conversation. Newer browsers that load this build
+  // have visualViewport and keep the desktop limits.
+  g.__paseoLegacyLayoutViewport = typeof g.visualViewport === "undefined";
   // Set by the ResizeObserver fallback: style writes can resize elements.
   let afterStyleFlush = () => {};
 

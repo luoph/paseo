@@ -35,6 +35,7 @@ import {
 } from "@/utils/host-route-browser";
 import { prepareWorkspaceTab } from "@/utils/workspace-navigation";
 import { isNative, isWeb } from "@/constants/platform";
+import { isLegacyLayoutViewport } from "@/utils/legacy-layout-viewport";
 import { RenderProfile } from "@/utils/render-profiler";
 
 function getParamValue(value: string | string[] | undefined): string {
@@ -211,7 +212,10 @@ function WorkspaceDeck({ recoveryRequested }: { recoveryRequested: boolean }) {
         currentEntries: retainedSelections,
         activeSelection,
         now: reconciliationNow,
-        maxMountedWorkspaces: resolveWorkspaceDeckRetentionLimit({ isNative }),
+        maxMountedWorkspaces: resolveWorkspaceDeckRetentionLimit({
+          isNative,
+          singleWorkspace: isLegacyLayoutViewport(),
+        }),
       }),
     [activeSelection, reconciliationNow, retainedSelections],
   );
@@ -248,7 +252,10 @@ function WorkspaceDeck({ recoveryRequested }: { recoveryRequested: boolean }) {
           currentEntries: current,
           activeSelection,
           now: Date.now(),
-          maxMountedWorkspaces: resolveWorkspaceDeckRetentionLimit({ isNative }),
+          maxMountedWorkspaces: resolveWorkspaceDeckRetentionLimit({
+            isNative,
+            singleWorkspace: isLegacyLayoutViewport(),
+          }),
         }),
       );
     }, expirationDelay + 1);

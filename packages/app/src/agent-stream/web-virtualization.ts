@@ -6,8 +6,12 @@ import {
   findMountedWindowStart,
   getMountedRecentStreamItems,
 } from "./history-window";
+import { isLegacyLayoutViewport } from "@/utils/legacy-layout-viewport";
 
 export const DEFAULT_WEB_PARTIAL_VIRTUALIZATION_THRESHOLD = 100;
+const LEGACY_WEB_PARTIAL_VIRTUALIZATION_THRESHOLD = 6;
+const LEGACY_WEB_VIRTUALIZER_OVERSCAN = 2;
+const DESKTOP_WEB_VIRTUALIZER_OVERSCAN = 8;
 export const DEFAULT_WEB_MOUNTED_RECENT_STREAM_ITEMS = DEFAULT_MOUNTED_RECENT_STREAM_ITEMS;
 const COLLAPSED_TOOL_SEQUENCE_ROW_HEIGHT_ESTIMATE = 40;
 
@@ -27,7 +31,18 @@ export function getWebPartialVirtualizationThreshold(): number {
   const override = readPositiveIntegerOverride(
     (globalThis as BottomAnchorE2ETestGlobals).__PASEO_E2E_WEB_PARTIAL_VIRTUALIZATION_THRESHOLD,
   );
-  return override ?? DEFAULT_WEB_PARTIAL_VIRTUALIZATION_THRESHOLD;
+  return (
+    override ??
+    (isLegacyLayoutViewport()
+      ? LEGACY_WEB_PARTIAL_VIRTUALIZATION_THRESHOLD
+      : DEFAULT_WEB_PARTIAL_VIRTUALIZATION_THRESHOLD)
+  );
+}
+
+export function getWebVirtualizerOverscan(): number {
+  return isLegacyLayoutViewport()
+    ? LEGACY_WEB_VIRTUALIZER_OVERSCAN
+    : DESKTOP_WEB_VIRTUALIZER_OVERSCAN;
 }
 
 export function getWebMountedRecentStreamItems(): number {

@@ -332,6 +332,28 @@ describe("stream presentation through installed plugins", () => {
     expect(result.tail[0]!.id).not.toBe(messageId);
   });
 
+  it("does not markdown-split source rows above splitRecentCount", () => {
+    const source = hydrateStreamState([
+      { event: assistant("Older paragraph.\n\nStill old.", "old"), timestamp: new Date(1000) },
+      { event: assistant("Newer paragraph.\n\nStill new.", "new"), timestamp: new Date(2000) },
+    ]);
+    const older = source[0]!;
+    const newer = source[1]!;
+    const result = createStreamPresentation()({
+      ...presentationOptions,
+      tail: source,
+      head: [],
+      transform: undefined,
+      splitRecentCount: 1,
+    });
+
+    expect(result.tail[0]).toBe(older);
+    expect(result.tail.slice(1).map((row) => row.id)).toEqual([
+      `${newer.id}:block:0`,
+      `${newer.id}:block:1`,
+    ]);
+  });
+
   it("continues to stream inline reasoning with a stable plugin row", () => {
     const harness = streamHarness(installedTransform(installProbe("reasoning")));
     const first = harness.send({

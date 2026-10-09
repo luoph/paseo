@@ -1,7 +1,11 @@
 import type { ReactNode } from "react";
 import { deriveStreamTurnTiming, type StreamTurnTiming } from "@/timeline/turn-time";
 import type { StreamItem } from "@/types/stream";
-import { findMountedWindowStart, getMountedRecentStreamItems } from "./history-window";
+import {
+  findMountedWindowStart,
+  getMaxMountedStreamItems,
+  getMountedRecentStreamItems,
+} from "./history-window";
 import { getWebPartialVirtualizationThreshold } from "./web-virtualization";
 import { orderHeadForStreamRenderStrategy, orderTailForStreamRenderStrategy } from "./strategy";
 import { resolveStreamRenderStrategy } from "./strategy-resolver";
@@ -89,7 +93,7 @@ function splitOrderedTail(params: {
     platform === "web" &&
     !isMobileBreakpoint &&
     orderedTail.length > getWebPartialVirtualizationThreshold();
-  const cacheKey = `${platform}:${isMobileBreakpoint}:${getMountedRecentStreamItems()}:${shouldSplitHistory}`;
+  const cacheKey = `${platform}:${isMobileBreakpoint}:${getMountedRecentStreamItems()}:${getMaxMountedStreamItems() ?? "none"}:${shouldSplitHistory}`;
   let cachedByKey = splitHistoryCache.get(orderedTail);
   if (!cachedByKey) {
     cachedByKey = new Map();
@@ -116,6 +120,7 @@ function splitOrderedTail(params: {
   const mountedWindowStart = findMountedWindowStart({
     items: orderedTail,
     minMountedCount: getMountedRecentStreamItems(),
+    maxMountedCount: getMaxMountedStreamItems(),
   });
   const split = {
     history: orderedTail,

@@ -104,6 +104,7 @@ import { isWeb } from "@/constants/platform";
 import type { Theme } from "@/styles/theme";
 import { recordRenderProfileReasons } from "@/utils/render-profiler";
 import { useRetainedPanelActive } from "@/components/retained-panel";
+import { getLegacySplitRecentCount } from "./history-window";
 import { useStreamHistoryWindow } from "./use-stream-history-window";
 import { PluginTimelineItemView, useInstalledTimelineTransform } from "@/plugins/timeline";
 
@@ -544,6 +545,7 @@ const AgentStreamViewComponent = forwardRef<AgentStreamViewHandle, AgentStreamVi
           transform: transformTimelineItem,
           level: toolCallDetailLevel,
           isTurnActive,
+          splitRecentCount: getLegacySplitRecentCount(),
         }),
       [
         presentStream,

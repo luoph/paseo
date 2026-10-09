@@ -15,6 +15,12 @@ interface PresentationInput {
   transform: TimelineItemTransform | undefined;
   level: ToolCallDetailLevel;
   isTurnActive: boolean;
+  /**
+   * Markdown-split only this many trailing source rows. Older rows stay whole
+   * so opening a long session does not parse its entire history. Unset splits
+   * every row.
+   */
+  splitRecentCount?: number;
 }
 
 function retainItems(previous: StreamItem[], next: StreamItem[]): StreamItem[] {
@@ -71,6 +77,7 @@ export function createStreamPresentation() {
   let liveSources = new Map<string, AssistantMessageItem>();
   let historySource: StreamItem[] | undefined;
   let historyTransform: TimelineItemTransform | undefined;
+  let historySplitCount: number | undefined;
   let historyRows: StreamItem[] = [];
   let displayTail: StreamItem[] = [];
   let displayHistory: StreamItem[] | undefined;
@@ -137,15 +144,32 @@ export function createStreamPresentation() {
 
   return (input: PresentationInput) => {
     // Retained history is not reprojected or regrouped on each live text update.
-    if (historySource !== input.tail || historyTransform !== input.transform) {
+    if (
+      historySource !== input.tail ||
+      historyTransform !== input.transform ||
+      historySplitCount !== input.splitRecentCount
+    ) {
       // One rendering path: history splits the same way the live head does, and
       // `blocksBySource` keeps both the live block identities and the split cost
       // from being paid again when only the tail's array identity changed.
-      historyRows = projectPluginTimelineItems(input.tail, input.transform).flatMap<StreamItem>(
-        nativeBlocks,
-      );
+      const projected = projectPluginTimelineItems(input.tail, input.transform);
+      const splitFrom =
+        input.splitRecentCount === undefined
+          ? 0
+          : Math.max(0, projected.length - input.splitRecentCount);
+      const rows: StreamItem[] = [];
+      for (let index = 0; index < projected.length; index += 1) {
+        const item = projected[index]!;
+        if (index < splitFrom) {
+          rows.push(item);
+        } else {
+          rows.push(...nativeBlocks(item));
+        }
+      }
+      historyRows = rows;
       historySource = input.tail;
       historyTransform = input.transform;
+      historySplitCount = input.splitRecentCount;
     }
     const head: StreamItem[] = [];
     const promoted: StreamItem[] = [];

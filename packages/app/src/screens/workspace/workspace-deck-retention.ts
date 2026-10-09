@@ -8,8 +8,17 @@ export interface RetainedWorkspaceSelection {
   inactiveSince: number | null;
 }
 
-export function resolveWorkspaceDeckRetentionLimit(input: { isNative: boolean }): number {
-  return input.isNative ? 1 : WORKSPACE_DECK_MAX_MOUNTED_WORKSPACES;
+export function resolveWorkspaceDeckRetentionLimit(input: {
+  isNative: boolean;
+  singleWorkspace?: boolean;
+}): number {
+  // Safari 12 keeps every retained workspace's transcript in the DOM
+  // (`display: none` does not unmount it). A second sidebar click then lays
+  // out two full sessions on a 1GB iPad.
+  if (input.isNative || input.singleWorkspace) {
+    return 1;
+  }
+  return WORKSPACE_DECK_MAX_MOUNTED_WORKSPACES;
 }
 
 interface ReconcileRetainedWorkspaceSelectionsInput {
