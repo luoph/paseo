@@ -81,7 +81,7 @@ const variants = {
   },
   development: {
     name: "Paseo Fold",
-    packageId: "sh.paseo.debug",
+    packageId: "sh.paseo.fold",
     googleServicesFile: resolveSecretFile({
       envKey: "GOOGLE_SERVICES_FILE_DEBUG",
       fallbackRelativePath: "./.secrets/google-services.debug.json",
