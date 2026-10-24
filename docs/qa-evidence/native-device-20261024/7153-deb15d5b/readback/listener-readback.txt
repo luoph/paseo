@@ -1,0 +1,25 @@
+FILE /Users/rrd/workspace/rrd/paseo/.worktrees/pr-parallel-20261024-native-qa-7153/node_modules/react-native-unistyles/android/src/main/java/com/unistyles/NativePlatform+android.kt
+private fun startWindowLayoutListener() {
+        val decorView = reactContext.currentActivity?.window?.decorView ?: return
+
+        if (_observedDecorView !== decorView) {
+            stopWindowLayoutListener()
+            decorView.addOnLayoutChangeListener(_windowLayoutListener)
+            _observedDecorView = decorView
+        }
+
+        // The fold may change window metrics while the host is paused, without a later broadcast.
+        decorView.post {
+            if (_observedDecorView === decorView) {
+                onConfigChange()
+            }
+        }
+    }
+
+    private fun stopWindowLayoutListener() {
+        _observedDecorView?.removeOnLayoutChangeListener(_windowLayoutListener)
+        _observedDecorView = null
+    }
+
+    
+MISSING 

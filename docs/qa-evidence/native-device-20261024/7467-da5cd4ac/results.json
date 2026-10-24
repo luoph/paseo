@@ -1,0 +1,121 @@
+{
+  "head": "da5cd4ac52f48d36977c2788358b664ed04c872e",
+  "apk_sha256": "cb1ad96f72502ab457bfb2a399b4c20df1a108a19f31a665f6a458ab174a78eb",
+  "bundle_sha256_line": "e48bde1e1ae7fea522f87bc4f3d4b38ffa579390396885d01b5a41b2e001de3f  /tmp/native-qa-7467-virt.txt",
+  "bundle_hits_line": "2026-10-24T14:23:17Z BUNDLE_HITS worktree=2240 storage_ts=0 uiBaseFontSize=22",
+  "package": ["versionCode=13000 minSdk=29 targetSdk=36", "versionName=0.13.0"],
+  "pm_path": "package:/data/app/~~_gfYf7hUUIep9tIKKQzJMA==/sh.paseo.debug-oA9K_DN6HvFP-UNf0xGE0g==/base.apk",
+  "installed_apk_sha256": "cb1ad96f72502ab457bfb2a399b4c20df1a108a19f31a665f6a458ab174a78eb  /data/app/~~_gfYf7hUUIep9tIKKQzJMA==/sh.paseo.debug-oA9K_DN6HvFP-UNf0xGE0g==/base.apk",
+  "wm_size": "Physical size: 2560x1600",
+  "wm_density": "Physical density: 320",
+  "pm_clear": "Success at 2026-10-24T14:24:25Z; not repeated",
+  "launch_texts": "Tools | New workspace | New workspace | History | History | Search | Search | Schedules | Schedules | No projects yet | Add a project to get started | Add project | Add project | Import session | Import session | Add project | Usage | Hosts | Help and support | Settings | Close menu | Add a project, Open a folder on your machine | Add a project | Open a folder on your machine | Import session, Open a Claude Code, Codex or other session you started in a terminal | Import session | Open a Claude Code, Codex or other session you started in a terminal | Setup providers, Configure Claude Code, Codex, and more | Setup providers | Configure Claude Code, Codex, and more | Star | Star | Sponsor | Sponsor | Community | Community",
+  "storage_after_launch": {
+    "pulled": {
+      "RKStorage": 20480,
+      "RKStorage-wal": 0,
+      "RKStorage-shm": 0
+    },
+    "device_query_len": 0,
+    "device_err": "Error: in prepare, incomplete input",
+    "local_len": 885,
+    "local_err": "",
+    "fonts": {
+      "uiBaseFontSize": 13,
+      "contentFontSize": 13,
+      "codeFontSize": 13
+    },
+    "source": "local"
+  },
+  "ui_default": {
+    "Interface font size": "13",
+    "Content font size": "13",
+    "Code font size": "13"
+  },
+  "storage_default": {
+    "pulled": {
+      "RKStorage": 20480,
+      "RKStorage-wal": 0,
+      "RKStorage-shm": 0
+    },
+    "device_query_len": 0,
+    "device_err": "Error: in prepare, incomplete input",
+    "local_len": 885,
+    "local_err": "",
+    "fonts": {
+      "uiBaseFontSize": 13,
+      "contentFontSize": 13,
+      "codeFontSize": 13
+    },
+    "source": "local"
+  },
+  "default_ok": true,
+  "typed": {
+    "Interface font size": "17",
+    "Content font size": "18",
+    "Code font size": "19"
+  },
+  "ui_custom": {
+    "Interface font size": "17",
+    "Content font size": "18",
+    "Code font size": "19"
+  },
+  "storage_custom": {
+    "pulled": {
+      "RKStorage": 20480,
+      "RKStorage-wal": 0,
+      "RKStorage-shm": 0
+    },
+    "device_query_len": 0,
+    "device_err": "Error: in prepare, incomplete input",
+    "local_len": 885,
+    "local_err": "",
+    "fonts": {
+      "uiBaseFontSize": 17,
+      "contentFontSize": 18,
+      "codeFontSize": 19
+    },
+    "source": "local"
+  },
+  "custom_ok": true,
+  "storage_relaunch_early": {
+    "pulled": {
+      "RKStorage": 20480,
+      "RKStorage-wal": 0,
+      "RKStorage-shm": 0
+    },
+    "device_query_len": 0,
+    "device_err": "Error: in prepare, incomplete input",
+    "local_len": 885,
+    "local_err": "",
+    "fonts": {
+      "uiBaseFontSize": 17,
+      "contentFontSize": 18,
+      "codeFontSize": 19
+    },
+    "source": "local"
+  },
+  "ui_relaunch": {
+    "Interface font size": "17",
+    "Content font size": "18",
+    "Code font size": "19"
+  },
+  "storage_relaunch": {
+    "pulled": {
+      "RKStorage": 20480,
+      "RKStorage-wal": 0,
+      "RKStorage-shm": 0
+    },
+    "device_query_len": 0,
+    "device_err": "Error: in prepare, incomplete input",
+    "local_len": 885,
+    "local_err": "",
+    "fonts": {
+      "uiBaseFontSize": 17,
+      "contentFontSize": 18,
+      "codeFontSize": 19
+    },
+    "source": "local"
+  },
+  "relaunch_ok": true
+}

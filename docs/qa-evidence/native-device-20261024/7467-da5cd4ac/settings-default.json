@@ -1,0 +1,42 @@
+{
+  "theme": "auto",
+  "pluginThemeId": null,
+  "language": "system",
+  "sendBehavior": "steer",
+  "serviceUrlBehavior": "ask",
+  "terminalScrollbackLines": 10000,
+  "uiFontFamily": "",
+  "monoFontFamily": "",
+  "codeFontSize": 13,
+  "contentMaxWidth": null,
+  "syntaxTheme": "one",
+  "workspaceTitleSource": "title",
+  "sidebarWorkspaceTrailing": "timestamp",
+  "sidebarRowItems": {
+    "branch": false,
+    "project": false,
+    "host": true,
+    "changeRequest": true,
+    "services": true,
+    "labels": true
+  },
+  "sidebarNavItems": [],
+  "sidebarFooterItems": [],
+  "usage": { "displayAs": "used", "pins": null, "serverId": null },
+  "autoExpandReasoning": false,
+  "chatOutlineEnabled": true,
+  "vimKeybindings": false,
+  "filePanelAssociations": {},
+  "openInSidePane": {
+    "explorerFiles": false,
+    "diffs": false,
+    "chatFiles": false,
+    "diffFiles": false,
+    "subagents": false
+  },
+  "pullRequestOpenLocation": "explorer",
+  "uiBaseFontSize": 13,
+  "contentFontSize": 13,
+  "sidebarChecksDisplay": "iconAndText",
+  "toolCallDetailLevel": "detailed"
+}

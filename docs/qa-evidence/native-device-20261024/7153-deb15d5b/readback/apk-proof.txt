@@ -1,0 +1,6 @@
+sha256 ddc29ab9fea9080fcd266d1143d0d452f8eb86f5e0fd59d07a8ceab3998f96a0
+bytes 216428269
+same_as_cb1 False
+abis arm64-v8a
+symbol_hits 1
+classes2.dex

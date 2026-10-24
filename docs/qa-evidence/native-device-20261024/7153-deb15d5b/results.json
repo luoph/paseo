@@ -1,0 +1,178 @@
+{
+  "hardware_fold": false,
+  "simulated_resize_only": true,
+  "head": "deb15d5b9f9cbcb30a500981a23aa09a57a411ec",
+  "apk_sha256": "ddc29ab9fea9080fcd266d1143d0d452f8eb86f5e0fd59d07a8ceab3998f96a0",
+  "apk_is_old_cb1": false,
+  "apk_proof": "sha256 ddc29ab9fea9080fcd266d1143d0d452f8eb86f5e0fd59d07a8ceab3998f96a0\nbytes 216428269\nsame_as_cb1 False\nabis arm64-v8a\nsymbol_hits 1\nclasses2.dex\n",
+  "bundle_sha256_line": "58676e65db707e1d27cb273d1c33c258a5d0da330ffc8b79a8cdab52cb2143c4  /tmp/native-qa-7153-virt.txt",
+  "pm_path": "package:/data/app/~~USwE6d9gtVH_h6wBpo6Eug==/sh.paseo.debug-TbmLJJYQUWtnWcIo7GovOg==/base.apk",
+  "installed_apk_sha256": "ddc29ab9fea9080fcd266d1143d0d452f8eb86f5e0fd59d07a8ceab3998f96a0  /data/app/~~USwE6d9gtVH_h6wBpo6Eug==/sh.paseo.debug-TbmLJJYQUWtnWcIo7GovOg==/base.apk",
+  "pm_clear": "Success",
+  "wide_initial": {
+    "tag": "01-wide-initial",
+    "root": [2560, 1600],
+    "density": 320,
+    "width_dp": 1280.0,
+    "expected": "wide",
+    "shell": {
+      "wide": true,
+      "compact": false,
+      "handle": true,
+      "settings_sidebar": false,
+      "settings_detail": false
+    },
+    "agrees": true
+  },
+  "storage_before": {
+    "@paseo:app-settings": {
+      "uiBaseFontSize": 15,
+      "contentFontSize": 16,
+      "codeFontSize": 12
+    },
+    "panel-state": {
+      "sidebarWidth": 320
+    },
+    "workspace-layout-state": {
+      "bytes": 240
+    }
+  },
+  "foreground_narrow": {
+    "tag": "02-foreground-narrow",
+    "root": [1100, 1600],
+    "density": 320,
+    "width_dp": 550.0,
+    "expected": "compact",
+    "shell": {
+      "wide": false,
+      "compact": true,
+      "handle": false,
+      "settings_sidebar": false,
+      "settings_detail": false
+    },
+    "agrees": true
+  },
+  "foreground_wide_restored": {
+    "tag": "03-foreground-wide-restored",
+    "root": [2560, 1600],
+    "density": 320,
+    "width_dp": 1280.0,
+    "expected": "wide",
+    "shell": {
+      "wide": true,
+      "compact": false,
+      "handle": true,
+      "settings_sidebar": false,
+      "settings_detail": false
+    },
+    "agrees": true
+  },
+  "background_focus": "mCurrentFocus=Window{5669c21 u0 com.google.android.apps.nexuslauncher/com.google.android.apps.nexuslauncher.NexusLauncherActivity}",
+  "background_narrow": {
+    "tag": "04-background-narrow",
+    "root": [1100, 1600],
+    "density": 320,
+    "width_dp": 550.0,
+    "expected": "compact",
+    "shell": {
+      "wide": false,
+      "compact": true,
+      "handle": false,
+      "settings_sidebar": false,
+      "settings_detail": false
+    },
+    "agrees": true
+  },
+  "background_focus_2": "mCurrentFocus=Window{5669c21 u0 com.google.android.apps.nexuslauncher/com.google.android.apps.nexuslauncher.NexusLauncherActivity}",
+  "background_wide_restored": {
+    "tag": "05-background-wide-restored",
+    "root": [2560, 1600],
+    "density": 320,
+    "width_dp": 1280.0,
+    "expected": "wide",
+    "shell": {
+      "wide": true,
+      "compact": false,
+      "handle": true,
+      "settings_sidebar": false,
+      "settings_detail": false
+    },
+    "agrees": true
+  },
+  "rotation_0": {
+    "tag": "06-rotation-0",
+    "root": [825, 1100],
+    "density": 320,
+    "width_dp": 412.5,
+    "expected": "compact",
+    "shell": {
+      "wide": false,
+      "compact": true,
+      "handle": false,
+      "settings_sidebar": false,
+      "settings_detail": false
+    },
+    "agrees": true
+  },
+  "rotation_1": {
+    "tag": "07-rotation-1",
+    "root": [825, 1100],
+    "density": 320,
+    "width_dp": 412.5,
+    "expected": "compact",
+    "shell": {
+      "wide": false,
+      "compact": true,
+      "handle": false,
+      "settings_sidebar": false,
+      "settings_detail": false
+    },
+    "agrees": true
+  },
+  "rotation_changed_root": false,
+  "swapped_size": {
+    "tag": "08-swapped-size",
+    "root": [1100, 1400],
+    "density": 320,
+    "width_dp": 550.0,
+    "expected": "compact",
+    "shell": {
+      "wide": false,
+      "compact": true,
+      "handle": false,
+      "settings_sidebar": false,
+      "settings_detail": false
+    },
+    "agrees": true
+  },
+  "restored": {
+    "tag": "09-restored",
+    "root": [2560, 1600],
+    "density": 320,
+    "width_dp": 1280.0,
+    "expected": "wide",
+    "shell": {
+      "wide": true,
+      "compact": false,
+      "handle": true,
+      "settings_sidebar": false,
+      "settings_detail": false
+    },
+    "agrees": true
+  },
+  "storage_after": {
+    "@paseo:app-settings": {
+      "uiBaseFontSize": 15,
+      "contentFontSize": 16,
+      "codeFontSize": 12
+    },
+    "panel-state": {
+      "sidebarWidth": 320
+    },
+    "workspace-layout-state": {
+      "bytes": 240
+    }
+  },
+  "storage_persisted": true,
+  "checks": [true, true, true, true, true, true, true, true]
+}

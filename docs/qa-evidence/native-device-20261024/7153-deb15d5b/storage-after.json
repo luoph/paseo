@@ -1,0 +1,5 @@
+{
+  "@paseo:app-settings": { "uiBaseFontSize": 15, "contentFontSize": 16, "codeFontSize": 12 },
+  "panel-state": { "sidebarWidth": 320 },
+  "workspace-layout-state": { "bytes": 240 }
+}
