@@ -1,0 +1,235 @@
+{
+  "head": "9cb99aca728a8192938fb17b70a510dc9644a182",
+  "clientServerId": "srv_5obbuAKOLj7f",
+  "agents": [
+    {
+      "id": "a1f4168b-6809-45c1-a712-49881aa79578",
+      "title": "FIRST long selected tablet tab title that must stay wider than its neighbors and reveal every word after a long press on the pad",
+      "role": "FIRST"
+    },
+    {
+      "id": "45c0ce7c-b41f-496f-919b-505002fff099",
+      "title": "FILLER alpha crowded tablet tab title used only to push the row past the point where unselected labels shrink",
+      "role": "FILLER"
+    },
+    {
+      "id": "74eed518-7cc5-4af8-8ad5-4603fdebe9dc",
+      "title": "MIDDLE long selected tablet tab title that must stay wider than its neighbors and reveal every word after a long press on the pad",
+      "role": "MIDDLE"
+    },
+    {
+      "id": "d8d203f9-0ed9-403e-abc8-0fd734a9046e",
+      "title": "LAST long selected tablet tab title that must stay wider than its neighbors and reveal every word after a long press on the pad",
+      "role": "LAST"
+    }
+  ],
+  "FIRST": {
+    "label": "FIRST",
+    "tabs": [
+      {
+        "role": "FIRST",
+        "id": "a1f4168b-6809-45c1-a712-49881aa79578",
+        "present": true,
+        "selected": "true",
+        "widthDp": 240.0,
+        "bounds": "[1549,127][2029,183]",
+        "desc": "FIRST long selected tablet tab title that must stay wider than its neighbors and"
+      },
+      {
+        "role": "FILLER",
+        "id": "45c0ce7c-b41f-496f-919b-505002fff099",
+        "present": true,
+        "selected": "false",
+        "widthDp": 160.0,
+        "bounds": "[893,127][1213,183]",
+        "desc": "FILLER alpha crowded tablet tab title used only to push the row past the point w"
+      },
+      {
+        "role": "MIDDLE",
+        "id": "74eed518-7cc5-4af8-8ad5-4603fdebe9dc",
+        "present": true,
+        "selected": "false",
+        "widthDp": 160.0,
+        "bounds": "[1221,127][1541,183]",
+        "desc": "MIDDLE long selected tablet tab title that must stay wider than its neighbors an"
+      },
+      {
+        "role": "LAST",
+        "id": "d8d203f9-0ed9-403e-abc8-0fd734a9046e",
+        "present": true,
+        "selected": "false",
+        "widthDp": 160.0,
+        "bounds": "[2037,127][2357,183]",
+        "desc": "LAST long selected tablet tab title that must stay wider than its neighbors and "
+      }
+    ],
+    "selectedCount": 1,
+    "widths": [240.0, 160.0, 160.0, 160.0]
+  },
+  "MIDDLE": {
+    "label": "MIDDLE",
+    "tabs": [
+      {
+        "role": "FIRST",
+        "id": "a1f4168b-6809-45c1-a712-49881aa79578",
+        "present": true,
+        "selected": "false",
+        "widthDp": 160.0,
+        "bounds": "[1709,127][2029,183]",
+        "desc": "FIRST long selected tablet tab title that must stay wider than its neighbors and"
+      },
+      {
+        "role": "FILLER",
+        "id": "45c0ce7c-b41f-496f-919b-505002fff099",
+        "present": true,
+        "selected": "false",
+        "widthDp": 160.0,
+        "bounds": "[893,127][1213,183]",
+        "desc": "FILLER alpha crowded tablet tab title used only to push the row past the point w"
+      },
+      {
+        "role": "MIDDLE",
+        "id": "74eed518-7cc5-4af8-8ad5-4603fdebe9dc",
+        "present": true,
+        "selected": "true",
+        "widthDp": 240.0,
+        "bounds": "[1221,127][1701,183]",
+        "desc": "MIDDLE long selected tablet tab title that must stay wider than its neighbors an"
+      },
+      {
+        "role": "LAST",
+        "id": "d8d203f9-0ed9-403e-abc8-0fd734a9046e",
+        "present": true,
+        "selected": "false",
+        "widthDp": 160.0,
+        "bounds": "[2037,127][2357,183]",
+        "desc": "LAST long selected tablet tab title that must stay wider than its neighbors and "
+      }
+    ],
+    "selectedCount": 1,
+    "widths": [160.0, 160.0, 240.0, 160.0]
+  },
+  "LAST": {
+    "label": "LAST",
+    "tabs": [
+      {
+        "role": "FIRST",
+        "id": "a1f4168b-6809-45c1-a712-49881aa79578",
+        "present": true,
+        "selected": "false",
+        "widthDp": 160.0,
+        "bounds": "[1549,127][1869,183]",
+        "desc": "FIRST long selected tablet tab title that must stay wider than its neighbors and"
+      },
+      {
+        "role": "FILLER",
+        "id": "45c0ce7c-b41f-496f-919b-505002fff099",
+        "present": true,
+        "selected": "false",
+        "widthDp": 160.0,
+        "bounds": "[893,127][1213,183]",
+        "desc": "FILLER alpha crowded tablet tab title used only to push the row past the point w"
+      },
+      {
+        "role": "MIDDLE",
+        "id": "74eed518-7cc5-4af8-8ad5-4603fdebe9dc",
+        "present": true,
+        "selected": "false",
+        "widthDp": 160.0,
+        "bounds": "[1221,127][1541,183]",
+        "desc": "MIDDLE long selected tablet tab title that must stay wider than its neighbors an"
+      },
+      {
+        "role": "LAST",
+        "id": "d8d203f9-0ed9-403e-abc8-0fd734a9046e",
+        "present": true,
+        "selected": "true",
+        "widthDp": 240.0,
+        "bounds": "[1877,127][2357,183]",
+        "desc": "LAST long selected tablet tab title that must stay wider than its neighbors and "
+      }
+    ],
+    "selectedCount": 1,
+    "widths": [160.0, 160.0, 160.0, 240.0]
+  },
+  "longpress": {
+    "expected": "MIDDLE long selected tablet tab title that must stay wider than its neighbors and reveal every word after a long press on the pad",
+    "seen": "",
+    "containsExpected": true,
+    "videoBytes": 885709
+  },
+  "wm_portrait": "Physical size: 2560x1600",
+  "portraitLast": {
+    "label": "portrait-last",
+    "tabs": [
+      {
+        "role": "FIRST",
+        "id": "a1f4168b-6809-45c1-a712-49881aa79578",
+        "present": true,
+        "selected": "false",
+        "widthDp": 123.0,
+        "bounds": "[800,127][1046,183]",
+        "desc": "FIRST long selected tablet tab title that must stay wider than its neighbors and"
+      },
+      {
+        "role": "FILLER",
+        "id": "45c0ce7c-b41f-496f-919b-505002fff099",
+        "present": false
+      },
+      {
+        "role": "MIDDLE",
+        "id": "74eed518-7cc5-4af8-8ad5-4603fdebe9dc",
+        "present": false
+      },
+      {
+        "role": "LAST",
+        "id": "d8d203f9-0ed9-403e-abc8-0fd734a9046e",
+        "present": true,
+        "selected": "true",
+        "widthDp": 240.0,
+        "bounds": "[1054,127][1534,183]",
+        "desc": "LAST long selected tablet tab title that must stay wider than its neighbors and "
+      }
+    ]
+  },
+  "portraitLongpress": {
+    "expected": "LAST long selected tablet tab title that must stay wider than its neighbors and reveal every word after a long press on the pad",
+    "containsExpected": true,
+    "seen": ""
+  },
+  "wm_end": "Physical size: 2560x1600",
+  "density_end": "Physical density: 320",
+  "night_end": "Night mode: no",
+  "FILLER": {
+    "selectedCount": 1,
+    "note": "leftmost tab after the other three selections",
+    "tabs": [
+      {
+        "role": "FILLER",
+        "selected": "true",
+        "widthDp": 240.0,
+        "bounds": "[893,127][1373,183]"
+      },
+      {
+        "role": "MIDDLE",
+        "selected": "false",
+        "widthDp": 160.0,
+        "bounds": "[1381,127][1701,183]"
+      },
+      {
+        "role": "FIRST",
+        "selected": "false",
+        "widthDp": 160.0,
+        "bounds": "[1709,127][2029,183]"
+      },
+      {
+        "role": "LAST",
+        "selected": "false",
+        "widthDp": 160.0,
+        "bounds": "[2037,127][2357,183]"
+      }
+    ]
+  },
+  "portraitRoot": "[0,0][1600,2560]",
+  "landscapeRootEnd": "[0,0][2560,1600]"
+}

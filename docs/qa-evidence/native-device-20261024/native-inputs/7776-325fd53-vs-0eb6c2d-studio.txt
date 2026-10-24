@@ -1,0 +1,22 @@
+label 7776-325fd53
+base 0eb6c2dfec82d48a7919e578452f9303e236f098
+head refs/qa-native/7776
+native_same=112 native_differ=2 only_base=0 only_head=0
+DIFF b59ef19b73233cd3482f31df94fd9aa846ee9343 b0b806c7ab51b07e684f66926258cf429613e23a packages/app/package.json
+DIFF 5c265cc23cfba38dd2a69313a98d65a6fd054125 b2da02d6e071492ffaff39aad0243f2e9504f4e3 packages/expo-two-way-audio/package.json
+VERSION_ONLY packages/app/package.json base=0.13.0-beta.2 head=0.13.0
+VERSION_ONLY packages/expo-two-way-audio/package.json base=0.13.0-beta.2 head=0.13.0
+--- lock ---
+LOCK_SAME 0.86.3 sha512-JR5s3bM9ezud+Mw24GlNXNfthqPIKwrQgPPJcam+L97t2sKjjEavhCzBn+fyqZZRcM5+XlhYxpTxVkK7e1n38Q== react-native
+LOCK_SAME 57.0.30 sha512-dpNWbsqiAHkgInOBClv5PxKCSMAly1n0oBVoIjS/yv8LQtRgDqSkWAnJq16cExndKrgONxdItY+O3J8u6MNYlw== expo
+LOCK_SAME 3.2.4 sha512-S0aXJKZ6zYUViKMol+3on707AWD71fnAM7kmcHjk3FALy5QJicCCzxuluR0IptFQYNUP2dRqnnhgoS1X/U6Jpw== react-native-unistyles
+LOCK_SAME 57.0.23 sha512-vZQoSlhqU6me5K4KCl42yXB0x3zqAiG2FAjzHmbuez77CslJJQ+82cmJoHC3tN5X8o/KxRArJejKNQIeciyoXA== expo-modules-core
+LOCK_SAME 4.5.1 sha512-RnMvtDuR+68ig864gAvZCOdZehqhC5rFmMo0kn+ARfgVSTvFeF6IFLBVgMPUu0KwihaapEyW24WRi6nEyy1kSA== react-native-reanimated
+LOCK_SAME 4.30.0 sha512-FrZG/Q5gqoDu0SgP4d2Ly0qdio5DR1KdGPEYImhkz7tmrhpML4C39m6RYLGd5TVLHZwcCh8NPvW9rylevjD0uQ== react-native-screens
+LOCK_SAME 2.32.0 sha512-uYIMOKlKENORq2SABE+jIjbPU+h5I/sQKcq2v16zRq848nwEp1fWRVwML4QWqijc8UcXJC25o54S8GQd4Mf2OA== react-native-gesture-handler
+LOCK_SAME 15.15.4 sha512-boT/vIRgj6zZKBpfTPJJiYWMbZE9duBMOwPK6kCSTgxsS947IFMOq9OgIFkpWZTB7t229H24pDRkh3W9ZK/J1A== react-native-svg
+LOCK_SAME 5.7.0 sha512-/9/MtQz8ODphjsLdZ+GZAIcC/RtoqW9EeShf7Uvnfgm/pzYrJ75y3PV/J1wuAV1T5Dye5ygq4EAW20RoBq0ABQ== react-native-safe-area-context
+LOCK_SAME 2.2.0 sha512-gvRvjR5JAaUZF8tv2Kcq/Gbt3JHwbKFYfmb445rhOj6NUMx3qPLixmDx5pZAyb9at1bYvJ4/eTUipU5aki45xw== @react-native-async-storage/async-storage
+LOCK_NATIVE_DIFFS 0
+DECISION REUSE_APK
+REASON native blobs match the APK source except package.json version fields; lock versions and integrity match

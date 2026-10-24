@@ -1,0 +1,466 @@
+tracked_native_same=113 differ=2 only_apk=0 only_7776=0 lock_diff=1
+apk_source 0eb6c2dfec82d48a7919e578452f9303e236f098
+pr_7776 325fd53cdfd57aa0c255fe61d62bd7c32be803af
+blob hashes are git object ids of file contents
+SAME 7ddfc950299eac7858a28a7c2c6fe797946b1f00 packages/app/app.config.js
+SAME d80969eb276d66f1ffef62c4b195c3666e153981 packages/app/modules/paseo-diff-prototype/.gitignore
+SAME f872033889855c3f53206a74b1a4417d4ebe3978 packages/app/modules/paseo-diff-prototype/README.md
+SAME 1230d875a2561eea541d1aeaf3059932be42800a packages/app/modules/paseo-diff-prototype/android/CMakeLists.txt
+SAME 3f717f4de48b6d6c4e5fec445bc55cc9b77e8184 packages/app/modules/paseo-diff-prototype/android/build.gradle
+SAME 94cbbcfc396aca20240417158bac4d52ba4e1a14 packages/app/modules/paseo-diff-prototype/android/src/main/AndroidManifest.xml
+SAME d542f0b17bcdc0d84409f2faa50f5abe01ad4f25 packages/app/modules/paseo-diff-prototype/android/src/main/java/sh/paseo/diffprototype/PaseoDiffPrototypeModule.kt
+SAME 70422df3ce44363de384bc5dbe0e27614ae2756b packages/app/modules/paseo-diff-prototype/cpp/generate-graphemes.mjs
+SAME 8761c3eda3567f4a58a018802d30738ae9892d10 packages/app/modules/paseo-diff-prototype/cpp/jni.cpp
+SAME f0fd5f2d8c0c514ecef58d484d682e7433bf7538 packages/app/modules/paseo-diff-prototype/cpp/layout.cpp
+SAME 7de6f00fe212c74b2b7ec8f047772cdafce3edbd packages/app/modules/paseo-diff-prototype/cpp/layout.h
+SAME 2a4587d5f83b1aef430091072e31e520ef4b322c packages/app/modules/paseo-diff-prototype/expo-module.config.json
+SAME 9c775282ed6660b2966a55279a7b26dd17889e54 packages/app/modules/paseo-diff-prototype/package.json
+SAME 57759b1d87dfef73909727ded723b501165d6d40 packages/app/modules/paseo-hardware-keyboard/expo-module.config.json
+SAME 58fa15b9768bb80adf9e2f079f782d37bdd769e3 packages/app/modules/paseo-hardware-keyboard/ios/PaseoHardwareKeyboard.podspec
+SAME cd325748e351c8507121b563fc0b6c360953fb50 packages/app/modules/paseo-hardware-keyboard/ios/PaseoHardwareKeyboardModule.swift
+SAME 9431034e8e38854136cc5b13d20e7ca6a1ce44c0 packages/app/modules/paseo-hardware-keyboard/package.json
+SAME c0340730ffa8ec9af4901c26e7907b374a0252fa packages/app/modules/paseo-native-trace/android/build.gradle
+SAME 94cbbcfc396aca20240417158bac4d52ba4e1a14 packages/app/modules/paseo-native-trace/android/src/main/AndroidManifest.xml
+SAME 512795838c1593e872ec1b3cef4d6cb67e85223a packages/app/modules/paseo-native-trace/android/src/main/java/sh/paseo/trace/DiagnosticRecorder.kt
+SAME 63608a354c2991db99caee9b7287e6a64cf385a3 packages/app/modules/paseo-native-trace/android/src/main/java/sh/paseo/trace/DownloadsLogStorage.kt
+SAME dcf5d1aba10624e371d25273cfa9f6f29e3e79ca packages/app/modules/paseo-native-trace/android/src/main/java/sh/paseo/trace/HeartbeatWatchdog.kt
+SAME 5a048b30e18c14ef2f59f23cb8bd460b18c39f69 packages/app/modules/paseo-native-trace/android/src/main/java/sh/paseo/trace/PaseoNativeTraceModule.kt
+SAME 194b30aa8a8969acfb473c62363485cde63bc28b packages/app/modules/paseo-native-trace/android/src/main/java/sh/paseo/trace/RotatingLog.kt
+SAME 870c0319970d0828edc97fe291f43319780a626a packages/app/modules/paseo-native-trace/android/src/test/java/sh/paseo/trace/HeartbeatWatchdogTest.kt
+SAME ae021278a206b6cfadbcc04f243318557f3fdcc7 packages/app/modules/paseo-native-trace/android/src/test/java/sh/paseo/trace/RotatingLogTest.kt
+SAME e5c1c82ec59d26bd5f5c36f89b52006a35c20bad packages/app/modules/paseo-native-trace/expo-module.config.json
+SAME ab66ed52eb28dc387b3e849a0fb239fed8a102b6 packages/app/modules/paseo-native-trace/package.json
+SAME d80969eb276d66f1ffef62c4b195c3666e153981 packages/app/modules/paseo-scroll/.gitignore
+SAME 5f5eed07cb020d520147d9e6cacb60ab77205a0e packages/app/modules/paseo-scroll/android/build.gradle
+SAME c7007776baf6e3877f652c952543e472733bdef8 packages/app/modules/paseo-scroll/android/src/androidTest/java/sh/paseo/scroll/ScrollSelectionTest.kt
+SAME 71ff179cb1eb3e15259639bd27309d9ac54e5874 packages/app/modules/paseo-scroll/android/src/main/java/sh/paseo/scroll/PaseoScrollPackage.kt
+SAME 08cd8f177456371fe285b982853146d489e0da34 packages/app/modules/paseo-scroll/app.plugin.js
+SAME 8004c20ecd247c50046f1b90c24c91a4f1f53003 packages/app/modules/paseo-scroll/app.plugin.test.ts
+SAME ba00434407785dd828188f259041a66fce8d9572 packages/app/modules/paseo-scroll/expo-module.config.json
+SAME 5887e76734842c0c96ea7ff2f40bdedc26984e91 packages/app/modules/paseo-scroll/package.json
+DIFF b59ef19b73233cd3482f31df94fd9aa846ee9343 b0b806c7ab51b07e684f66926258cf429613e23a packages/app/package.json
+SAME 58905835636e4ba1848fc9c7199d9fef57c27441 packages/app/plugins/with-android-async-storage-size.js
+SAME dd5776e15555248ce36cafb3ca21d68cb85d31f5 packages/app/plugins/with-android-optional-camera.js
+SAME 46f0afe2300a9dbedc8610c2fddc1d5ec169f66b packages/app/plugins/with-android-profileable.js
+SAME fcdf8795dfbe7ff23767a33a84a96a98952a45dc packages/app/plugins/with-fdroid-autolinking.js
+SAME cc5660646ed5495aff69158f9815c84c9854bc41 packages/app/plugins/with-paste-input.js
+SAME 4412570ddbf436ea88634963c51174c6c62217eb packages/app/plugins/with-paste-input.test.ts
+SAME a53a5406bb7f1d605a118ff944ed309d196b9740 packages/app/scripts/verify-android-ndk.gradle
+SAME ac8894bc521e2ba90c3137342968e5602960029b packages/desktop/capture-harness/titlebar-drag-mouse.m
+SAME 8e39d62aca2932678b1abc5ca454de3251073b39 packages/expo-two-way-audio/.eslintrc.js
+SAME 7b90c31d78915b15029561489766a843c5ef010f packages/expo-two-way-audio/.github/workflows/cd.yml
+SAME cc0e02d22ff704d54eed23b9abf390ebecab3c1b packages/expo-two-way-audio/.github/workflows/ci.yml
+SAME 18fd90efa7f31d57f006823d362ce3629abe4446 packages/expo-two-way-audio/.gitignore
+SAME 3ded9b9c850855309eb0c8f053229a986ef60fb8 packages/expo-two-way-audio/.npmignore
+SAME 7b01368d543789bd379eab0a3ba8dfc16f514e75 packages/expo-two-way-audio/.nvmrc
+SAME 074b8503e0ee21b6a9c73e61afc41f70231fd9d9 packages/expo-two-way-audio/CODE_OF_CONDUCT.md
+SAME cf9701ccca44e42e477eac1458be346d5c13a84d packages/expo-two-way-audio/CONTRIBUTING.md
+SAME efe455f16c89067b76d26a1cea8ee47e0a10ccc1 packages/expo-two-way-audio/LICENSE
+SAME 293a439f0170b4a0bbc2a74c5c77f2f0c3568c7e packages/expo-two-way-audio/README.md
+SAME 5bb7508992ff9589a90cf736d1428cfa19995428 packages/expo-two-way-audio/android/build.gradle
+SAME 6501d613de6cc93e320f1fbcb9e3f95fbe3cdfa7 packages/expo-two-way-audio/android/src/androidTest/AndroidManifest.xml
+SAME ad840deb20e71ca5e274c5acccd46d911e9cd443 packages/expo-two-way-audio/android/src/androidTest/java/expo/modules/twowayaudio/AudioEngineTest.kt
+SAME bdae66c8f5a82773eaadc8f7befc05437e27cf25 packages/expo-two-way-audio/android/src/main/AndroidManifest.xml
+SAME 48aff1f1df4b9b083c0b9a28c5d065b3182519ca packages/expo-two-way-audio/android/src/main/java/expo/modules/twowayaudio/AudioEngine.kt
+SAME cdad2de63f4bc6b8ee8673b1af2781b33b906705 packages/expo-two-way-audio/android/src/main/java/expo/modules/twowayaudio/ExpoTwoWayAudioLifeCycleListener.kt
+SAME 68f1489de7e7f06f8e7fc26023f95d9d2c7ed6ba packages/expo-two-way-audio/android/src/main/java/expo/modules/twowayaudio/ExpoTwoWayAudioModule.kt
+SAME ec74a935382b05559e0533ed78e578f0ede32481 packages/expo-two-way-audio/android/src/main/java/expo/modules/twowayaudio/ExpoTwoWayAudioPackage.kt
+SAME 05647d55c75215e41f54285e3ca8f7fa6466bc01 packages/expo-two-way-audio/examples/basic-usage/.gitignore
+SAME bba7b976ade19e2ebc5b46051cbc4c2cb5a40532 packages/expo-two-way-audio/examples/basic-usage/App.tsx
+SAME cd55472f62fce7a7daba7f82f5163932d1d35070 packages/expo-two-way-audio/examples/basic-usage/README.md
+SAME 481171caa4330ee2a1b8cdfefc5f47062bd8546f packages/expo-two-way-audio/examples/basic-usage/app.json
+SAME 03d6f6b6c6727954aec1d8206222769afd178d8d packages/expo-two-way-audio/examples/basic-usage/assets/adaptive-icon.png
+SAME e75f697b1801871ad8cd9309b05e8ffe8c6b6d01 packages/expo-two-way-audio/examples/basic-usage/assets/favicon.png
+SAME a0b1526fc7b78680fd8d733dbc6113e1af695487 packages/expo-two-way-audio/examples/basic-usage/assets/icon.png
+SAME 0e89705a9436743e42954d3744a0e7ff0d3d4701 packages/expo-two-way-audio/examples/basic-usage/assets/splash.png
+SAME 73ebf58e3cc99c4c5e350dd1fef846fd14cda7af packages/expo-two-way-audio/examples/basic-usage/babel.config.js
+SAME 4ece3244baa5dd21bb3fcf04e0e5bcd13142c892 packages/expo-two-way-audio/examples/basic-usage/metro.config.js
+SAME 17a86b11eaf2d4d3fc34d4d95ba9617fc3fe9af5 packages/expo-two-way-audio/examples/basic-usage/package-lock.json
+SAME 5ba14b147ccb71408d1948f2eda7585f59150f67 packages/expo-two-way-audio/examples/basic-usage/package.json
+SAME 4083b55dbd7be6ce1f16d97f7de81925b2152e10 packages/expo-two-way-audio/examples/basic-usage/tsconfig.json
+SAME 4d7a329189c8ce04b1f2c140a6259eac53e1fdbc packages/expo-two-way-audio/examples/basic-usage/webpack.config.js
+SAME 05647d55c75215e41f54285e3ca8f7fa6466bc01 packages/expo-two-way-audio/examples/flow-api/.gitignore
+SAME f67d96ebddf2518fd9bc2fc788252e51e305fca5 packages/expo-two-way-audio/examples/flow-api/App.tsx
+SAME c297193c7b1bb1ba52ec8cd0914714d1ce4ac7ef packages/expo-two-way-audio/examples/flow-api/README.md
+SAME 20fc2ddcea1abd0aae1c9910a8d196c64a784ecf packages/expo-two-way-audio/examples/flow-api/app.json
+SAME 03d6f6b6c6727954aec1d8206222769afd178d8d packages/expo-two-way-audio/examples/flow-api/assets/adaptive-icon.png
+SAME e75f697b1801871ad8cd9309b05e8ffe8c6b6d01 packages/expo-two-way-audio/examples/flow-api/assets/favicon.png
+SAME a0b1526fc7b78680fd8d733dbc6113e1af695487 packages/expo-two-way-audio/examples/flow-api/assets/icon.png
+SAME 0e89705a9436743e42954d3744a0e7ff0d3d4701 packages/expo-two-way-audio/examples/flow-api/assets/splash.png
+SAME 0e0719917fa9ca692f7a46a1fecb6fdca3b24a8e packages/expo-two-way-audio/examples/flow-api/auth.ts
+SAME 73ebf58e3cc99c4c5e350dd1fef846fd14cda7af packages/expo-two-way-audio/examples/flow-api/babel.config.js
+SAME 399a843653a03d3ac9e15e00352d14dd1a1d8b0f packages/expo-two-way-audio/examples/flow-api/metro.config.js
+SAME 45078daac4606bf0fcda575dc53bceb63764923c packages/expo-two-way-audio/examples/flow-api/package-lock.json
+SAME 97d73b0318d4fb5473363d112971eb33bac82f56 packages/expo-two-way-audio/examples/flow-api/package.json
+SAME 4083b55dbd7be6ce1f16d97f7de81925b2152e10 packages/expo-two-way-audio/examples/flow-api/tsconfig.json
+SAME 155165e2b4204765415b29526e5cb4c05a5c97d8 packages/expo-two-way-audio/examples/flow-api/volume-display.tsx
+SAME 4d7a329189c8ce04b1f2c140a6259eac53e1fdbc packages/expo-two-way-audio/examples/flow-api/webpack.config.js
+SAME 0bed28b6b129e5269709bdb637ca9713856b1f77 packages/expo-two-way-audio/expo-module.config.json
+SAME d385dab7aa018cd0df9666ad8b44b000b37eed56 packages/expo-two-way-audio/ios/AudioEngine.swift
+SAME bc76f006c314b07a4a303d39c02583374a56505f packages/expo-two-way-audio/ios/ExpoTwoWayAudio.podspec
+SAME b18afd7deb1621150ddd36bf81a11c2632515d47 packages/expo-two-way-audio/ios/ExpoTwoWayAudioModule.swift
+SAME 14dc7a2ee5f73f203350d3376415d9da6d402170 packages/expo-two-way-audio/ios/MicrophonePermissionRequester.swift
+SAME d77137ef6c62a9911550ba159d9cc08891ce8437 packages/expo-two-way-audio/package-lock.json
+DIFF 5c265cc23cfba38dd2a69313a98d65a6fd054125 b2da02d6e071492ffaff39aad0243f2e9504f4e3 packages/expo-two-way-audio/package.json
+SAME 1ec4e55f8e95ce1770af6bc1ad10b7d55081fb55 packages/expo-two-way-audio/src/ExpoTwoWayAudioModule.ts
+SAME 48215f2bae760e4386f31216498425ce3f4a40f3 packages/expo-two-way-audio/src/core.ts
+SAME c3fb0176a5cb97f9d9773d597a69e923f5a09488 packages/expo-two-way-audio/src/events.ts
+SAME f2c327f20d69491f888cf79a7c25336649bc2789 packages/expo-two-way-audio/src/hooks.ts
+SAME f4f7e9598188d5775403206673ffe8adde6052b4 packages/expo-two-way-audio/src/index.ts
+SAME 102525ffa9cd7c96978755124ac93d890f084de9 packages/expo-two-way-audio/tsconfig.json
+SAME f84d46f8fdd4edeb25d49218cda1c9304d636c69 patches/@gorhom+bottom-sheet+5.2.14.patch
+SAME d3a4f760b6fa321292a3be96378f7b8e440b4085 patches/@mattermost+react-native-paste-input+2.0.1.patch
+SAME 65ce690098ad4dc40de00bcfa9c0137aba087363 patches/@opencode-ai+sdk+1.14.46.patch
+SAME bfcc8932a521be46c201820ad30d6f732e0832d5 patches/expo-modules-core+57.0.23.patch
+SAME ddbdb92224515c3f0ff37325b9d39856553136c8 patches/react-native-draggable-flatlist+4.0.3.patch
+SAME d7e224d04d843f4f759373ac2cc98a1bc7d1dcbc patches/react-native-enriched-markdown+1.2.0-nightly-20261014-766fc0e67.patch
+SAME 7cdbc35d4a112a618386d386de1f76bf3e371de5 patches/react-native-gesture-handler+2.32.0.patch
+SAME b6b4a85a90fddefc8bb45f64b22497a041f42496 patches/react-native-svg+15.15.4.patch
+SAME 0195868340f333dc107ae5fb37cf90a0de64d86a patches/react-native-unistyles+3.2.4.patch
+--- lock integrity ---
+LOCK_SAME 7.27.1 sha512-hjlsMBl1aJc5lp8MoCDEZCiYzlgdRAShOjAfRw6X+GlpLpUPU7c3XNLsKFZbQk/1cRzBlJ7CXg3xJAJMrFa1Uw== node_modules/@babel/plugin-proposal-export-default-from
+LOCK_SAME 7.28.6 sha512-Svlx1fjJFnNz0LZeUaybRukSxZI3KkpApUmIRzEdXC5k8ErTOz0OD0kNrICi5Vc3GlpP5ZCeRyRO+mfWTSz+iQ== node_modules/@babel/plugin-syntax-export-default-from
+LOCK_SAME 7.28.6 sha512-WitabqiGjV/vJ0aPOLSFfNY1u9U3R7W36B03r5I2KoNix+a3sOhJ3pKFB3R5It9/UiK78NiO0KE9P21cMhlPkw== node_modules/@babel/plugin-transform-exponentiation-operator
+LOCK_SAME 7.27.1 sha512-tQvHWSZ3/jH2xuq/vZDy0jNn+ZdXJeM8gHvX4lnJmsc3+50yPlWdZXIc5ay+umX+2/tJIqHqiEqcJvxlmIvRvQ== node_modules/@babel/plugin-transform-export-namespace-from
+LOCK_SAME 0.4.50 sha512-XNSgSfd+1p6wqRAzzhrckGngHJQ1/z+oCMdI5FN+x/VnDeMMFGkXsuRNPYcZTYYff1GwVwx4u6Gqnb30aALysw== node_modules/@expo-google-fonts/material-symbols
+LOCK_SAME 2.1.13 sha512-nt3efiJhAWTHl9ikKYrHEuv3dhqCdicsHFRE9LmvtcVsPhXl9bAsm0gbACoLPr7ClP8664H/S6SdVJOD/tw0jg== node_modules/@expo/apple-utils
+LOCK_SAME 4.0.1 sha512-+Lla7nYSiHZirgK+U/uYzsLv/X+HaJienbD5AKX1UQZHYfWaP+9uuQluRB4GrEVWF0GZ7vEVp/jzaOT9k/SQlg== node_modules/@expo/bunyan
+LOCK_SAME 57.0.31 sha512-NPTMPGQ9i3KzULyP1bzp8hMggoe3QlkfICw388zJuj0UhqfGHEZURkJFuHBksb/ndTjfrCrCBOO0HQz/9QzXIw== node_modules/@expo/cli
+LOCK_SAME 0.0.6 sha512-iNe0puxwBNEcuua9gmTGzq+SuMDa0iATai1FlFTMHJ/vUmKvN/V//drXoLJkVb5i5H3iE/n/qIJxyoBnXouD0w== node_modules/@expo/cli/node_modules/@expo/code-signing-certificates
+LOCK_SAME 57.0.10 sha512-YpexTqLWEXdbbXgHh7Zhpq+qA5diuvO46lb7TiY81JwqKLAl9zK31APY1D7jUFlDX56owje5RtK0o5bMmGIMUg== node_modules/@expo/cli/node_modules/@expo/config
+LOCK_SAME 57.0.10 sha512-XFcj01blofSohoOxibrPsrsFPt2gAigrcWE3s6Vg+rSHvP9QVEfnyfmJNVsuIVT0EjY/1rZVJ4SajNDR5cJjpA== node_modules/@expo/cli/node_modules/@expo/config-plugins
+LOCK_SAME 11.0.1 sha512-zxHWj4MKKMAL29ZQSY/Fssx4Thluk40JmuGNaeS078wy/NhlFhnVi+rHHunulE3xJAJ0CM73m8VK2+GkF9eRwQ== node_modules/@expo/cli/node_modules/@expo/config-plugins/node_modules/@expo/json-file
+LOCK_SAME 57.0.2 sha512-ewW08OonrcRIsRKIlFvvcmmafE5zemb1ocu3HkNwtVPyRtj2w42pZCAkMIROYpcVBaPnc3mDT9UZDzwXWC3i6g== node_modules/@expo/cli/node_modules/@expo/config-types
+LOCK_SAME 2.4.3 sha512-M1NXeZCA1mkMkYOyIe7PlyRX0/jqFtMoJgyblnlq/vpCRfmueFT7RnGSQG8uEFDF5WHOFGijAQ3fogPh3/n5Ng== node_modules/@expo/cli/node_modules/@expo/env
+LOCK_SAME 0.11.6 sha512-rmMpn7QGp6pUGRCQ3vvB9RP/vqq2q/PpToRh4dL/FbhSZOLZ1YTotpuLHf71FGOEfgKil/4PCd3hkWe/CCeiEg== node_modules/@expo/cli/node_modules/@expo/image-utils
+LOCK_SAME 11.2.1 sha512-UPhKoFCj8BcwgLB1rKQ1CuR/REITnZLiqxHEHOeH1tPsdXcHGtUDh0P5bLbr7oU0nKVdtJ5rzyKx8jniMQdESQ== node_modules/@expo/cli/node_modules/@expo/json-file
+LOCK_SAME 2.8.1 sha512-SCi+6q6uOkGhiAn6AIP/OPFgaIq/iKD2oYpnAOg2rShHStJ8ey7wyT127RbOaZXmlcY/62rHOX1WiiMnD8u/BA== node_modules/@expo/cli/node_modules/@expo/osascript
+LOCK_SAME 1.14.2 sha512-sftl0eRVVCarI6grMdjAB3jX2pX1Mt3cdSnajlXS4QyeDkaKRM/ntBy6dcagj1VL0+cEfEqctlyvinmlZdNubg== node_modules/@expo/cli/node_modules/@expo/package-manager
+LOCK_SAME 0.8.1 sha512-3gTReGIUm0oRaMClsAJYxBnVPCl6fVpsl8HS+DTVxDhW4GyVyxg9E/Znm3BvcHtUJ51RJJI14pC1wvrNilCRHw== node_modules/@expo/cli/node_modules/@expo/plist
+LOCK_SAME 57.0.19 sha512-trBpySOP8Pv/xtMSb5ASAL5y8h6kbZTinakZ5cUbu0lX5iDpiB3Cg3ANYc3coriH7jpl3cJecG4e0PzUMced8g== node_modules/@expo/cli/node_modules/@expo/prebuild-config
+LOCK_SAME 1.8.0 sha512-eb9xxd/LbuEGSdua4NumCu/McVB9EM+F/JxB9pWgnERw4HQ9XyTNH1KapG6oqLWR8TuRK2LQfzJlmNi94CVobw== node_modules/@expo/cli/node_modules/@expo/spawn-async
+LOCK_SAME 0.0.5 sha512-BNhXkY1bblxKZpltzAx98G2Egj9g1Q+JRcvR7E99DOj862FTCX+ZPsAUtPTr7aHxwtrL7+fL3r0JSmM9kBm+Bw== node_modules/@expo/code-signing-certificates
+LOCK_SAME 10.0.6 sha512-xXkfPElrtxznkOZxFASJ7OPa6E9IHSjcZwj5BQ6XUF2dz5M7AFa2h5sXM8AalSaDU5tEBSgoUOjTh5957TlR8g== node_modules/@expo/config
+LOCK_SAME 9.0.12 sha512-/Ko/NM+GzvJyRkq8PITm8ms0KY5v0wmN1OQFYRMkcJqOi3PjlhndW+G6bHpJI9mkQXBaUnHwAiGLqIC3+MQ5Wg== node_modules/@expo/config-plugins
+LOCK_SAME 9.0.2 sha512-yAznIUrybOIWp3Uax7yRflB0xsEpvIwIEqIjao9SGi2Gaa+N0OamWfe0fnXBSWF+2zzF4VvqwT4W5zwelchfgw== node_modules/@expo/config-plugins/node_modules/@expo/json-file
+LOCK_SAME 52.0.5 sha512-AMDeuDLHXXqd8W+0zSjIt7f37vUd/BP8p43k68NHpyAvQO+z8mbQZm3cNQVAMySeayK2XoPigAFB1JF2NFajaA== node_modules/@expo/config-types
+LOCK_SAME 9.1.5 sha512-prWBhLUlmcQtvN6Y7BpW2k9zXGd3ySa3R6rAguMJkp1z22nunLN64KYTUWfijFlprFoxm9r2VNnGkcbndAlgKA== node_modules/@expo/config/node_modules/@expo/json-file
+LOCK_SAME 1.2.2 sha512-wz1YedXwdNbYqk/PRr34vixnuw1+l6uSwmPXUj649cot5iYNccb2zIOnK7Nonb1Pfd/dxAY6CvU6KM3uSdxC7A== node_modules/@expo/devcert
+LOCK_SAME 57.0.1 sha512-GyUf+wFNkbttaX0jR7MZa9bm77U0IrLg6d2AjpxdyoXw/w4abHoXG0oFufwLMgP9zLTd5+Ct4X/ffNUTnlzZgg== node_modules/@expo/devtools
+LOCK_SAME 57.0.1 sha512-lAKsME4SAq+8sf56oN0DX5TBYyruupoRxbWbD2xf9RnKY8y6x8eb9LCE5pxSN0qyWdqnp+0wmyWzDkKboThKAw== node_modules/@expo/dom-webview
+LOCK_SAME 1.0.243 sha512-wLU9q0pzIKibr4jLMV/U6BYszk5T85p/WmRYUIqH7nhmy2dDUJHz0WlP/i/ZWAsnrHplwidbCZvZGoxwgJsISA== node_modules/@expo/eas-build-job
+LOCK_SAME 16.30.0 sha512-GeWdhJTPcOh7xhox+ymsUYqsrPTB+dTyjaKdvdhZNHoNYwZADEEq2DyDHUJJPiUbPvld03qbg/mrSaVMYhxP9w== node_modules/@expo/eas-json
+LOCK_SAME 1.0.231 sha512-jktsZ7IJYcC9lbgUWftbFCpfrhcGwJX4q0qSubUrqvFTMuUyLjCzJqyIZ4znbXLXfJSUPDJNAd4H0wBqKJA9kA== node_modules/@expo/eas-json/node_modules/@expo/eas-build-job
+LOCK_SAME 1.0.7 sha512-qSTEnwvuYJ3umapO9XJtrb1fAqiPlmUUg78N0IZXXGwQRt+bkp0OBls+Y5Mxw/Owj8waAM0Z3huKKskRADR5ow== node_modules/@expo/env
+LOCK_SAME 0.6.1 sha512-cpsLZE4rqkc1Y3eZTkxB98jrqY1YXgetmtxFt8q89jBRmk3quRuk1BZo+VcnCSObZardjg99r1k5xijEMONFGA== node_modules/@expo/expo-modules-macros-plugin
+LOCK_SAME 0.20.14 sha512-7sihStGX1ZepJBNbYgeQY7cU2GQ+PSkSROe3g7JOQqnT6OOuX0rXKY0ZNoVnlB2Y/H5FWnnJ6QrPlK3fNg9+bQ== node_modules/@expo/fingerprint
+LOCK_SAME 2.5.2 sha512-z8kCvBVJpd2S20a+Ab1otQgz8sJLeR7CXDTsuAMcNbYFsK10Fdhfb7rx9Ys1vvlbijnY55eZhQvJACajc1IjBQ== node_modules/@expo/fingerprint/node_modules/@expo/env
+LOCK_SAME 1.8.0 sha512-eb9xxd/LbuEGSdua4NumCu/McVB9EM+F/JxB9pWgnERw4HQ9XyTNH1KapG6oqLWR8TuRK2LQfzJlmNi94CVobw== node_modules/@expo/fingerprint/node_modules/@expo/spawn-async
+LOCK_SAME 0.6.5 sha512-RsS/1CwJYzccvlprYktD42KjyfWZECH6PPIEowvoSmXfGLfdViwcUEI4RvBfKX5Jli6P67H+6YmHvPTbGOboew== node_modules/@expo/image-utils
+LOCK_SAME 0.1.8 sha512-5OCHzv/VHVuam9UT6/yeArtUnmkp5VdAH6k4JwdRzK/34ukzdjQK7B9n71fiswZKtm2MmZlPuy4hJo2Ao8CZNw== node_modules/@expo/inline-modules
+LOCK_SAME 57.0.10 sha512-XFcj01blofSohoOxibrPsrsFPt2gAigrcWE3s6Vg+rSHvP9QVEfnyfmJNVsuIVT0EjY/1rZVJ4SajNDR5cJjpA== node_modules/@expo/inline-modules/node_modules/@expo/config-plugins
+LOCK_SAME 57.0.2 sha512-ewW08OonrcRIsRKIlFvvcmmafE5zemb1ocu3HkNwtVPyRtj2w42pZCAkMIROYpcVBaPnc3mDT9UZDzwXWC3i6g== node_modules/@expo/inline-modules/node_modules/@expo/config-types
+LOCK_SAME 11.0.1 sha512-zxHWj4MKKMAL29ZQSY/Fssx4Thluk40JmuGNaeS078wy/NhlFhnVi+rHHunulE3xJAJ0CM73m8VK2+GkF9eRwQ== node_modules/@expo/inline-modules/node_modules/@expo/json-file
+LOCK_SAME 0.8.1 sha512-3gTReGIUm0oRaMClsAJYxBnVPCl6fVpsl8HS+DTVxDhW4GyVyxg9E/Znm3BvcHtUJ51RJJI14pC1wvrNilCRHw== node_modules/@expo/inline-modules/node_modules/@expo/plist
+LOCK_SAME 8.3.3 sha512-eZ5dld9AD0PrVRiIWpRkm5aIoWBw3kAyd8VkuWEy92sEthBKDDDHAnK2a0dw0Eil6j7rK7lS/Qaq/Zzngv2h5A== node_modules/@expo/json-file
+LOCK_SAME 57.0.9 sha512-hox13/K/dqvKG7StLYs9nwyNR/mJ5ieAkNN8jTee6liMPyUQTfpzgticRyWnVxj49Fr8PpTaQab/ArYVEBJOcQ== node_modules/@expo/local-build-cache-provider
+LOCK_SAME 57.0.10 sha512-YpexTqLWEXdbbXgHh7Zhpq+qA5diuvO46lb7TiY81JwqKLAl9zK31APY1D7jUFlDX56owje5RtK0o5bMmGIMUg== node_modules/@expo/local-build-cache-provider/node_modules/@expo/config
+LOCK_SAME 57.0.10 sha512-XFcj01blofSohoOxibrPsrsFPt2gAigrcWE3s6Vg+rSHvP9QVEfnyfmJNVsuIVT0EjY/1rZVJ4SajNDR5cJjpA== node_modules/@expo/local-build-cache-provider/node_modules/@expo/config-plugins
+LOCK_SAME 11.0.1 sha512-zxHWj4MKKMAL29ZQSY/Fssx4Thluk40JmuGNaeS078wy/NhlFhnVi+rHHunulE3xJAJ0CM73m8VK2+GkF9eRwQ== node_modules/@expo/local-build-cache-provider/node_modules/@expo/config-plugins/node_modules/@expo/json-file
+LOCK_SAME 57.0.2 sha512-ewW08OonrcRIsRKIlFvvcmmafE5zemb1ocu3HkNwtVPyRtj2w42pZCAkMIROYpcVBaPnc3mDT9UZDzwXWC3i6g== node_modules/@expo/local-build-cache-provider/node_modules/@expo/config-types
+LOCK_SAME 11.2.1 sha512-UPhKoFCj8BcwgLB1rKQ1CuR/REITnZLiqxHEHOeH1tPsdXcHGtUDh0P5bLbr7oU0nKVdtJ5rzyKx8jniMQdESQ== node_modules/@expo/local-build-cache-provider/node_modules/@expo/json-file
+LOCK_SAME 0.8.1 sha512-3gTReGIUm0oRaMClsAJYxBnVPCl6fVpsl8HS+DTVxDhW4GyVyxg9E/Znm3BvcHtUJ51RJJI14pC1wvrNilCRHw== node_modules/@expo/local-build-cache-provider/node_modules/@expo/plist
+LOCK_SAME 57.0.4 sha512-IxwS9s1L2muj8mj8AQSuiy7u8OFJdc02NRFo2me/Tj6DiaeG5SREqmpBE4rQpR2cadqSg5jl8Qab8Cjie616dg== node_modules/@expo/log-box
+LOCK_SAME 58.0.2 sha512-My8Lwe9FU/yDwwzqwi5LN2rzzDcJqIAZKrD9f0XHZEKz/FQnWJYdt1rsV7+RwqMGeGq2XsxTCVT1ggTCOvumxw== node_modules/@expo/log-box-utils
+LOCK_SAME 1.0.221 sha512-arNkhzq4Ludz9J7PIYWTVYXuT1bO/A8prR8HYAviKuF6fEZfitemNVriGSetQASOE8Vnv3lmBZv6YIwLiFuv/Q== node_modules/@expo/logger
+LOCK_SAME 56.0.2 sha512-Ld5AeYMCCDa8bLeWhfuLbZFFjlV3f6ORqyPz2glGh6RltIngMuLf9BTC2yvHFjkKuGxL5SynijmA8xmNNWn5iA== node_modules/@expo/metro
+LOCK_SAME 57.0.13 sha512-r+YCwqh8FM5cymkC3MdYO32DqLZQ2wDWkGEnzwgwI40Bj355BvL4XoY0hGgao9vNHjYa7be7XxbVqtMTi76snw== node_modules/@expo/metro-config
+LOCK_SAME 57.0.10 sha512-YpexTqLWEXdbbXgHh7Zhpq+qA5diuvO46lb7TiY81JwqKLAl9zK31APY1D7jUFlDX56owje5RtK0o5bMmGIMUg== node_modules/@expo/metro-config/node_modules/@expo/config
+LOCK_SAME 57.0.10 sha512-XFcj01blofSohoOxibrPsrsFPt2gAigrcWE3s6Vg+rSHvP9QVEfnyfmJNVsuIVT0EjY/1rZVJ4SajNDR5cJjpA== node_modules/@expo/metro-config/node_modules/@expo/config-plugins
+LOCK_SAME 57.0.2 sha512-ewW08OonrcRIsRKIlFvvcmmafE5zemb1ocu3HkNwtVPyRtj2w42pZCAkMIROYpcVBaPnc3mDT9UZDzwXWC3i6g== node_modules/@expo/metro-config/node_modules/@expo/config-types
+LOCK_SAME 2.4.3 sha512-M1NXeZCA1mkMkYOyIe7PlyRX0/jqFtMoJgyblnlq/vpCRfmueFT7RnGSQG8uEFDF5WHOFGijAQ3fogPh3/n5Ng== node_modules/@expo/metro-config/node_modules/@expo/env
+LOCK_SAME 11.0.1 sha512-zxHWj4MKKMAL29ZQSY/Fssx4Thluk40JmuGNaeS078wy/NhlFhnVi+rHHunulE3xJAJ0CM73m8VK2+GkF9eRwQ== node_modules/@expo/metro-config/node_modules/@expo/json-file
+LOCK_SAME 0.8.1 sha512-3gTReGIUm0oRaMClsAJYxBnVPCl6fVpsl8HS+DTVxDhW4GyVyxg9E/Znm3BvcHtUJ51RJJI14pC1wvrNilCRHw== node_modules/@expo/metro-config/node_modules/@expo/plist
+LOCK_SAME 1.8.0 sha512-eb9xxd/LbuEGSdua4NumCu/McVB9EM+F/JxB9pWgnERw4HQ9XyTNH1KapG6oqLWR8TuRK2LQfzJlmNi94CVobw== node_modules/@expo/metro-config/node_modules/@expo/spawn-async
+LOCK_SAME 0.36.1 sha512-guv1nQ6IJ7S83NRFPWc3SA7IBZrdNC9kapwOq6uXvF4wP+sDCgjzQbKPCoyYmoyZRzztF/n/c36l/rccCZSiCw== node_modules/@expo/metro-config/node_modules/hermes-estree
+LOCK_SAME 0.36.1 sha512-GApNk4zLHi2UWoWZZkx7LNCOSzLSc5lB55pZ/PhK7ycFeg7u5LcF88p/WbpIi1XUDtE0MpHE3uRR3u3KB7TjSQ== node_modules/@expo/metro-config/node_modules/hermes-parser
+LOCK_SAME 57.0.4 sha512-gLABIbU3SlxRVVCe56ZfYFbxjhdpAKomQYr6LIeDYf7rca8Pfvzv8FS39hH0+IcdpEHly2Jy0X2nd4/obd8Kig== node_modules/@expo/metro-file-map
+LOCK_SAME 57.0.17 sha512-fiWYLaMDV8hoIpyPztRFPhGbHCHWlVfRTac3jZV7tP+fYCpo1QmgsuL23ubnoWqDZhFuRDNk+hQ4y21DMmxEFA== node_modules/@expo/metro-runtime
+LOCK_SAME 0.20.0 sha512-7B57gc7+TeygPcK8fLYlEhJbbvaPh+JBzex11YIYZrSzbFhz7Q+Z37fSdAfp4EsfCswJNcX0S6wpkgSlVNefVw== node_modules/@expo/modules-macros-win32-arm64
+LOCK_SAME 0.20.0 sha512-BM5a2U2tCyHzmtiSEY70KPsts82Mfy1bHSZ7AUbg6z9LcnxuThxJlcH85/SV5eFbhrPfgDBAG/WAncyZCvKvyA== node_modules/@expo/modules-macros-win32-x64
+LOCK_SAME 2.0.0 sha512-yS/wsqlj0d8ZKETEN7ro3dZtjdMhpte8wp+xUzjUQC3jizxcE0E62xgvGquJObiYUMGoCF5qRYr2t78STPEaSw== node_modules/@expo/multipart-body-parser
+LOCK_SAME 1.0.1 sha512-yDyBlNIgg+rKoKCOVM9ZyAtgqRx6gHw+JtmZTrYYW4auAfwS6kE/iInmCpVXPqRy0OhJHgXj6q5PCgWELLVMeg== node_modules/@expo/npm-proofread
+LOCK_SAME 2.1.4 sha512-LcPjxJ5FOFpqPORm+5MRLV0CuYWMthJYV6eerF+lQVXKlvgSn3EOqaHC3Vf3H+vmB0f6G4kdvvFtg40vG4bIhA== node_modules/@expo/osascript
+LOCK_SAME 1.9.10 sha512-axJm+NOj3jVxep49va/+L3KkF3YW/dkV+RwzqUJedZrv4LeTqOG4rhrCaCPXHTvLqCTDKu6j0Xyd28N7mnxsGA== node_modules/@expo/package-manager
+LOCK_SAME 10.0.12 sha512-inbDycp1rMAelAofg7h/mMzIe+Owx6F7pur3XdQ3EPTy00tme+4P6FWgHKUcjN8dBSrnbRNpSyh5/shzHyVCyQ== node_modules/@expo/package-manager/node_modules/@expo/json-file
+LOCK_SAME 0.1.3 sha512-96MePEGppKi08vawrTPw8kMCRdsbrDbV900MlI8rrP9F57DfDl/y1P52bwIDBYCEHE3XtPMo7s1xkG0BKOLCVg== node_modules/@expo/pkcs12
+LOCK_SAME 58.0.1 sha512-KtLrtAvpShq16l9lTxd2fZSjULxcGxXrJTHA31iUVqrc+Af7aTAJW4ZB3yQBgi/w+kSb6BB/CG9RXI0ohbMm6g== node_modules/@expo/platforms
+LOCK_SAME 0.2.0 sha512-F/IZJQaf8OIVnVA6XWUeMPC3OH6MV00Wxf0WC0JhTQht2QgjyHUa3U5Gs3vRtDq8tXNsZneOQRDVwpaOnd4zTQ== node_modules/@expo/plist
+LOCK_SAME 5.1.23 sha512-s0uH6cPplLj73ZVie40EYUhl7X7q9kRR+8IfZWDod3wUtVGOFInxuCPX9Jpv1UwwBgbRu2cLisqr8m45LrFgxw== node_modules/@expo/plugin-help
+LOCK_SAME 2.5.1 sha512-B65QSIZ+TgFHnVXsTw+1Q6djsJByWwnIjYfoG8ZV9wizOC01gbAw1cOZ/YtrJ2BrDnzFQtM8qecjlmZ7C3MPLw== node_modules/@expo/plugin-warn-if-update-available
+LOCK_SAME 8.0.17 sha512-HM+XpDox3fAZuXZXvy55VRcBbsZSDijGf8jI8i/pexgWvtsnt1ouelPXRuE1pXDicMX+lZO83QV+XkyLmBEXYQ== node_modules/@expo/prebuild-config
+LOCK_SAME 9.1.5 sha512-prWBhLUlmcQtvN6Y7BpW2k9zXGd3ySa3R6rAguMJkp1z22nunLN64KYTUWfijFlprFoxm9r2VNnGkcbndAlgKA== node_modules/@expo/prebuild-config/node_modules/@expo/json-file
+LOCK_SAME 0.76.2 sha512-ICoOpaTLPsFQjNLSM00NgQr6wal300cZZonHVSDXKntX+BfkLeuCHRtr/Mn+klTtW+/1v2/2FRm9dXjvyGf9Dw== node_modules/@expo/prebuild-config/node_modules/@react-native/normalize-colors
+LOCK_SAME 57.0.6 sha512-PKWfFdMgwWrlSP6NGplCi2nK0dEM5MeJ2Cj1ijr5VWTmZ+pKsJsJw2dWkBtlFDyxMY8eUjCPZ7hoqFEnbc0Pcw== node_modules/@expo/require-utils
+LOCK_SAME 1.0.0 sha512-qECzzXX5oJot3m2Gu9pfRDz50USdBieQVwYAzeAtQRUTD3PVeTK1tlRUoDcrK8PSruDLuVYdKkLebX4w/o55VA== node_modules/@expo/results
+LOCK_SAME 57.0.13 sha512-A25869lSp6916GiYjz1y1S/Kfi5qn7S1xepycFv8x8VOrulLBbv0byXl6o3BSLh5nLBx5RiMTjBFM2u+K7JsrA== node_modules/@expo/router-server
+LOCK_SAME 1.1.1 sha512-uy/hS/awclDJ1S88w9UGpc6Nm9XnNUjzOAAib1A3PVAnGQIwebg8DpFqOthFBTlZxeuV/BKbZ5jmTbtNZkp1WQ== node_modules/@expo/rudder-sdk-node
+LOCK_SAME 57.0.2 sha512-fMu/jyN0l1Wzv7XkeWR4IYCx1M8ryui3FdBNGrWwbRgJ7EhxXxK8E2jxP2W3pbgUwUY0V3hG8+GyfCZwny+Lxw== node_modules/@expo/schema-utils
+LOCK_SAME 1.0.0 sha512-Doz2bfiPndXYFPMRwPyGa1k5QaKDVpY806UJj570epIiMzWaYyCtobasyfC++qfIXVb5Ocy7r3tP9d62hAQ7IQ== node_modules/@expo/sdk-runtime-versions
+LOCK_SAME 1.7.2 sha512-QdWi16+CHB9JYP7gma19OVVg0BFkvU8zNj9GjWorYI8Iv8FUxjOCcYRuAmX4s/h91e4e7BPsskc8cSrZYho9Ew== node_modules/@expo/spawn-async
+LOCK_SAME 1.0.231 sha512-o7Wj6W32S4H4geWC0b3RL5finHmiPT+e8SMP4/4Il2R0oc9er8jLXaj1tQ3fTZvpnlqoMWcFn5fAvaGnxfYDPA== node_modules/@expo/steps
+LOCK_SAME 1.0.231 sha512-jktsZ7IJYcC9lbgUWftbFCpfrhcGwJX4q0qSubUrqvFTMuUyLjCzJqyIZ4znbXLXfJSUPDJNAd4H0wBqKJA9kA== node_modules/@expo/steps/node_modules/@expo/eas-build-job
+LOCK_SAME 9.3.2 sha512-HHQigo3rQWKMDzYDLkubN5WQOYXJJE2eNqIQC2axC2iO3mHdwnIR7FgZVvHWtBwAdzBgAP0ECp8KqS8TiMKvgw== node_modules/@expo/sudo-prompt
+LOCK_SAME 1.0.0 sha512-PD45CGlCL8kG0U3YcH1NvYxQThw5XAS7qE9bgP4L7dakm8lsMz+p8BQ1IjBFMmImawVWsV3py6JZINaEebXLnw== node_modules/@expo/timeago.js
+LOCK_SAME 57.0.25 sha512-/BbxsKh/LSIFDnWAHRHfJdCcnqHY7WNcWXjld0soKnYXDUbImjvsFK7y5dqq2XZTbOMyf44BpgAWKUR/B8huCA== node_modules/@expo/ui
+LOCK_SAME 2.0.1 sha512-mljsRffbOHzmSimYQbQu9h9NR3alwCCwEEouRGFL4QRTt8dNvsNtKEPa/5jHmtDLDtsh4xXsWKwzjN9BTpeXHQ== node_modules/@expo/ws-tunnel
+LOCK_SAME 4.4.7 sha512-EbxYllZ7/ozONVZd425cm4XnolfW+AmSFT5aP7Jdno6oc3WrYQcHz2CO20z/2rwWwYgztmV2PXvYH+BQ8YFjqg== node_modules/@expo/xcpretty
+LOCK_SAME 0.10.9 sha512-8lLF/hrfCLPSeMljMbFi/cxVjtFTZyg1XHFiuZtXirbBiEfTvCgD0a1YUo2fpG4wa9Fa8Nz4HSq4TmdV+JuxwQ== node_modules/@floating-ui/react-native
+LOCK_SAME - - node_modules/@getpaseo/expo-two-way-audio
+LOCK_SAME 2.0.1 sha512-Q9zjXvjwxVQ1M8ylxr9Y+wUpG7xb1wW4u+I34oPvF3etTyBrGtVyA4Bt7Xphgc29eW6wQFUxTIbzZc3E6W2MQg== node_modules/@mattermost/react-native-paste-input
+LOCK_SAME 2.2.0 sha512-gvRvjR5JAaUZF8tv2Kcq/Gbt3JHwbKFYfmb445rhOj6NUMx3qPLixmDx5pZAyb9at1bYvJ4/eTUipU5aki45xw== node_modules/@react-native-async-storage/async-storage
+LOCK_SAME 0.3.2 sha512-XwuQoW7/GEgWRMovOQtX3A4PrXhyaZm0lVUiY8qJDvdngjLms9Cpdck6SmGAUNqQwcj2EadHC1HwL0bEyoa/SQ== node_modules/@react-native-masked-view/masked-view
+LOCK_SAME 0.88.0 sha512-Bj1DxQt5f4OrjdlgSVkZT37Z3hx5hUIN5AUDSqL/e99vgtTcqj5vnm067epZL1EF/QiqsniZO8Q1GSkItOakDg== node_modules/@react-native/asset-utils
+LOCK_SAME 0.86.3 sha512-TDhgCZA4wjJg84d5A9swiOQYPIWSKEEVdg9IwMFZDupQzW/F3QoLUrfAJOcalgqTDA9/buTB8awhE3Whwg6u9Q== node_modules/@react-native/assets-registry
+LOCK_SAME 0.81.5 sha512-oF71cIH6je3fSLi6VPjjC3Sgyyn57JLHXs+mHWc9MoCiJJcM4nqsS5J38zv1XQ8d3zOW2JtHro+LF0tagj2bfQ== node_modules/@react-native/babel-plugin-codegen
+LOCK_SAME 0.81.5 sha512-UoI/x/5tCmi+pZ3c1+Ypr1DaRMDLI3y+Q70pVLLVgrnC3DHsHRIbHcCHIeG/IJvoeFqFM2sTdhSOLJrf8lOPrA== node_modules/@react-native/babel-preset
+LOCK_SAME 0.81.5 sha512-a2TDA03Up8lpSa9sh5VRGCQDXgCTOyDOFH+aqyinxp1HChG8uk89/G+nkJ9FPd0rqgi25eCTR16TWdS3b+fA6g== node_modules/@react-native/codegen
+LOCK_SAME 0.86.3 sha512-TQmeofQ0PcuylhhlleOeuzHYZfbrgm3gayXzowqUEzgRisTm1D40/J3ggqs7XkQi5HP5ZA3n8dHmKL9vIzPcsw== node_modules/@react-native/debugger-frontend
+LOCK_SAME 0.86.3 sha512-O4ds+J7xZfxkbih9T+cAGegBdvKSPKYJm/lDgC9CpEjFMkmzWTpVLU3Qsv9sqZuo58z+sGhIcJfPsCFFWHpqbQ== node_modules/@react-native/debugger-shell
+LOCK_SAME 0.86.3 sha512-LiEPTqTg/63bYUnrPyHLfjTDCNhA/+CUqI1+DsA9tYyewtSbULd5awsva6SgE10I+2iMhgKXS3ymkhU/kSCrGA== node_modules/@react-native/dev-middleware
+LOCK_SAME 0.86.3 sha512-lxmx0GqLEWRIpZfpYFXlYVIs3ENQwaW6Vmp6oi29l2GoQJ1wZfFZRdMimDWlGEk8LKfHar3QH3iaPMkTcK9lEQ== node_modules/@react-native/gradle-plugin
+LOCK_SAME 0.86.3 sha512-eYIJ0es967+tePBFQDnl/gidVFxLns3fnbiK6rxscQrGodvuUO6hwxpQnfNynJ8MjbbndImXihXjcnJdc7SzJg== node_modules/@react-native/js-polyfills
+LOCK_SAME 0.86.3 sha512-0nlwVkG0uT9o72nrGTKUz/IqDnCkM4zE0ihe4r+OJcxH93yBdDm58AXJ3EXZeSjv3osHEFXU7ceajdZiS34mTw== node_modules/@react-native/metro-babel-transformer
+LOCK_SAME 0.86.3 sha512-O6Xza4JBGPIU8J7YbKTyBoYL4thpy8jMW/oaLDWdAyOwYHKIjK47pAL5HUEbOe2bWz2PEKjbYRF2ApkJv1ottQ== node_modules/@react-native/metro-babel-transformer/node_modules/@react-native/babel-plugin-codegen
+LOCK_SAME 0.86.3 sha512-/eqs/Hy9RZRcjdcs4wj3Cqmxvtb3NM5g+Uuh1RIvsjynMO8PRsrVWWLWgBcZL/jYUo+ogXd2NFB0W8L5Bg89xw== node_modules/@react-native/metro-babel-transformer/node_modules/@react-native/babel-preset
+LOCK_SAME 0.86.3 sha512-Ux4jHi0fh+bdtVEcL0gaPLbY56V+SvFUDl/8sRAE1jdb4k+o7fT/4Nc29yz4X+qfjstkSqObQTMBGhdzxH9JvA== node_modules/@react-native/metro-babel-transformer/node_modules/@react-native/codegen
+LOCK_SAME 0.36.0 sha512-LhD0xdoedDw7ansQgXbB2DADLZIK/LRXuWNBPuVzMc5S2WK5GyT89tCM+cQzxFGO0mGyLK6D5TrVOJJzAoDy8Q== node_modules/@react-native/metro-babel-transformer/node_modules/babel-plugin-syntax-hermes-parser
+LOCK_SAME 0.36.0 sha512-A1+8zn5oss2CFP7pKsOaxorQG6FNIz1WU1VDqruLPPZl3LVgeE2C5xfFg8Ow6/Ow4mSslLLtYP1J3n38eKyW9w== node_modules/@react-native/metro-babel-transformer/node_modules/hermes-estree
+LOCK_SAME 0.36.0 sha512-GdpwMmH5x6IpC1cijvcvYnlPB60Mh6kTSF/NFdYV/j56gYdi+0RIakYs+eqOV+bbO0SW7mgVVGSsTJxyPQfo3w== node_modules/@react-native/metro-babel-transformer/node_modules/hermes-parser
+LOCK_SAME 0.86.3 sha512-qdzDMepV2xdUhsO4XC7idnnbt8K6+Hd59AjeK9y4KS86fxSQq5oL0TAbqUuajDGR7beNQoYTuS6AowN/zP0oaQ== node_modules/@react-native/metro-config
+LOCK_SAME 0.86.3 sha512-Cv3CDkprb67GrzuaS9BGbBJC/6G4lIw3nyKOHRKTqTTum4bn37y5+R0Z04L8mcbQN85eEohNrRwb7IOM4j6uvg== node_modules/@react-native/normalize-colors
+LOCK_SAME 0.86.3 sha512-1j44NEyNn05Ut40vHAmoSWbsIcybFkMAOBTwQt1PrESyfSS+qBoyU1LGIogNva0VIa0rQyEC5PzbA7R4/7Nhyw== node_modules/@react-native/virtualized-lists
+LOCK_SAME 0.21.2 sha512-SPD0J6qjJn8231i0HZhlAGH6NORe+QvRSQM2mwQEzJ2Fb3E4ruWTiiicPlHjmeWShDXLcvoorOCXjeR7k/lyWA== node_modules/babel-plugin-react-native-web
+LOCK_SAME 0.29.1 sha512-2WFYnoWGdmih1I1J5eIqxATOeycOqRwYxAQBu3cUu/rhwInwHUg7k60AFNbuGjSDL8tje5GDrAnxzRLcu2pYcA== node_modules/babel-plugin-syntax-hermes-parser
+LOCK_SAME 54.0.10 sha512-wTt7POavLFypLcPW/uC5v8y+mtQKDJiyGLzYCjqr9tx0Qc3vCXcDKk1iCFIj/++Iy5CWhhTflEa7VvVPNWeCfw== node_modules/babel-preset-expo
+LOCK_SAME 57.0.30 sha512-dpNWbsqiAHkgInOBClv5PxKCSMAly1n0oBVoIjS/yv8LQtRgDqSkWAnJq16cExndKrgONxdItY+O3J8u6MNYlw== node_modules/expo
+LOCK_SAME 57.0.20 sha512-xm1p3Squ/dCzipISO1TE5+kDsIFEUc6DxEtRe2rRgPMDLPi6AumLlrNorFxetiP6zrvxK23xzVlNng/g7o/+aA== node_modules/expo-asset
+LOCK_SAME 0.11.6 sha512-rmMpn7QGp6pUGRCQ3vvB9RP/vqq2q/PpToRh4dL/FbhSZOLZ1YTotpuLHf71FGOEfgKil/4PCd3hkWe/CCeiEg== node_modules/expo-asset/node_modules/@expo/image-utils
+LOCK_SAME 1.8.0 sha512-eb9xxd/LbuEGSdua4NumCu/McVB9EM+F/JxB9pWgnERw4HQ9XyTNH1KapG6oqLWR8TuRK2LQfzJlmNi94CVobw== node_modules/expo-asset/node_modules/@expo/spawn-async
+LOCK_SAME 57.0.2 sha512-VB4Au8X/RbvJKUtJk+87vdtveWSNEa5RzY3ooeO6VNF7Rd49RbQXZOu3/TfEW9p7mU8TCfyTvjyCiAUwSoSJ4w== node_modules/expo-clipboard
+LOCK_SAME 57.0.22 sha512-+mBjnzMWMKIrQa7BP7LTDRC0W7cI+q12/sZns4HzVQJGzgGoAdRJSTEKiObxIw/3EswKXlESkRob8upiL95Q4A== node_modules/expo-constants
+LOCK_SAME 2.4.3 sha512-M1NXeZCA1mkMkYOyIe7PlyRX0/jqFtMoJgyblnlq/vpCRfmueFT7RnGSQG8uEFDF5WHOFGijAQ3fogPh3/n5Ng== node_modules/expo-constants/node_modules/@expo/env
+LOCK_SAME 57.0.7 sha512-1vkZRadOsIputFDBcclqBa1pO3iXOO6iIsdqJipQWw4V5TSnWgmRTuOF7ro8IzrVue+PHbum++KCG3Tawem4cg== node_modules/expo-file-system
+LOCK_SAME 57.0.4 sha512-7WOMC2oA6xCfOm8bbofqWn2bIqyWFm7YLEnpc/gA1MJH0Ll0TfT/3+CqRkoW2eNRWMS8sxrz5WukUmSvmNquHA== node_modules/expo-font
+LOCK_SAME 57.0.4 sha512-/AG2Kljbqfgxu+GchI2YFIbxiF9cPsIpCy4iNDzlRiZk9rvR6BwRfB6gfQVu3V2ExaoGf2h5IsEnqVI5MYNBAg== node_modules/expo-glass-effect
+LOCK_SAME 1.1.2 sha512-VJRecrYlklVXEwafLyuZKUCnYEY9vJYvUy639LN3c5krlmunkYQphh/YzXDng8C9oihz6mr+cPbwEn6sv6fXyw== node_modules/expo-gradle-jvmargs
+LOCK_SAME 57.0.2 sha512-GqgH746wtJImmsbyHmCQoi7cOslKuWQBbJHXr53S35Bpf5UvxCAztvnitUEd7D0QvFN2rvkOhylbZpgZZfBLlQ== node_modules/expo-keep-awake
+LOCK_SAME 57.0.13 sha512-1cjN7Ely0FZqlZItfPYjl6jjrCFLRevrIE/H5XhA6tgDm9uhTaSyJQXyftgt2FvJZ7liheDft7WMnPB9Uktx+A== node_modules/expo-linking
+LOCK_SAME 57.0.16 sha512-OJh6rMMIIZ/dfwOk2FufJjjsUSw5Boy1Y5Tl+zbBmua/FcD03eEg097dkYIf3iBHVkQ6q9eR08qT88qxvnelow== node_modules/expo-modules-autolinking
+LOCK_SAME 1.8.0 sha512-eb9xxd/LbuEGSdua4NumCu/McVB9EM+F/JxB9pWgnERw4HQ9XyTNH1KapG6oqLWR8TuRK2LQfzJlmNi94CVobw== node_modules/expo-modules-autolinking/node_modules/@expo/spawn-async
+LOCK_SAME 57.0.23 sha512-vZQoSlhqU6me5K4KCl42yXB0x3zqAiG2FAjzHmbuez77CslJJQ+82cmJoHC3tN5X8o/KxRArJejKNQIeciyoXA== node_modules/expo-modules-core
+LOCK_SAME 57.1.2 sha512-DYhBwO0fqcKIUma4jF16zRDP/m6ZbawEZbo4eX3gdekREIFqrrz8HKWXydgNUqOyOQcUkdrkZatxi2I9+V6E8g== node_modules/expo-modules-jsi
+LOCK_SAME 0.20.0 sha512-Ekgb5c9LQPM9CPnmDZdeWcOa1eBbCDUGrgdN5lIFNH2GWDUf9doeAOK7IqQOOVviamy37eIp5FW+N1zyrIwzoA== node_modules/expo-modules-macros
+LOCK_SAME 57.0.28 sha512-KrW7dGtZ1A9ocpt/Gq1RKczfoAkJ+2LrxweVcEq/FZcJ+eFsaKC9f60ER3uzWJ9n9mb+dbeSPewYOMzG6KMK2Q== node_modules/expo-router
+LOCK_SAME 57.0.3 sha512-aK+LdKzauHSGmsOStZtyxdzv0zWssCkxTw3m4QuOhfDSJsZaMRTd9O41d8ixU/QfELTbaJ0oRNcF7JFV/7O9YQ== node_modules/expo-server
+LOCK_SAME 57.0.3 sha512-uuK5yHLVR7kExUCrO/ItBvp/kp1maQ9Nkb6KvNy5ZUQnN0NMKwuhJ4GvbfS9N3ACmvCjTT4gKvg4yH5UuKIYNA== node_modules/expo-symbols
+LOCK_SAME 57.0.10 sha512-YpexTqLWEXdbbXgHh7Zhpq+qA5diuvO46lb7TiY81JwqKLAl9zK31APY1D7jUFlDX56owje5RtK0o5bMmGIMUg== node_modules/expo/node_modules/@expo/config
+LOCK_SAME 57.0.10 sha512-XFcj01blofSohoOxibrPsrsFPt2gAigrcWE3s6Vg+rSHvP9QVEfnyfmJNVsuIVT0EjY/1rZVJ4SajNDR5cJjpA== node_modules/expo/node_modules/@expo/config-plugins
+LOCK_SAME 11.0.1 sha512-zxHWj4MKKMAL29ZQSY/Fssx4Thluk40JmuGNaeS078wy/NhlFhnVi+rHHunulE3xJAJ0CM73m8VK2+GkF9eRwQ== node_modules/expo/node_modules/@expo/config-plugins/node_modules/@expo/json-file
+LOCK_SAME 57.0.2 sha512-ewW08OonrcRIsRKIlFvvcmmafE5zemb1ocu3HkNwtVPyRtj2w42pZCAkMIROYpcVBaPnc3mDT9UZDzwXWC3i6g== node_modules/expo/node_modules/@expo/config-types
+LOCK_SAME 11.2.1 sha512-UPhKoFCj8BcwgLB1rKQ1CuR/REITnZLiqxHEHOeH1tPsdXcHGtUDh0P5bLbr7oU0nKVdtJ5rzyKx8jniMQdESQ== node_modules/expo/node_modules/@expo/json-file
+LOCK_SAME 0.8.1 sha512-3gTReGIUm0oRaMClsAJYxBnVPCl6fVpsl8HS+DTVxDhW4GyVyxg9E/Znm3BvcHtUJ51RJJI14pC1wvrNilCRHw== node_modules/expo/node_modules/@expo/plist
+LOCK_SAME 0.86.3 sha512-O6Xza4JBGPIU8J7YbKTyBoYL4thpy8jMW/oaLDWdAyOwYHKIjK47pAL5HUEbOe2bWz2PEKjbYRF2ApkJv1ottQ== node_modules/expo/node_modules/@react-native/babel-plugin-codegen
+LOCK_SAME 0.86.3 sha512-Ux4jHi0fh+bdtVEcL0gaPLbY56V+SvFUDl/8sRAE1jdb4k+o7fT/4Nc29yz4X+qfjstkSqObQTMBGhdzxH9JvA== node_modules/expo/node_modules/@react-native/codegen
+LOCK_SAME 0.36.1 sha512-ycduwJbvdvIMmVvlAZqGggS+pm5Eu4Bk9pcV9Sm2Z4PJNRVsKkv0g7vHj+LeuC1gHTeF67sJXFOq61IlqCa2hA== node_modules/expo/node_modules/babel-plugin-syntax-hermes-parser
+LOCK_SAME 0.36.1 sha512-guv1nQ6IJ7S83NRFPWc3SA7IBZrdNC9kapwOq6uXvF4wP+sDCgjzQbKPCoyYmoyZRzztF/n/c36l/rccCZSiCw== node_modules/expo/node_modules/babel-plugin-syntax-hermes-parser/node_modules/hermes-estree
+LOCK_SAME 0.36.1 sha512-GApNk4zLHi2UWoWZZkx7LNCOSzLSc5lB55pZ/PhK7ycFeg7u5LcF88p/WbpIi1XUDtE0MpHE3uRR3u3KB7TjSQ== node_modules/expo/node_modules/babel-plugin-syntax-hermes-parser/node_modules/hermes-parser
+LOCK_SAME 57.0.16 sha512-hGsVNbgxYchVyvBiFAVf+uHVMVIGObiWzAsnv8GsM/ZZRnrhGJLD8x/BLtNNycEYSIb23wPPlSqTGiw0iwwJvQ== node_modules/expo/node_modules/babel-preset-expo
+LOCK_SAME 0.36.0 sha512-A1+8zn5oss2CFP7pKsOaxorQG6FNIz1WU1VDqruLPPZl3LVgeE2C5xfFg8Ow6/Ow4mSslLLtYP1J3n38eKyW9w== node_modules/expo/node_modules/hermes-estree
+LOCK_SAME 0.36.0 sha512-GdpwMmH5x6IpC1cijvcvYnlPB60Mh6kTSF/NFdYV/j56gYdi+0RIakYs+eqOV+bbO0SW7mgVVGSsTJxyPQfo3w== node_modules/expo/node_modules/hermes-parser
+LOCK_SAME 3.1.3 sha512-ZgEeZXj30q+I0EN+CbSSpIyPaJ5HVQD18Z1m+u1FXbAeT94mr1zw50q4q6jiiC447Nl/YTcIYSAftiGqetwXCA== node_modules/exponential-backoff
+LOCK_SAME 250829098.0.17 sha512-qG1PXzTEtriF6oQLZF3vyHhSMxOdW5h2TqqLri0rdpstPustd2fSvRZQMVAPdlhgFwBfYnj3OUZtiO6LjYsEFw== node_modules/hermes-compiler
+LOCK_SAME 0.29.1 sha512-jl+x31n4/w+wEqm0I2r4CMimukLbLQEYpisys5oCre611CI5fc9TxhqkBBCJ1edDG4Kza0f7CgNz8xVMLZQOmQ== node_modules/hermes-estree
+LOCK_SAME 0.29.1 sha512-xBHWmUtRC5e/UL0tI7Ivt2riA/YBq9+SiYFU7C1oBa/j2jYGlIF9043oak1F47ihuDIxQ5nbsKueYJDRY02UgA== node_modules/hermes-parser
+LOCK_SAME 0.35.0 sha512-xVx5Opwy8Oo1I5yGpVRhCvWL/iV3M+ylksSKVNlxxD90cpDpR/AR1jLYqK8HWihm065a6UI3HeyAmYzwS8NOOg== node_modules/metro-babel-transformer/node_modules/hermes-estree
+LOCK_SAME 0.35.0 sha512-9JLjeHxBx8T4CAsydZR49PNZUaix+WpQJwu9p2010lu+7Kwl6D/7wYFFJxoz+aXkaaClp9Zfg6W6/zVlSJORaA== node_modules/metro-babel-transformer/node_modules/hermes-parser
+LOCK_SAME 0.35.0 sha512-xVx5Opwy8Oo1I5yGpVRhCvWL/iV3M+ylksSKVNlxxD90cpDpR/AR1jLYqK8HWihm065a6UI3HeyAmYzwS8NOOg== node_modules/metro-config/node_modules/hermes-estree
+LOCK_SAME 0.35.0 sha512-9JLjeHxBx8T4CAsydZR49PNZUaix+WpQJwu9p2010lu+7Kwl6D/7wYFFJxoz+aXkaaClp9Zfg6W6/zVlSJORaA== node_modules/metro-config/node_modules/hermes-parser
+LOCK_SAME 0.35.0 sha512-xVx5Opwy8Oo1I5yGpVRhCvWL/iV3M+ylksSKVNlxxD90cpDpR/AR1jLYqK8HWihm065a6UI3HeyAmYzwS8NOOg== node_modules/metro/node_modules/hermes-estree
+LOCK_SAME 0.35.0 sha512-9JLjeHxBx8T4CAsydZR49PNZUaix+WpQJwu9p2010lu+7Kwl6D/7wYFFJxoz+aXkaaClp9Zfg6W6/zVlSJORaA== node_modules/metro/node_modules/hermes-parser
+LOCK_SAME 1.6.0 sha512-pyFS63ptit/P5WqUkt+UUfe+4oevH+bFeIiPPdfb0pFeYEu/1ELnJu5l+5EcTKYL5M7zaAa7S8ddywgXypqKCw== node_modules/node-exports-info
+LOCK_SAME 0.86.3 sha512-JR5s3bM9ezud+Mw24GlNXNfthqPIKwrQgPPJcam+L97t2sKjjEavhCzBn+fyqZZRcM5+XlhYxpTxVkK7e1n38Q== node_modules/react-native
+LOCK_SAME 4.0.3 sha512-2F4x5BFieWdGq9SetD2nSAR7s7oQCSgNllYgERRXXtNfSOuAGAVbDb/3H3lP0y5f7rEyNwabKorZAD/SyyNbDw== node_modules/react-native-draggable-flatlist
+LOCK_SAME 4.2.12 sha512-qYmntEctkMSodN7pnC2llV21nswImLFPHJeT3PJXSJqZdU4jzDATR8iVi66sXkrtoOLJ2+EvXxgd7sMMpV4ViA== node_modules/react-native-drawer-layout
+LOCK_SAME 1.8.1 sha512-bhvsKqeX9PGkY9wBUk9vni/tJNJdKtLPbs/j3e/3CdV4JmUWfTXYYoL+4Hc8Wmej+5eJxkc8KOFa454ruFWBCA== node_modules/react-native-edge-to-edge
+LOCK_SAME 2.32.0 sha512-uYIMOKlKENORq2SABE+jIjbPU+h5I/sQKcq2v16zRq848nwEp1fWRVwML4QWqijc8UcXJC25o54S8GQd4Mf2OA== node_modules/react-native-gesture-handler
+LOCK_SAME 1.3.1 sha512-NIXU/iT5+ORyCc7p0z2nnlkouYKX425vuU1OEm6bMMtWWR9yvb+Xg5AZmImTKoF9abxCPqrKC3rOZsKzUYgYZA== node_modules/react-native-is-edge-to-edge
+LOCK_SAME 0.35.5 sha512-aa03UzC5dLg5qFfyBkVK+JGSwHTjmK7jUZzyRz11r1Yk9C/nJTFe59EeHPxxNNTagkiwQTM6p3sySgD/TDRC7Q== node_modules/react-native-nitro-modules
+LOCK_SAME 4.5.1 sha512-RnMvtDuR+68ig864gAvZCOdZehqhC5rFmMo0kn+ARfgVSTvFeF6IFLBVgMPUu0KwihaapEyW24WRi6nEyy1kSA== node_modules/react-native-reanimated
+LOCK_SAME 5.7.0 sha512-/9/MtQz8ODphjsLdZ+GZAIcC/RtoqW9EeShf7Uvnfgm/pzYrJ75y3PV/J1wuAV1T5Dye5ygq4EAW20RoBq0ABQ== node_modules/react-native-safe-area-context
+LOCK_SAME 4.30.0 sha512-FrZG/Q5gqoDu0SgP4d2Ly0qdio5DR1KdGPEYImhkz7tmrhpML4C39m6RYLGd5TVLHZwcCh8NPvW9rylevjD0uQ== node_modules/react-native-screens
+LOCK_SAME 147.1.0 sha512-pWA0M0G74AhjEop0HLCkjWJMup2HJxOmuUjfPt6kSDhYeWKVx8AEzWh0Fh19ah78zE/s4hD0Of0Tyem5shhiTg== node_modules/react-native-skia-android
+LOCK_SAME 147.1.0 sha512-cr4rWe4Bf0H0TTutUp5cgHt5/Felttl1bh4BAAAsgAeL2F10FAK9urX8spjUshzMwjqXD7rNOWuFzU6ZcNlGKw== node_modules/react-native-skia-apple-ios
+LOCK_SAME 147.1.0 sha512-Qbv0Y7LgawtRKuGk8gnGeh8nDWwNiu03LcX0mVaQzBBbxFDYvqejanA+AkO3p8gsQb+fsXRc9DAk+U8cBnzZvA== node_modules/react-native-skia-apple-macos
+LOCK_SAME 147.1.0 sha512-b+4vILXHPu++t8H41PHLBVsTab2LPqwXNdzgdScyl4+Cu8Ta34aUQW3T469cB0ogAMPdu//KV00w4YVpDZoRUQ== node_modules/react-native-skia-apple-tvos
+LOCK_SAME 3.2.4 sha512-S0aXJKZ6zYUViKMol+3on707AWD71fnAM7kmcHjk3FALy5QJicCCzxuluR0IptFQYNUP2dRqnnhgoS1X/U6Jpw== node_modules/react-native-unistyles
+LOCK_SAME 0.21.2 sha512-SO2t9/17zM4iEnFvlu2DA9jqNbzNhoUP+AItkoCOyFmDMOhUnBBznBDCYN92fGdfAkfQlWzPoez6+zLxFNsZEg== node_modules/react-native-web
+LOCK_SAME 0.74.89 sha512-qoMMXddVKVhZ8PA1AbUCk83trpd6N+1nF2A6k1i6LsQObyS92fELuk8kU/lQs6M7BsMHwqyLCpQJ1uFgNvIQXg== node_modules/react-native-web/node_modules/@react-native/normalize-colors
+LOCK_SAME 13.16.1 sha512-If0eHhoEdOYDcHsX+xBFwHMbWBGK1BvGDQDQdVkwtSIXiq1uiqjkpWVP2uQ1as94J0CzvFE9PUNDuhiX0Z6ubw== node_modules/react-native-webview
+LOCK_SAME 0.10.1 sha512-62mRM19bDpfpdI8HLkEErcdOsrAPDtE9lA/sw+5lLRpzBHNhxaoj9QyY2KjXqUmirelxkX4zuPGTC3VdA0feJA== node_modules/react-native-worklets
+LOCK_SAME 0.86.3 sha512-Ux4jHi0fh+bdtVEcL0gaPLbY56V+SvFUDl/8sRAE1jdb4k+o7fT/4Nc29yz4X+qfjstkSqObQTMBGhdzxH9JvA== node_modules/react-native/node_modules/@react-native/codegen
+LOCK_SAME 0.86.3 sha512-qSDL9LQc5mZSZPNczT95WU9YQuPzxBklgON9vLhhqfI0yWIwKInqFx88dQ/uiEXBtf0yossthaQIqA4Ml6bF6g== node_modules/react-native/node_modules/@react-native/community-cli-plugin
+LOCK_SAME 0.36.0 sha512-LhD0xdoedDw7ansQgXbB2DADLZIK/LRXuWNBPuVzMc5S2WK5GyT89tCM+cQzxFGO0mGyLK6D5TrVOJJzAoDy8Q== node_modules/react-native/node_modules/babel-plugin-syntax-hermes-parser
+LOCK_SAME 0.36.0 sha512-A1+8zn5oss2CFP7pKsOaxorQG6FNIz1WU1VDqruLPPZl3LVgeE2C5xfFg8Ow6/Ow4mSslLLtYP1J3n38eKyW9w== node_modules/react-native/node_modules/hermes-estree
+LOCK_SAME 0.36.0 sha512-GdpwMmH5x6IpC1cijvcvYnlPB60Mh6kTSF/NFdYV/j56gYdi+0RIakYs+eqOV+bbO0SW7mgVVGSsTJxyPQfo3w== node_modules/react-native/node_modules/hermes-parser
+LOCK_SAME 5.3.1 sha512-qdPgvUNWb40gWktBJnbJRelWcPzkLed/ShhnRsjbayXz8OtdPOzbil9jtiZdrYvSDumAz/VNQr6JaNfPx/gvPA== node_modules/svgson
+LOCK_SAME 57.0.10 sha512-XFcj01blofSohoOxibrPsrsFPt2gAigrcWE3s6Vg+rSHvP9QVEfnyfmJNVsuIVT0EjY/1rZVJ4SajNDR5cJjpA== packages/app/node_modules/@expo/config-plugins
+LOCK_SAME 11.0.1 sha512-zxHWj4MKKMAL29ZQSY/Fssx4Thluk40JmuGNaeS078wy/NhlFhnVi+rHHunulE3xJAJ0CM73m8VK2+GkF9eRwQ== packages/app/node_modules/@expo/config-plugins/node_modules/@expo/json-file
+LOCK_SAME 57.0.2 sha512-ewW08OonrcRIsRKIlFvvcmmafE5zemb1ocu3HkNwtVPyRtj2w42pZCAkMIROYpcVBaPnc3mDT9UZDzwXWC3i6g== packages/app/node_modules/@expo/config-types
+LOCK_SAME 0.11.6 sha512-rmMpn7QGp6pUGRCQ3vvB9RP/vqq2q/PpToRh4dL/FbhSZOLZ1YTotpuLHf71FGOEfgKil/4PCd3hkWe/CCeiEg== packages/app/node_modules/@expo/image-utils
+LOCK_SAME 0.8.1 sha512-3gTReGIUm0oRaMClsAJYxBnVPCl6fVpsl8HS+DTVxDhW4GyVyxg9E/Znm3BvcHtUJ51RJJI14pC1wvrNilCRHw== packages/app/node_modules/@expo/plist
+LOCK_SAME 1.8.0 sha512-eb9xxd/LbuEGSdua4NumCu/McVB9EM+F/JxB9pWgnERw4HQ9XyTNH1KapG6oqLWR8TuRK2LQfzJlmNi94CVobw== packages/app/node_modules/@expo/spawn-async
+LOCK_SAME 0.86.3 sha512-O6Xza4JBGPIU8J7YbKTyBoYL4thpy8jMW/oaLDWdAyOwYHKIjK47pAL5HUEbOe2bWz2PEKjbYRF2ApkJv1ottQ== packages/app/node_modules/@react-native/babel-plugin-codegen
+LOCK_SAME 0.86.3 sha512-Ux4jHi0fh+bdtVEcL0gaPLbY56V+SvFUDl/8sRAE1jdb4k+o7fT/4Nc29yz4X+qfjstkSqObQTMBGhdzxH9JvA== packages/app/node_modules/@react-native/codegen
+LOCK_SAME 2.6.2 sha512-NzZ3+MRedZAUhguWw9DTCpWFd09Bq+tdGWhimGfJLGckuyoWGyimTiNTmaO2DeeivHTnGdv+eXbw7j/AV3LkRQ== packages/app/node_modules/@shopify/react-native-skia
+LOCK_SAME 0.36.1 sha512-ycduwJbvdvIMmVvlAZqGggS+pm5Eu4Bk9pcV9Sm2Z4PJNRVsKkv0g7vHj+LeuC1gHTeF67sJXFOq61IlqCa2hA== packages/app/node_modules/babel-plugin-syntax-hermes-parser
+LOCK_SAME 0.36.1 sha512-guv1nQ6IJ7S83NRFPWc3SA7IBZrdNC9kapwOq6uXvF4wP+sDCgjzQbKPCoyYmoyZRzztF/n/c36l/rccCZSiCw== packages/app/node_modules/babel-plugin-syntax-hermes-parser/node_modules/hermes-estree
+LOCK_SAME 0.36.1 sha512-GApNk4zLHi2UWoWZZkx7LNCOSzLSc5lB55pZ/PhK7ycFeg7u5LcF88p/WbpIi1XUDtE0MpHE3uRR3u3KB7TjSQ== packages/app/node_modules/babel-plugin-syntax-hermes-parser/node_modules/hermes-parser
+LOCK_SAME 57.0.16 sha512-hGsVNbgxYchVyvBiFAVf+uHVMVIGObiWzAsnv8GsM/ZZRnrhGJLD8x/BLtNNycEYSIb23wPPlSqTGiw0iwwJvQ== packages/app/node_modules/babel-preset-expo
+LOCK_SAME 57.0.2 sha512-dOWkx+MWclLVnYpPPBzas4sfnPaAjk+fe/dbvJSzbWtHUR4fGGaTT/lTcOpxqhwRIlTKKBUYGKude0tcTBsZHg== packages/app/node_modules/eslint-config-expo
+LOCK_SAME 0.25.1 sha512-0wUoCcLp+5Ev5pDW2OriHC2MJCbwLwuRx+gAqMTOkGKJJiBCLjtrvy4PWUGn6MIVefecRpzoOZ/UV6iGdOr+Cw== packages/app/node_modules/eslint-config-expo/node_modules/hermes-estree
+LOCK_SAME 0.25.1 sha512-6pEjquH3rqaI6cYAXYPcz9MS4rY6R4ngRgrgfDshRptUZIc3lw0MCIJIGDj9++mfySOuPTHB4nrSW99BCvOPIA== packages/app/node_modules/eslint-config-expo/node_modules/hermes-parser
+LOCK_SAME 1.2.1 sha512-6eIogfGM7tIq169MbqJTA0iaI9h/VGujSUAy85hA3OHvYecEYM8XE9fMLd7ywnQClnVkT3JgbW8NWyhEP8g5yw== packages/app/node_modules/eslint-plugin-expo
+LOCK_SAME 57.0.3 sha512-t/CxeLio0NjY9/cOak1tQp62/hAUjzJxmhR4rVUR7K5bb9YoEtfl1ZekTn+Iuh+dYOMYzF0l72ODMSmY3CR1NA== packages/app/node_modules/expo-application
+LOCK_SAME 57.0.5 sha512-39fX5JC5zDvELB4/eDJPj2XAYRN0W9+K2DfDWm5N3aC5WZ7HRrhupWtT6hbH09NlfYpsRSqYOwEZnocFM42ynQ== packages/app/node_modules/expo-audio
+LOCK_SAME 57.0.22 sha512-A5oRf2I02XDRu2NnqKo7Au5kUu244unvyoRMUsB+xvg/BOlsR+G/oyDFGkjbda1cJbeKm9eqposIXbA2ri5UrQ== packages/app/node_modules/expo-build-properties
+LOCK_SAME 57.0.6 sha512-eswB77bOzQ2OEvll/hV5VnzywaICFnYF21HIwcyokebFcSTSMfGQk8+VW06DRec9JnWuRExs0QXlfxyMPjS6KQ== packages/app/node_modules/expo-camera
+LOCK_SAME 57.0.4 sha512-LqMMs/N6wvwZyw4deVmcl3AgXgqMwCVQ9WyWf2eaWyrk99TXSKk5da3QspiLOOjnn5Qv9f8C50cDNuoyLThpdw== packages/app/node_modules/expo-crypto
+LOCK_SAME 57.0.20 sha512-ko5FzWsUPuG4aiQfmqxQA5yAdmal6SSICB70KJLChQYzWo+XDoTpXRgEpzQSr1Ku8KyKW0lkEa48xbnKSgd1xQ== packages/app/node_modules/expo-dev-client
+LOCK_SAME 57.0.21 sha512-dXa1bhCEtSXn4y34rydBvArmoZtcLK7zY0FN3x1JFPTGh81OXUGZWhyzLCAI9nhI23L/MTy7cGCeNyeJmC1ITw== packages/app/node_modules/expo-dev-launcher
+LOCK_SAME 57.0.20 sha512-xpf7Rkj++sBA285GqWVJTtl5j/TychD980GKqWA5lVFKM41+xUNmyPMOfO18heAKvX9i620ZHVoHiBGD+6pCdA== packages/app/node_modules/expo-dev-menu
+LOCK_SAME 57.0.0 sha512-F47VdzOHYc19FhI/jBgctpO8a5UskTIxG6a1E5t3W5gF8VImuvBQffdXXfLHhsuCl7dS3v3U0R45cleeVXO1Zg== packages/app/node_modules/expo-dev-menu-interface
+LOCK_SAME 57.0.3 sha512-XlxdZ0zzv44JRD8O15DISgIO8FTaZ581oc4kQp6MJoR7vdahjcY+2qCuDt5k1J8/lc0YR+bXon/v81norciuxw== packages/app/node_modules/expo-document-picker
+LOCK_SAME 57.0.3 sha512-qucUXtwtJdtECKSQK5D6TQBc/0SxKj7s5wQ4mrfSxhZsHrS9a4rcxINl/gbruMaY9spTXStco32ST4pV0vXmxw== packages/app/node_modules/expo-haptics
+LOCK_SAME 57.0.5 sha512-jOm5lofaIKXhQ7i0Hz3I5JuNULw/aghmpIPZXddwQcEtw8+wUhlozq3M7LbsOrcsBEapcG4jFs85DsfuFoz1tQ== packages/app/node_modules/expo-image
+LOCK_SAME 57.0.1 sha512-uhrZKLT/cTl2mXyR28kPpVkS5O+PK9N1QA/07IFM4f5T4g0lTW1JHT3NEWwEEsGFldPmVX4j7LwUVVZxE+woug== packages/app/node_modules/expo-image-loader
+LOCK_SAME 57.0.21 sha512-NZeNvZxBNf/PK97Df5zORmtqRR/LovkA+lHdRLm1IJFiVKjs4xr+Ib6/jWhDxn04VOX3TJswCQyu4SCxkgMe4Q== packages/app/node_modules/expo-image-manipulator
+LOCK_SAME 57.0.20 sha512-plgcGuMZMWqDchjXQW6S/WepYLB5KqfbZOzwC6xe0+j5IhY4ipvVuRZcXeP/0NgKgU0Jiu/XoTK4Bi8crtZ+sQ== packages/app/node_modules/expo-image-picker
+LOCK_SAME 57.0.2 sha512-9kYZECLKE3pYZQs+kt3+ggY83Lfryog9/UEo3HJKGcHUZeKKtlFBIPFjI4LzREubsvjP7AsvG0FdEX9EquIoAQ== packages/app/node_modules/expo-json-utils
+LOCK_SAME 57.0.2 sha512-sIKYH3Ivddoge568WY6j+Kp2MAAZzWWqEnY2bokLkJFwX366tGL1mEnoY2WUi/qHatFFPop2yqDdurzbhnnimQ== packages/app/node_modules/expo-localization
+LOCK_SAME 57.0.2 sha512-pPIIcKR73OShwlWMg8H90WRzKUd2krDdKlKAwuQV1FtUwE7H3hQEFw0ePFQY9yFoGMF/77ryYwNKfI5umMcCog== packages/app/node_modules/expo-manifests
+LOCK_SAME 57.0.23 sha512-KdHROY5tvbzlDJImJKF91F8GRpV4hP+RLPC7NJgiFNyzb0clETpV0hJNdbFrfyubZf+cqx88+WuwFsH9Yl+kzg== packages/app/node_modules/expo-notifications
+LOCK_SAME 57.0.23 sha512-fN+jrqoWwOpIo+X4utiu/ayCWym23DMgvrTJUHoopkBeO6rEa79ZY4f6ApOlRxvEx2NgQgJEQX+cbPJrjOSRog== packages/app/node_modules/expo-sharing
+LOCK_SAME 57.0.10 sha512-W7++tMiyVMviWPTvaTXKpcOwwu5SbriwA2n0ewEhC+ic1LFaUNTUXiIXr95MVMSHaLRgtIG9dGyCTCb+NkekkA== packages/app/node_modules/expo-splash-screen
+LOCK_SAME 57.0.4 sha512-3N/bnDx4+kWEC9GABxKPLe/6RHTZJR/7DNT5tz/cYi8f7emign3ooavXnJn0+JPBA0JhHmsdDPrmC+CtT86Jzg== packages/app/node_modules/expo-sqlite
+LOCK_SAME 57.0.4 sha512-z//rxQJzhTNA1PcKrUtWmrd21jAS3nEDu1b0n8B/7LTTR933OcsZYP1HnbaZifuo2ZH/h7nce2Ow61WZ1Ig2bg== packages/app/node_modules/expo-system-ui
+LOCK_SAME 57.0.2 sha512-x3SA5toiHZEkW+5oeNdUM1Rvt6M3ExegQsSwS3Z1+S9gn9utGYTGBkb8MBQivhjIZiRlQYDIhauxA8kySQEWtQ== packages/app/node_modules/expo-updates-interface
+LOCK_SAME 0.36.0 sha512-A1+8zn5oss2CFP7pKsOaxorQG6FNIz1WU1VDqruLPPZl3LVgeE2C5xfFg8Ow6/Ow4mSslLLtYP1J3n38eKyW9w== packages/app/node_modules/hermes-estree
+LOCK_SAME 0.36.0 sha512-GdpwMmH5x6IpC1cijvcvYnlPB60Mh6kTSF/NFdYV/j56gYdi+0RIakYs+eqOV+bbO0SW7mgVVGSsTJxyPQfo3w== packages/app/node_modules/hermes-parser
+LOCK_SAME 1.50.0 sha512-uMtIW3I6jfHbUp2FnUwxbDJc7XFJDz2g5YVcw6T/De8Sp9f21vTO7HlJNhxpBynDYlqLyWHaXeR0dBSiw6TqOw== packages/app/node_modules/lucide-react-native
+LOCK_SAME 1.2.0-nightly-20261014-766fc0e67 sha512-PyYAAVJAyjlcqHXgSnzxok13MDmyxs/nt46hHIOBdCc0prfaL2Ef6nYkZu7fFCeaETOJXd/xQr4n2/79I+gvdA== packages/app/node_modules/react-native-enriched-markdown
+LOCK_SAME 1.21.12 sha512-pZJNXS//AhXDD9RvkNBZF5MsHv9qbFpNeHMIZ9ESSUqubNsACU7GyTE4GekIcJ1MBu+r9/TNZQuEfpT9v01HZg== packages/app/node_modules/react-native-keyboard-controller
+LOCK_SAME 4.26.2 sha512-2XnWsZToKj76trGtEZzx5ELD/qOICFEprEeUntImmitQFVUkea27fiWdUSITArI356Y1qynpXZINW+Unbhky/A== packages/app/node_modules/react-native-screens
+LOCK_SAME 15.15.4 sha512-boT/vIRgj6zZKBpfTPJJiYWMbZE9duBMOwPK6kCSTgxsS947IFMOq9OgIFkpWZTB7t229H24pDRkh3W9ZK/J1A== packages/app/node_modules/react-native-svg
+LOCK_DIFF apk=0.13.0-beta.2:None pr=0.13.0:None packages/expo-two-way-audio
+LOCK_SAME 0.0.7 sha512-zP0tnfqrFFRL8INtOaQ6XwEYfdIpIH9vrEo7y0bHQGQa50z4/QWXE5CI4nRUHxqFW4MVWOwXFg1hom1aAZHNkQ== packages/expo-two-way-audio/node_modules/@expo/code-signing-certificates
+LOCK_SAME 12.0.13 sha512-Cu52arBa4vSaupIWsF0h7F/Cg//N374nYb7HAxV0I4KceKA7x2UXpYaHOL7EEYYvp7tZdThBjvGpVmr8ScIvaQ== packages/expo-two-way-audio/node_modules/@expo/config
+LOCK_SAME 54.0.4 sha512-g2yXGICdoOw5i3LkQSDxl2Q5AlQCrG7oniu0pCPPO+UxGb7He4AFqSvPSy8HpRUj55io17hT62FTjYRD+d6j3Q== packages/expo-two-way-audio/node_modules/@expo/config-plugins
+LOCK_SAME 10.0.16 sha512-fcVkWEj+hLuP2yt5W0aw6LmDRqSPWDLUSxOMcmFeV+algmIF59sQVKCwB9btjQLd4V6x9N0pISkQEkBubUHrCw== packages/expo-two-way-audio/node_modules/@expo/config-plugins/node_modules/@expo/json-file
+LOCK_SAME 54.0.10 sha512-/J16SC2an1LdtCZ67xhSkGXpALYUVUNyZws7v+PVsFZxClYehDSoKLqyRaGkpHlYrCc08bS0RF5E0JV6g50psA== packages/expo-two-way-audio/node_modules/@expo/config-types
+LOCK_SAME 58.0.2 sha512-WBj/K+vv8JPSmY70ennL04YYOHkpEsGGkfuVY9lfv4XO7Qhbt5qz4q6W7maME194I5oGcimRMigUFfWNkBe90w== packages/expo-two-way-audio/node_modules/@expo/devtools
+LOCK_SAME 58.0.2 sha512-bLkREoP7qL3rEuzxP60xG+TjdPoGjbnZfxkvYo5imJxGWfKMOf7x962W06Pu+WWAr4gcDRk16iA+Clg8D0zjCg== packages/expo-two-way-audio/node_modules/@expo/dom-webview
+LOCK_SAME 2.5.2 sha512-z8kCvBVJpd2S20a+Ab1otQgz8sJLeR7CXDTsuAMcNbYFsK10Fdhfb7rx9Ys1vvlbijnY55eZhQvJACajc1IjBQ== packages/expo-two-way-audio/node_modules/@expo/env
+LOCK_SAME 0.21.5 sha512-4ngc+aPgMK56sYc47tfabmoaNdP7OvPBOH7QPgN3riSYM0Ev+KwsGRDius5jBBwjCI9ADp7IpjJEK9xlRYjjvA== packages/expo-two-way-audio/node_modules/@expo/fingerprint
+LOCK_SAME 0.12.5 sha512-nsFYd7GfDdwZa+S+p+EkVCkh7UKKNf0kfUXDQ53HbyMmNFD3psb5JYwU/2N+uZG5wOEfKGfQ5u7pk/wn2gMlBA== packages/expo-two-way-audio/node_modules/@expo/image-utils
+LOCK_SAME 58.0.4 sha512-DvjS5NCitXYcad2Woe1EMHJKcbhTbE77HX0BgOQGL2LFHE3q2H0n8kCWDPBOCVJ63Drap3c35nwoJwF5TQL7Tw== packages/expo-two-way-audio/node_modules/@expo/image-utils/node_modules/@expo/require-utils
+LOCK_SAME 0.2.6 sha512-S8PK3wx6ogwunoQ7pqdPbklQGtXloeWTAOzWJ9yIL7xHFxvnI/Ryj0phA3KEGCMlaKZjaCP1h/3s7n/ueErRgQ== packages/expo-two-way-audio/node_modules/@expo/inline-modules
+LOCK_SAME 58.0.9 sha512-HyP7V1QgDxeHcOEh4qQH7cfK7cI7wNp0y9lszAu98SRYCshhDbwB9gWpFfnpX1GQUtgiqG4Hvgh1z3ntcGwAjw== packages/expo-two-way-audio/node_modules/@expo/inline-modules/node_modules/@expo/config-plugins
+LOCK_SAME 58.0.3 sha512-wyfrwkTT/hQHzwyqkXkngKxoOa8L6ovsTP4h/UukS1mTmssee5et6HOPoN5RtawdJPnm5JO28f//C/wXlpka8Q== packages/expo-two-way-audio/node_modules/@expo/inline-modules/node_modules/@expo/config-types
+LOCK_SAME 11.2.1 sha512-UPhKoFCj8BcwgLB1rKQ1CuR/REITnZLiqxHEHOeH1tPsdXcHGtUDh0P5bLbr7oU0nKVdtJ5rzyKx8jniMQdESQ== packages/expo-two-way-audio/node_modules/@expo/inline-modules/node_modules/@expo/json-file
+LOCK_SAME 0.10.1 sha512-nuNOqj+r/hGJbZ1Ax3jUpZaOB8UAMHUrISALJEUKaCieTflYj7224EqFWmMpriCGk9wXS1gH+9GGVnSj0tWzuQ== packages/expo-two-way-audio/node_modules/@expo/inline-modules/node_modules/@expo/plist
+LOCK_SAME 58.0.4 sha512-DvjS5NCitXYcad2Woe1EMHJKcbhTbE77HX0BgOQGL2LFHE3q2H0n8kCWDPBOCVJ63Drap3c35nwoJwF5TQL7Tw== packages/expo-two-way-audio/node_modules/@expo/inline-modules/node_modules/@expo/require-utils
+LOCK_SAME 10.2.0 sha512-S6XzKe3R9GQeHiUPXc3xJjOv2VJhOEwFYf7xdC2z2cUqt3kZJ9mSO877sNQloVdnW/SUCtPY3bexlM7nwq+CAQ== packages/expo-two-way-audio/node_modules/@expo/json-file
+LOCK_SAME 58.0.6 sha512-AJk3pslFNlwRMbUbfvxhu6CPA9U7A+JPb88VS/uWkG/S/QMJL90Iw4sPVfG4BOKfRUNkB8ipl432Dr4txjSMKw== packages/expo-two-way-audio/node_modules/@expo/local-build-cache-provider
+LOCK_SAME 58.0.6 sha512-PT1qv4s/R5A/NxXb4efGlFsYF5Consi7F8xSsJBAN090EGDr6U1EDQGOijFqzDc3JA2epD8zjKLJLOVB9YOewg== packages/expo-two-way-audio/node_modules/@expo/local-build-cache-provider/node_modules/@expo/config
+LOCK_SAME 58.0.9 sha512-HyP7V1QgDxeHcOEh4qQH7cfK7cI7wNp0y9lszAu98SRYCshhDbwB9gWpFfnpX1GQUtgiqG4Hvgh1z3ntcGwAjw== packages/expo-two-way-audio/node_modules/@expo/local-build-cache-provider/node_modules/@expo/config-plugins
+LOCK_SAME 58.0.3 sha512-wyfrwkTT/hQHzwyqkXkngKxoOa8L6ovsTP4h/UukS1mTmssee5et6HOPoN5RtawdJPnm5JO28f//C/wXlpka8Q== packages/expo-two-way-audio/node_modules/@expo/local-build-cache-provider/node_modules/@expo/config-types
+LOCK_SAME 11.2.1 sha512-UPhKoFCj8BcwgLB1rKQ1CuR/REITnZLiqxHEHOeH1tPsdXcHGtUDh0P5bLbr7oU0nKVdtJ5rzyKx8jniMQdESQ== packages/expo-two-way-audio/node_modules/@expo/local-build-cache-provider/node_modules/@expo/json-file
+LOCK_SAME 0.10.1 sha512-nuNOqj+r/hGJbZ1Ax3jUpZaOB8UAMHUrISALJEUKaCieTflYj7224EqFWmMpriCGk9wXS1gH+9GGVnSj0tWzuQ== packages/expo-two-way-audio/node_modules/@expo/local-build-cache-provider/node_modules/@expo/plist
+LOCK_SAME 58.0.4 sha512-DvjS5NCitXYcad2Woe1EMHJKcbhTbE77HX0BgOQGL2LFHE3q2H0n8kCWDPBOCVJ63Drap3c35nwoJwF5TQL7Tw== packages/expo-two-way-audio/node_modules/@expo/local-build-cache-provider/node_modules/@expo/require-utils
+LOCK_SAME 58.0.12 sha512-IzDYoFY2iUsmSDvl1V7YUM7UkCPDyMVS4e4a38c2LnFc1A3WGMUiQh+vsHLYTPKjIelu4r7/u4V7Gxtfa0oJgA== packages/expo-two-way-audio/node_modules/@expo/log-box
+LOCK_SAME 58.0.0 sha512-PMD640ihB0C3Oqm0AnDVJ/8qF2cKbRUEqGuSOr4tM/OTb9ktxsQqsiSSSeaOEgdCZBq20AxRS0d6WHNhhH2P+g== packages/expo-two-way-audio/node_modules/@expo/metro
+LOCK_SAME 58.0.14 sha512-UDUMAJwYGEzaB26ejMLG/IOVzwKDbHzoODBf3FZeRS94kk9jDf1dWE1VMX6bLBLoiflxXwqrMWiH0Fvz3gZ9YQ== packages/expo-two-way-audio/node_modules/@expo/metro-config
+LOCK_SAME 58.0.6 sha512-PT1qv4s/R5A/NxXb4efGlFsYF5Consi7F8xSsJBAN090EGDr6U1EDQGOijFqzDc3JA2epD8zjKLJLOVB9YOewg== packages/expo-two-way-audio/node_modules/@expo/metro-config/node_modules/@expo/config
+LOCK_SAME 58.0.9 sha512-HyP7V1QgDxeHcOEh4qQH7cfK7cI7wNp0y9lszAu98SRYCshhDbwB9gWpFfnpX1GQUtgiqG4Hvgh1z3ntcGwAjw== packages/expo-two-way-audio/node_modules/@expo/metro-config/node_modules/@expo/config-plugins
+LOCK_SAME 58.0.3 sha512-wyfrwkTT/hQHzwyqkXkngKxoOa8L6ovsTP4h/UukS1mTmssee5et6HOPoN5RtawdJPnm5JO28f//C/wXlpka8Q== packages/expo-two-way-audio/node_modules/@expo/metro-config/node_modules/@expo/config-types
+LOCK_SAME 11.2.1 sha512-UPhKoFCj8BcwgLB1rKQ1CuR/REITnZLiqxHEHOeH1tPsdXcHGtUDh0P5bLbr7oU0nKVdtJ5rzyKx8jniMQdESQ== packages/expo-two-way-audio/node_modules/@expo/metro-config/node_modules/@expo/json-file
+LOCK_SAME 0.10.1 sha512-nuNOqj+r/hGJbZ1Ax3jUpZaOB8UAMHUrISALJEUKaCieTflYj7224EqFWmMpriCGk9wXS1gH+9GGVnSj0tWzuQ== packages/expo-two-way-audio/node_modules/@expo/metro-config/node_modules/@expo/plist
+LOCK_SAME 58.0.4 sha512-DvjS5NCitXYcad2Woe1EMHJKcbhTbE77HX0BgOQGL2LFHE3q2H0n8kCWDPBOCVJ63Drap3c35nwoJwF5TQL7Tw== packages/expo-two-way-audio/node_modules/@expo/metro-config/node_modules/@expo/require-utils
+LOCK_SAME 0.36.1 sha512-guv1nQ6IJ7S83NRFPWc3SA7IBZrdNC9kapwOq6uXvF4wP+sDCgjzQbKPCoyYmoyZRzztF/n/c36l/rccCZSiCw== packages/expo-two-way-audio/node_modules/@expo/metro-config/node_modules/hermes-estree
+LOCK_SAME 0.36.1 sha512-GApNk4zLHi2UWoWZZkx7LNCOSzLSc5lB55pZ/PhK7ycFeg7u5LcF88p/WbpIi1XUDtE0MpHE3uRR3u3KB7TjSQ== packages/expo-two-way-audio/node_modules/@expo/metro-config/node_modules/hermes-parser
+LOCK_SAME 58.0.5 sha512-Y2w8qKklLffZie28In4WF6f6e8nIJOhU0mZ5UaQdCiITVQm2a5teNdIDudEPkBsh8ItlvyHZt9n42PN2onRbkQ== packages/expo-two-way-audio/node_modules/@expo/metro-file-map
+LOCK_SAME 2.8.1 sha512-SCi+6q6uOkGhiAn6AIP/OPFgaIq/iKD2oYpnAOg2rShHStJ8ey7wyT127RbOaZXmlcY/62rHOX1WiiMnD8u/BA== packages/expo-two-way-audio/node_modules/@expo/osascript
+LOCK_SAME 1.14.2 sha512-sftl0eRVVCarI6grMdjAB3jX2pX1Mt3cdSnajlXS4QyeDkaKRM/ntBy6dcagj1VL0+cEfEqctlyvinmlZdNubg== packages/expo-two-way-audio/node_modules/@expo/package-manager
+LOCK_SAME 11.2.1 sha512-UPhKoFCj8BcwgLB1rKQ1CuR/REITnZLiqxHEHOeH1tPsdXcHGtUDh0P5bLbr7oU0nKVdtJ5rzyKx8jniMQdESQ== packages/expo-two-way-audio/node_modules/@expo/package-manager/node_modules/@expo/json-file
+LOCK_SAME 0.4.9 sha512-MPVpmKGfnQEnrCzgxuXcmPP/y/t6AVm+DcSb2Myp21LKWv1N3l8uFxMggesfF4ixAxkRlGmMMx9GyDC9M+XklQ== packages/expo-two-way-audio/node_modules/@expo/plist
+LOCK_SAME 58.0.14 sha512-2wVzVDfXjRB3LzUbW5shOM/A+6eUUCfR+2bpZiWRBBZBtZP2HA5Zq1YgCio1tDqMGAHf2NQQDhvy/Rz1U6aC3A== packages/expo-two-way-audio/node_modules/@expo/prebuild-config
+LOCK_SAME 58.0.6 sha512-PT1qv4s/R5A/NxXb4efGlFsYF5Consi7F8xSsJBAN090EGDr6U1EDQGOijFqzDc3JA2epD8zjKLJLOVB9YOewg== packages/expo-two-way-audio/node_modules/@expo/prebuild-config/node_modules/@expo/config
+LOCK_SAME 58.0.9 sha512-HyP7V1QgDxeHcOEh4qQH7cfK7cI7wNp0y9lszAu98SRYCshhDbwB9gWpFfnpX1GQUtgiqG4Hvgh1z3ntcGwAjw== packages/expo-two-way-audio/node_modules/@expo/prebuild-config/node_modules/@expo/config-plugins
+LOCK_SAME 58.0.3 sha512-wyfrwkTT/hQHzwyqkXkngKxoOa8L6ovsTP4h/UukS1mTmssee5et6HOPoN5RtawdJPnm5JO28f//C/wXlpka8Q== packages/expo-two-way-audio/node_modules/@expo/prebuild-config/node_modules/@expo/config-types
+LOCK_SAME 11.2.1 sha512-UPhKoFCj8BcwgLB1rKQ1CuR/REITnZLiqxHEHOeH1tPsdXcHGtUDh0P5bLbr7oU0nKVdtJ5rzyKx8jniMQdESQ== packages/expo-two-way-audio/node_modules/@expo/prebuild-config/node_modules/@expo/json-file
+LOCK_SAME 0.10.1 sha512-nuNOqj+r/hGJbZ1Ax3jUpZaOB8UAMHUrISALJEUKaCieTflYj7224EqFWmMpriCGk9wXS1gH+9GGVnSj0tWzuQ== packages/expo-two-way-audio/node_modules/@expo/prebuild-config/node_modules/@expo/plist
+LOCK_SAME 58.0.4 sha512-DvjS5NCitXYcad2Woe1EMHJKcbhTbE77HX0BgOQGL2LFHE3q2H0n8kCWDPBOCVJ63Drap3c35nwoJwF5TQL7Tw== packages/expo-two-way-audio/node_modules/@expo/prebuild-config/node_modules/@expo/require-utils
+LOCK_SAME 58.0.2 sha512-w28y8SG+5ZTdDdmH2ZnCQk9wHVwGzI9NqX5V4urJUFEnxbm7I129fJRkb8RIAJmMA1WKU5h3ONmranV473uaXQ== packages/expo-two-way-audio/node_modules/@expo/schema-utils
+LOCK_SAME 1.0.1 sha512-kvisefkhxu8Fm/4M8G6DEqUaigrXfrSOm2lFw7hsk/nq0zchcp6B4wSk8rlheHY8FRi5iHxKtoVMGY/3M6h04A== packages/expo-two-way-audio/node_modules/@expo/sdk-runtime-versions
+LOCK_SAME 1.8.0 sha512-eb9xxd/LbuEGSdua4NumCu/McVB9EM+F/JxB9pWgnERw4HQ9XyTNH1KapG6oqLWR8TuRK2LQfzJlmNi94CVobw== packages/expo-two-way-audio/node_modules/@expo/spawn-async
+LOCK_SAME 0.88.0 sha512-leGEnCcS7Q0hTxvzvhNtr8zGQpI1gfWqXjzC4UedsFmNMv6kIo4s70o0XbtM30ZXbpfWe4BcSC8NKWuak5sI4A== packages/expo-two-way-audio/node_modules/@react-native/babel-plugin-codegen
+LOCK_SAME 0.88.0 sha512-iMfAHhFGNegnReSY6CYaWHncvyDwHq8olRs0zp9nRRApMAoCiLyfo1dwL/f39qt/MreD6xIqUs9SrTPYWobY6g== packages/expo-two-way-audio/node_modules/@react-native/babel-preset
+LOCK_SAME 0.88.0 sha512-SAGg+XfzsrPiYTscbKa9bo2/H2ei2TjyxW8RTMq2Ps661kRK3AnmpMGVfrEFshEMr3FGEbuQIvj86X98kaXlRA== packages/expo-two-way-audio/node_modules/@react-native/codegen
+LOCK_SAME 0.88.0 sha512-WrQdXbjVt1gwAay8ZzYtpOi9ly99ksJ0VMYFdVcMe6nq3vtiRgqKRpHgCdN6ySIbtr5o+aJ+Vr7OTDY98ec/Ow== packages/expo-two-way-audio/node_modules/@react-native/community-cli-plugin
+LOCK_SAME 0.88.0 sha512-v5cnBaaWhDRPcQv8EC20zj53jOAKH7u2wnzzXS4JTNu+diPC+cA2+kC7rq3eKI5vGhlAcG2kDPoViRuC0AY0oA== packages/expo-two-way-audio/node_modules/@react-native/debugger-frontend
+LOCK_SAME 0.88.0 sha512-p82zT8ZKNx7nIm/8zf8pi55sxm5KQBm8td47kzoJysTdqHLyPsRMUvDXtvCJIWadHSv7RJ6t/yiCc+IoImLBtw== packages/expo-two-way-audio/node_modules/@react-native/debugger-shell
+LOCK_SAME 0.88.0 sha512-sHLxVHOwfkF672ZzMepNh4d3IKbrZy3qXDKWSwN5LC5VJkzzZ5FdmSPP4N/CCn2pcKJ4oSqvojXwN4De3Xk92A== packages/expo-two-way-audio/node_modules/@react-native/dev-middleware
+LOCK_SAME 0.88.0 sha512-4jPSKslOfJj8NKY/jv9qmWkxZYmqPyamoS3Vs0JOFxw9t4PM6L/ea0fUsjNV0LxC9zJlvWilPJOCTOf7h8wlyw== packages/expo-two-way-audio/node_modules/@react-native/gradle-plugin
+LOCK_SAME 0.88.0 sha512-Iq6v4+EWdOLv0M1+BpADQJBVfInl6FkABXCIBSi0FbvHahEYT+Y4UJ7Cm96p18gbEN1VKzqz3nbBbwLA6bx0rQ== packages/expo-two-way-audio/node_modules/@react-native/js-polyfills
+LOCK_SAME 0.88.0 sha512-xsUfzXrqKXeD7sBja7hkyBG32AGIwWJ3IEZ+UcNMRTR/sucnXXZ6Do40qXoeY52YC8b9//J+p51JIp2CC0DZKA== packages/expo-two-way-audio/node_modules/@react-native/metro-babel-transformer
+LOCK_SAME 0.88.0 sha512-iPV2HNXlPs7xQDBJJGIjkH0x2psZwJeRIEpfSqxgqLaO5eEfE2Ccicfz2OBHBcIC5jKGGa4IoI/e26zMNDuTMQ== packages/expo-two-way-audio/node_modules/@react-native/metro-config
+LOCK_SAME 0.88.0 sha512-eZCu3tGAQCfvMCPQJVY4dmoMX8ZZYBvqIGHX7lwOYyzNK+Dl8e5ky7ZoXub1Rq75oSrQXNNmSP2CDjNNXXZpFQ== packages/expo-two-way-audio/node_modules/@react-native/normalize-colors
+LOCK_SAME 0.21.4 sha512-FSclsDTGi5EcvpbW3TM7s8GLWwQqo5wI9zQqJr2m0IoJRenSkp1+bVvdeZXTNznI5Ms9Bry7DLBR+C5Shb9gtw== packages/expo-two-way-audio/node_modules/babel-plugin-react-native-web
+LOCK_SAME 0.36.1 sha512-ycduwJbvdvIMmVvlAZqGggS+pm5Eu4Bk9pcV9Sm2Z4PJNRVsKkv0g7vHj+LeuC1gHTeF67sJXFOq61IlqCa2hA== packages/expo-two-way-audio/node_modules/babel-plugin-syntax-hermes-parser
+LOCK_SAME 0.36.1 sha512-guv1nQ6IJ7S83NRFPWc3SA7IBZrdNC9kapwOq6uXvF4wP+sDCgjzQbKPCoyYmoyZRzztF/n/c36l/rccCZSiCw== packages/expo-two-way-audio/node_modules/babel-plugin-syntax-hermes-parser/node_modules/hermes-estree
+LOCK_SAME 0.36.1 sha512-GApNk4zLHi2UWoWZZkx7LNCOSzLSc5lB55pZ/PhK7ycFeg7u5LcF88p/WbpIi1XUDtE0MpHE3uRR3u3KB7TjSQ== packages/expo-two-way-audio/node_modules/babel-plugin-syntax-hermes-parser/node_modules/hermes-parser
+LOCK_SAME 58.0.16 sha512-beR3uusLA+rFo+6Ug0L7FPR4b6y/37VwtYW2Jig/i+3Co+oyYCTnvVuFPWhb05W9TOZRxdHUEI569fVKIgtYAA== packages/expo-two-way-audio/node_modules/expo-asset
+LOCK_SAME 58.0.12 sha512-d3/dsps32nU4m6YJQbXQ1dIfn58GxfmJjTnZ0WtnhdSHTdG/oVsOakLqYRlX/FaLUKkQOSHXMf7hyCx+2a/HSQ== packages/expo-two-way-audio/node_modules/expo-constants
+LOCK_SAME 58.0.4 sha512-DvjS5NCitXYcad2Woe1EMHJKcbhTbE77HX0BgOQGL2LFHE3q2H0n8kCWDPBOCVJ63Drap3c35nwoJwF5TQL7Tw== packages/expo-two-way-audio/node_modules/expo-constants/node_modules/@expo/require-utils
+LOCK_SAME 58.0.9 sha512-JT0km3Wa+wDz/7Rli8ifreoMnmk68ulf/uaWzRA26xm/4K+jGTY+cDhnboRmpmXUCBkED6uqxWmNoXjaVU9VUw== packages/expo-two-way-audio/node_modules/expo-file-system
+LOCK_SAME 58.0.8 sha512-i9HKj/ljdmmjLamYQEkI4wXJB9+ap7AG5CpCqK/bgwwy45y5T8+1lpNbYgRXE7aQgmDjPpzd09wX6dOZkHfrxg== packages/expo-two-way-audio/node_modules/expo-font
+LOCK_SAME 58.0.3 sha512-wLRF+XeVsD/Rt/ZyX+A0mk1brdf8vefWizNAPzqV5eOCgkj23LCRZdN8gUi5X8UwyR8UJ7Y7Dzdz4YDGB/4c9Q== packages/expo-two-way-audio/node_modules/expo-keep-awake
+LOCK_SAME 5.0.8 sha512-3YkAic3E6QGQuNEIchq6/0GGSBwR2C70AhDUF7VI7/N3THwUpeqZrX20FxHKN95/wclHs1ljrGvRX+2YTgXxiw== packages/expo-two-way-audio/node_modules/expo-module-scripts
+LOCK_SAME 58.0.9 sha512-HyP7V1QgDxeHcOEh4qQH7cfK7cI7wNp0y9lszAu98SRYCshhDbwB9gWpFfnpX1GQUtgiqG4Hvgh1z3ntcGwAjw== packages/expo-two-way-audio/node_modules/expo-module-scripts/node_modules/@expo/config-plugins
+LOCK_SAME 11.2.1 sha512-UPhKoFCj8BcwgLB1rKQ1CuR/REITnZLiqxHEHOeH1tPsdXcHGtUDh0P5bLbr7oU0nKVdtJ5rzyKx8jniMQdESQ== packages/expo-two-way-audio/node_modules/expo-module-scripts/node_modules/@expo/config-plugins/node_modules/@expo/json-file
+LOCK_SAME 58.0.4 sha512-DvjS5NCitXYcad2Woe1EMHJKcbhTbE77HX0BgOQGL2LFHE3q2H0n8kCWDPBOCVJ63Drap3c35nwoJwF5TQL7Tw== packages/expo-two-way-audio/node_modules/expo-module-scripts/node_modules/@expo/config-plugins/node_modules/@expo/require-utils
+LOCK_SAME 58.0.3 sha512-wyfrwkTT/hQHzwyqkXkngKxoOa8L6ovsTP4h/UukS1mTmssee5et6HOPoN5RtawdJPnm5JO28f//C/wXlpka8Q== packages/expo-two-way-audio/node_modules/expo-module-scripts/node_modules/@expo/config-types
+LOCK_SAME 58.0.14 sha512-IIvTo+RpN5jZVuYspQdECsxQ03VGWjZnGS6wtr9U7DERBpykUe+ZSHDZ1hsrvQ7HAucsVoKr9np0xAscGEuXtg== packages/expo-two-way-audio/node_modules/expo-module-scripts/node_modules/@expo/metro-runtime
+LOCK_SAME 0.10.1 sha512-nuNOqj+r/hGJbZ1Ax3jUpZaOB8UAMHUrISALJEUKaCieTflYj7224EqFWmMpriCGk9wXS1gH+9GGVnSj0tWzuQ== packages/expo-two-way-audio/node_modules/expo-module-scripts/node_modules/@expo/plist
+LOCK_SAME 0.88.0 sha512-zpZIOAbobdS93edwHkNUdGDzvElNeQJqukRERRPns3/ucPvuMd2G4fYpmVJSVjhxtGCcLLB1PFndLYYfwaYoBQ== packages/expo-two-way-audio/node_modules/expo-module-scripts/node_modules/@react-native/virtualized-lists
+LOCK_SAME 13.3.3 sha512-k6Mjsd9dbZgvY4Bl7P1NIpePQNi+dfYtlJ5voi9KQlynxSyQkfOgJmYGCYmw/aSgH/rUcFvG8u5gd4npzgRDyg== packages/expo-two-way-audio/node_modules/expo-module-scripts/node_modules/@testing-library/react-native
+LOCK_SAME 58.0.14 sha512-M05O++KRgG4NA6kQ9AP60kbN8xqHJ6S8uTXdtkeiwcGVIYzdu2kaUXJyraVturvePO/Mf4PWa0C9+JggrHITwA== packages/expo-two-way-audio/node_modules/expo-module-scripts/node_modules/expo
+LOCK_SAME 58.0.22 sha512-T3YJYziFkF4JlGDpX4zCl91oIxz1Skq5sp1LFVO+GL/BARSIXk013QWGdRZrvt+wMxoVaql5dpOdPdP5q2+0jQ== packages/expo-two-way-audio/node_modules/expo-module-scripts/node_modules/expo-modules-core
+LOCK_SAME 58.1.11 sha512-wkFTSLXXYqLkRT5oy4DnLuTOtbFIu3qTiXHSHkFSqUBTHiE92y3bOIwM3UN7Y1ys18qVJge8lXjezaEfsHmijQ== packages/expo-two-way-audio/node_modules/expo-module-scripts/node_modules/expo/node_modules/@expo/cli
+LOCK_SAME 58.0.14 sha512-RSzQYMA+Tv2eTemhjhzpx8+hL+pMC30JTVqAWrk5AZwht+OgaKZar/gHmj4iJf7n3rq+GG6KujrkKF9xAXLz2w== packages/expo-two-way-audio/node_modules/expo-module-scripts/node_modules/expo/node_modules/@expo/cli/node_modules/@expo/router-server
+LOCK_SAME 58.0.6 sha512-PT1qv4s/R5A/NxXb4efGlFsYF5Consi7F8xSsJBAN090EGDr6U1EDQGOijFqzDc3JA2epD8zjKLJLOVB9YOewg== packages/expo-two-way-audio/node_modules/expo-module-scripts/node_modules/expo/node_modules/@expo/config
+LOCK_SAME 11.2.1 sha512-UPhKoFCj8BcwgLB1rKQ1CuR/REITnZLiqxHEHOeH1tPsdXcHGtUDh0P5bLbr7oU0nKVdtJ5rzyKx8jniMQdESQ== packages/expo-two-way-audio/node_modules/expo-module-scripts/node_modules/expo/node_modules/@expo/json-file
+LOCK_SAME 58.0.4 sha512-DvjS5NCitXYcad2Woe1EMHJKcbhTbE77HX0BgOQGL2LFHE3q2H0n8kCWDPBOCVJ63Drap3c35nwoJwF5TQL7Tw== packages/expo-two-way-audio/node_modules/expo-module-scripts/node_modules/expo/node_modules/@expo/require-utils
+LOCK_SAME 58.0.17 sha512-Rrqc/Z5Idc4bG2/PrEh725t3kvuAc7jUKCJ+wZVU9KXk2bKSdqAniXxQa8aph9aHdv4h5sGKLpMXMaMNz/4+Og== packages/expo-two-way-audio/node_modules/expo-module-scripts/node_modules/expo/node_modules/babel-preset-expo
+LOCK_SAME 54.0.17 sha512-LyIhrsP4xvHEEcR1R024u/LBj3uPpAgB+UljgV+YXWkEHjprnr0KpE4tROsMNYCVTM1pPlAnPuoBmn5gnAN9KA== packages/expo-two-way-audio/node_modules/expo-module-scripts/node_modules/jest-expo
+LOCK_SAME 0.88.0 sha512-v/wee0nYWcammMYBnSat/e3WY/5iaf9YQOMcBrfKT/wPApPPlHp94hgZovBtwhMuthR01yc/8cGn0FpFTE/C4A== packages/expo-two-way-audio/node_modules/expo-module-scripts/node_modules/react-native
+LOCK_SAME 0.13.0 sha512-1OrhAeAKaZF4XrBa4YbPQbKzNOpjh52HDlId8e6ete1OCHNdAlrQHzG4gznJ225EAj3dgQXHViJvK51M9B52jQ== packages/expo-two-way-audio/node_modules/expo-module-scripts/node_modules/react-native-worklets
+LOCK_SAME 58.0.13 sha512-uzLFoTnAKabUdITvzRqWTvFkZsOdRPEXj7AEMAuBEhA2kGhqaBDa2EOWqPXVay0QJVoZuIQaEEgPGAXN1dPuYg== packages/expo-two-way-audio/node_modules/expo-modules-autolinking
+LOCK_SAME 58.0.4 sha512-DvjS5NCitXYcad2Woe1EMHJKcbhTbE77HX0BgOQGL2LFHE3q2H0n8kCWDPBOCVJ63Drap3c35nwoJwF5TQL7Tw== packages/expo-two-way-audio/node_modules/expo-modules-autolinking/node_modules/@expo/require-utils
+LOCK_SAME 2.5.0 sha512-aIbQxZE2vdCKsolQUl6Q9Farlf8tjh/ROR4hfN1qT7QBGPl1XrJGnaOKkcgYaGrlzCPg/7IBe0Np67GzKMZKKQ== packages/expo-two-way-audio/node_modules/expo-modules-core
+LOCK_SAME 58.0.15 sha512-PsjYgL4KWtvBqWH242r0wbP99VjgHkHCpkPCekO7nzb+ulkDNyrNnhysxa0TcNpfRTNLetmCUaLs9t4CcoquZQ== packages/expo-two-way-audio/node_modules/expo-modules-jsi
+LOCK_SAME 58.0.5 sha512-FHYecxfGOuAhacHcanR6qCN8Cln9S+FFulcYetLu3ddDg55ohuCsMZ9U4Egzwdm+A2o6N+MdSoJKquBC5F9NIg== packages/expo-two-way-audio/node_modules/expo-server
+LOCK_SAME 260318099.0.4 sha512-8odcPFkPC82HlqCl0C5QI9mBN4rEAT+IAo55sJhzwKw//K3qZloiv3ex6J2O8CuBbhdmkJozfidNsset2KH25w== packages/expo-two-way-audio/node_modules/hermes-compiler
+LOCK_SAME 0.25.1 sha512-0wUoCcLp+5Ev5pDW2OriHC2MJCbwLwuRx+gAqMTOkGKJJiBCLjtrvy4PWUGn6MIVefecRpzoOZ/UV6iGdOr+Cw== packages/expo-two-way-audio/node_modules/hermes-estree
+LOCK_SAME 0.25.1 sha512-6pEjquH3rqaI6cYAXYPcz9MS4rY6R4ngRgrgfDshRptUZIc3lw0MCIJIGDj9++mfySOuPTHB4nrSW99BCvOPIA== packages/expo-two-way-audio/node_modules/hermes-parser

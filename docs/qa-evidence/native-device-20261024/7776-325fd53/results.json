@@ -1,0 +1,39 @@
+{
+  "head": "325fd53cdfd57aa0c255fe61d62bd7c32be803af",
+  "apk_sha256": "cb1ad96f72502ab457bfb2a399b4c20df1a108a19f31a665f6a458ab174a78eb",
+  "bundle_virtual_sha256": "52f7acede67ce38713150e91866bd530681be44b64592118cbfedeee1462c4a4",
+  "width_before": 421.4794921875,
+  "handle_before": [753, 712, 841, 888],
+  "grip_before": [797, 736, 837, 864],
+  "handle_after_main_drag": [953, 712, 1041, 888],
+  "width_after_main_drag": 521.5791015625,
+  "drag_video_bytes": 295619,
+  "settings_handle": [955, 712, 1043, 888],
+  "settings_sidebar": [0, 0, 1043, 1600],
+  "width_in_settings": 521.5791015625,
+  "settings_handle_after": [793, 712, 881, 888],
+  "width_after_settings_drag": 440.67919921875,
+  "handle_back_on_main": [791, 712, 879, 888],
+  "width_back_on_main": 440.67919921875,
+  "width_after_restart": 440.67919921875,
+  "handle_after_restart": [791, 712, 879, 888],
+  "handle_dark": [791, 712, 879, 888],
+  "handle_light": [791, 712, 879, 888],
+  "at_600dp": {
+    "settings_sidebar": [0, 0, 400, 1600],
+    "settings_handle": [312, 712, 400, 888],
+    "detail": [400, 0, 1200, 1600],
+    "main_handle": null,
+    "width": 440.67919921875
+  },
+  "compact": {
+    "main_handle": null,
+    "settings_handle": null,
+    "width": 440.67919921875
+  },
+  "restored": {
+    "main_handle": [791, 712, 879, 888],
+    "width": 440.67919921875
+  },
+  "wm_size_end": "Physical size: 2560x1600"
+}
