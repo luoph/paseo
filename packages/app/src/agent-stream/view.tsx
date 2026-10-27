@@ -103,6 +103,7 @@ import { recordRenderProfileReasons } from "@/utils/render-profiler";
 import { useRetainedPanelActive } from "@/components/retained-panel";
 import { useStreamHistoryWindow } from "./use-stream-history-window";
 import { PluginTimelineItemView, useInstalledTimelineTransform } from "@/plugins/timeline";
+import { HOST_PERF_ENABLED, hostPerfKind, onRowRender } from "@/debug/host-perf";
 
 function renderLiveAuxiliaryNode(input: {
   pendingPermissions: ReactNode;
@@ -172,7 +173,18 @@ function renderStreamItemWithTurnFooter(input: {
   ) : null;
   const content = (
     <StreamItemWrapper itemId={input.layoutItem.item.id} gapBelow={input.layoutItem.gapBelow}>
-      {input.content}
+      {HOST_PERF_ENABLED ? (
+        <React.Profiler
+          id={`${hostPerfKind(input.layoutItem.item as { kind: string; itemKind?: string })}|${
+            input.layoutItem.item.kind === "plugin" ? "plugin" : "native"
+          }`}
+          onRender={onRowRender}
+        >
+          {input.content}
+        </React.Profiler>
+      ) : (
+        input.content
+      )}
     </StreamItemWrapper>
   );
 
