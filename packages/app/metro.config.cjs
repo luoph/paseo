@@ -74,7 +74,14 @@ function resolveWithCustomWebOverlay(context, moduleName, platform) {
   return defaultResolveRequest(context, moduleName, platform);
 }
 
+const useReactDomProfiling = process.env.BC_REACT_PROFILING === "1";
+
 config.resolver.resolveRequest = (context, moduleName, platform) => {
+  // Bench only: the production web build gets React's profiling renderer so <Profiler>
+  // reports commits. It stands in for react-dom/client and shares react-dom's internals.
+  if (useReactDomProfiling && platform === "web" && moduleName === "react-dom/client") {
+    return defaultResolveRequest(context, "react-dom/profiling", platform);
+  }
   if (isFdroidBuild && platform === "android" && fdroidModuleOverrides[moduleName]) {
     return resolveWithCustomWebOverlay(context, fdroidModuleOverrides[moduleName], platform);
   }
