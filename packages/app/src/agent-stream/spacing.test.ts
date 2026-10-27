@@ -111,10 +111,39 @@ describe("tool sequence spacing for plugin items", () => {
     );
   });
 
-  it("keeps the default gap for plugin rows that are not tool-like", () => {
+  it("keeps the default gap for plugin rows that are neither tool-like nor replies", () => {
     expect(
-      getGapBetweenStreamItems(pluginItem("a", "assistant_message"), pluginItem("b", "tool_call")),
+      getGapBetweenStreamItems(pluginItem("a", "notification"), pluginItem("b", "tool_call")),
     ).toBe(SPACING[4]);
+    expect(getGapBetweenStreamItems(pluginItem("a"), pluginItem("b", "tool_call"))).toBe(
+      SPACING[4],
+    );
+  });
+});
+
+describe("assistant spacing for plugin items", () => {
+  it("spaces a plugin reply from the tool row below it like a native reply", () => {
+    const reply = pluginItem("r", "assistant_message");
+    const native = assistantBlock({ id: "as", blockGroupId: "g", blockIndex: 0 });
+    expect(getGapBetweenStreamItems(reply, pluginItem("t", "tool_call"))).toBe(SPACING[1]);
+    expect(getGapBetweenStreamItems(reply, toolCallBlock("tc"))).toBe(
+      getGapBetweenStreamItems(native, toolCallBlock("tc")),
+    );
+  });
+
+  it("spaces a plugin reply from the tool row above it like a native reply", () => {
+    const reply = pluginItem("r", "assistant_message");
+    const native = assistantBlock({ id: "as", blockGroupId: "g", blockIndex: 0 });
+    expect(getGapBetweenStreamItems(pluginItem("t", "thought"), reply)).toBe(SPACING[1]);
+    expect(getGapBetweenStreamItems(toolCallBlock("tc"), reply)).toBe(
+      getGapBetweenStreamItems(toolCallBlock("tc"), native),
+    );
+  });
+
+  it("keeps the default gap between a plugin reply and a prompt or another reply", () => {
+    const reply = pluginItem("r", "assistant_message");
+    expect(getGapBetweenStreamItems(reply, userMessage("u"))).toBe(SPACING[4]);
+    expect(getGapBetweenStreamItems(reply, pluginItem("r2", "assistant_message"))).toBe(SPACING[4]);
   });
 });
 

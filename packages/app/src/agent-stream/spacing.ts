@@ -41,6 +41,13 @@ export function isToolSequenceItem(item?: StreamItem | null): boolean {
   return kind === "tool_call" || kind === "thought" || kind === "todo_list";
 }
 
+// A plugin item projected from an assistant message keeps the native gap to the tool rows
+// around it; without this it gets the default gap, four times the native one.
+function isAssistantMessageItem(item: StreamItem): boolean {
+  const kind = item.kind === "plugin" ? item.sourceKind : item.kind;
+  return kind === "assistant_message";
+}
+
 export function getGapBetweenStreamItems(
   item: StreamItem | null,
   belowItem: StreamItem | null,
@@ -61,10 +68,10 @@ export function getGapBetweenStreamItems(
   if (item.kind === "user_message" && isToolSequenceItem(belowItem)) {
     return SPACING[4];
   }
-  if (item.kind === "assistant_message" && isToolSequenceItem(belowItem)) {
+  if (isAssistantMessageItem(item) && isToolSequenceItem(belowItem)) {
     return SPACING[1];
   }
-  if (isToolSequenceItem(item) && belowItem.kind === "assistant_message") {
+  if (isToolSequenceItem(item) && isAssistantMessageItem(belowItem)) {
     return SPACING[1];
   }
   if (isSameAssistantBlockGroup({ item, other: belowItem })) {
