@@ -83,7 +83,11 @@ config.resolver.resolveRequest = (context, moduleName, platform) => {
     return defaultResolveRequest(context, "react-dom/profiling", platform);
   }
   // Same for a native release bundle: the renderer shim picks -prod when __DEV__ is false.
-  if (useReactDomProfiling && platform !== "web" && /implementations\/(ReactFabric|ReactNativeRenderer)-prod$/.test(moduleName)) {
+  if (
+    useReactDomProfiling &&
+    platform !== "web" &&
+    /implementations\/(ReactFabric|ReactNativeRenderer)-prod$/.test(moduleName)
+  ) {
     return defaultResolveRequest(context, moduleName.replace(/-prod$/, "-profiling"), platform);
   }
   if (isFdroidBuild && platform === "android" && fdroidModuleOverrides[moduleName]) {
