@@ -31,14 +31,14 @@ export function resolveProviderIconName(
   provider: string,
   serverId?: string | null,
 ): ProviderIconName {
-  if (BUILTIN_PROVIDER_IDS.has(provider)) {
-    return { kind: "builtin", id: provider };
-  }
   const iconSvg = serverId
     ? providerSnapshotIconSvgsByServer.get(serverId)?.get(provider)
     : undefined;
   if (iconSvg) {
     return { kind: "svg", svg: iconSvg };
+  }
+  if (BUILTIN_PROVIDER_IDS.has(provider)) {
+    return { kind: "builtin", id: provider };
   }
   if (KNOWN_PROVIDER_IDS.has(provider)) {
     return { kind: "catalog", id: provider };

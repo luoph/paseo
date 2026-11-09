@@ -17,5 +17,9 @@ export function providerIconSvgFailure(svg: string): string | null {
     const href = match[2] ?? match[3] ?? "";
     if (!href.startsWith("#")) return "external href references are not allowed";
   }
+  const urlPattern = /url\(\s*(["']?)(.*?)\1\s*\)/gi;
+  for (const match of svg.matchAll(urlPattern)) {
+    if (!match[2].trim().startsWith("#")) return "external URL references are not allowed";
+  }
   return null;
 }

@@ -54,8 +54,8 @@ describe("resolveProviderIconName", () => {
       svg: secondSvg,
     });
     expect(resolveProviderIconName("claude", "server-1")).toEqual({
-      kind: "builtin",
-      id: "claude",
+      kind: "svg",
+      svg: "<svg />",
     });
 
     replaceProviderSnapshotIcons("server-1", [{ provider: "snapshot-provider" }]);

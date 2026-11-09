@@ -10,12 +10,13 @@ import { resolvePaseoHome } from "../paseo-home.js";
  */
 export function readConfiguredProviderIcon(iconPath: string): string {
   let resolved: string;
+  let home: string | undefined;
   if (path.isAbsolute(iconPath)) {
     resolved = path.resolve(iconPath);
   } else {
-    const paseoHome = resolvePaseoHome();
-    resolved = path.resolve(paseoHome, iconPath);
-    if (!isInside(paseoHome, resolved)) {
+    home = realpathSync(resolvePaseoHome());
+    resolved = path.resolve(home, iconPath);
+    if (!isInside(home, resolved)) {
       throw configuredIconError(iconPath, "path leaves the Paseo home directory");
     }
   }
@@ -23,6 +24,10 @@ export function readConfiguredProviderIcon(iconPath: string): string {
     resolved = realpathSync(resolved);
   } catch {
     throw configuredIconError(iconPath, "file does not exist or is not a regular file");
+  }
+
+  if (home && !isInside(home, resolved)) {
+    throw configuredIconError(iconPath, "path leaves the Paseo home directory");
   }
 
   const iconStat = statSync(resolved);

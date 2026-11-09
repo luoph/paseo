@@ -22,7 +22,7 @@ afterEach(async () => {
 describe("readPluginProviderIcon", () => {
   test("accepts a self-contained SVG", async () => {
     const svg =
-      '<svg viewBox="0 0 24 24"><defs><path id="mark" d="M0 0h1v1z" /></defs><use href="#mark" /></svg>';
+      '<svg viewBox="0 0 24 24"><defs><path id="mark" d="M0 0h1v1z" /></defs><use href="#mark" fill="url(#mark)" /></svg>';
     const directory = await writeIcon(svg);
 
     await expect(readPluginProviderIcon(directory, "icon.svg")).resolves.toBe(svg);
@@ -35,6 +35,11 @@ describe("readPluginProviderIcon", () => {
     ["style", "<svg><style /></svg>", "style elements"],
     ["event handler", '<svg><path onclick="run()" /></svg>', "event-handler attributes"],
     ["javascript URL", '<svg><a href="javascript:run()" /></svg>', "javascript URLs"],
+    [
+      "external paint",
+      '<svg><path fill="url(https://example.com/icon.svg#paint)" /></svg>',
+      "external URL",
+    ],
     ["external href", '<svg><use href="https://example.com/icon.svg" /></svg>', "external href"],
   ])("rejects %s", async (_name, svg, reason) => {
     const directory = await writeIcon(svg);

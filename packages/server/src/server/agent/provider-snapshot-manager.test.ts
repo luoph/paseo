@@ -1,4 +1,7 @@
 import pino from "pino";
+import { mkdtempSync, rmSync, writeFileSync } from "node:fs";
+import { tmpdir } from "node:os";
+import { join } from "node:path";
 import { homedir } from "node:os";
 import { resolve } from "node:path";
 import { describe, expect, test, vi } from "vitest";
@@ -1628,6 +1631,39 @@ describe("ProviderSnapshotManager applyMutableProviderConfig", () => {
     } finally {
       finish();
       manager.destroy();
+    }
+  });
+
+  test("publishes icon changes and removal on config reload", () => {
+    const directory = mkdtempSync(join(tmpdir(), "paseo-icon-reload-"));
+    const first = join(directory, "first.svg");
+    const second = join(directory, "second.svg");
+    writeFileSync(first, '<svg id="first" />');
+    writeFileSync(second, '<svg id="second" />');
+    const config = { "custom-codex": { extends: "codex", label: "Custom", icon: first } };
+    const manager = new ProviderSnapshotManager({
+      logger: createTestLogger(),
+      providerOverrides: config,
+    });
+    const icon = () =>
+      manager
+        .getSnapshot("/tmp/icon-test")
+        .records.find(({ entry }) => entry.provider === "custom-codex")?.entry.iconSvg;
+    try {
+      expect(icon()).toBe('<svg id="first" />');
+      manager.applyMutableProviderConfig(
+        { "custom-codex": { ...config["custom-codex"], icon: second } },
+        { replace: true },
+      );
+      expect(icon()).toBe('<svg id="second" />');
+      manager.applyMutableProviderConfig(
+        { "custom-codex": { extends: "codex", label: "Custom" } },
+        { replace: true },
+      );
+      expect(icon()).toBeUndefined();
+    } finally {
+      manager.destroy();
+      rmSync(directory, { recursive: true, force: true });
     }
   });
 

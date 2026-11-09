@@ -599,7 +599,12 @@ export class ProviderSnapshotManager {
     for (const provider of new Set([...this.generation.order, ...Object.keys(definitions)])) {
       const before = this.generation.definitions[provider];
       const after = definitions[provider];
-      if (!before || !after || !isDeepStrictEqual(before.configuration, after.configuration)) {
+      if (
+        !before ||
+        !after ||
+        before.iconSvg !== after.iconSvg ||
+        !isDeepStrictEqual(before.configuration, after.configuration)
+      ) {
         changed.add(provider);
         delete clients[provider];
       } else {
